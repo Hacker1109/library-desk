@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Library Desk</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -43,9 +43,7 @@
       position: relative;
     }
 
-    body.rain-mode {
-      background-color: #eee9e0;
-    }
+    body.rain-mode { background-color: #eee9e0; }
 
     #ambientCanvas {
       position: fixed;
@@ -64,17 +62,20 @@
       z-index: 1;
     }
 
-    /* Milestone Bookmark */
-    .milestone-banner {
+    /* Top Bar: Milestone + Reading Together Candle */
+    .top-shelf {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 22px;
+      padding: 0 4px;
     }
+
     .milestone-pill {
       background: #f1ebd8;
       border: 1px solid #dfd3bd;
       border-radius: 30px;
-      padding: 6px 18px;
+      padding: 5px 16px;
       font-family: 'Cormorant Garamond', serif;
       font-size: 0.95rem;
       font-style: italic;
@@ -82,10 +83,52 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
     }
 
-    /* Header */
+    /* Candle Presence Indicator */
+    .candle-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px;
+      background: #f7f3ec;
+      border: 1px solid var(--border-soft);
+      border-radius: 30px;
+      transition: all 0.6s ease;
+    }
+    .candle-icon {
+      font-size: 1.1rem;
+      filter: grayscale(80%) opacity(0.5);
+      transition: all 0.6s ease;
+    }
+    .candle-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      transition: color 0.6s ease;
+    }
+
+    .candle-indicator.together {
+      background: #fff8e8;
+      border-color: #e5cf96;
+      box-shadow: 0 0 16px rgba(235, 185, 78, 0.25);
+    }
+    .candle-indicator.together .candle-icon {
+      filter: grayscale(0%) opacity(1);
+      animation: flicker 1.8s infinite alternate ease-in-out;
+    }
+    .candle-indicator.together .candle-text {
+      color: #7b591b;
+      font-weight: 600;
+    }
+
+    @keyframes flicker {
+      0% { transform: scale(1) rotate(-1deg); filter: drop-shadow(0 0 4px #ffc107); }
+      50% { transform: scale(1.1) rotate(2deg); filter: drop-shadow(0 0 8px #ff9800); }
+      100% { transform: scale(1.05) rotate(-1deg); filter: drop-shadow(0 0 6px #ffb300); }
+    }
+
     header {
       text-align: center;
       margin-bottom: 30px;
@@ -115,17 +158,15 @@
     }
 
     .ambient-switch {
-      position: absolute;
-      top: 0;
-      right: 0;
+      margin-top: 10px;
       background: #f2eee8;
       border: 1px solid var(--border-soft);
       border-radius: 20px;
-      padding: 6px 12px;
+      padding: 5px 14px;
       font-size: 0.78rem;
       color: var(--text-muted);
       cursor: pointer;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 6px;
       transition: all 0.2s;
@@ -317,9 +358,7 @@
       border-right: 7px solid transparent;
       border-bottom: 7px solid var(--paper-neelam);
     }
-    .note-card.Saksham .bookmark-ribbon::after {
-      border-bottom-color: var(--paper-saksham);
-    }
+    .note-card.Saksham .bookmark-ribbon::after { border-bottom-color: var(--paper-saksham); }
 
     .note-header {
       display: flex;
@@ -353,7 +392,6 @@
       position: relative;
     }
 
-    /* Invisible Ink Blur Effect */
     .invisible-text {
       filter: blur(8px);
       user-select: none;
@@ -384,13 +422,8 @@
       overflow: hidden;
       border: 1px solid rgba(0,0,0,0.06);
     }
-    .note-photo img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
+    .note-photo img { width: 100%; height: auto; display: block; }
 
-    /* Song Box */
     .song-box {
       margin-top: 16px;
       background: #fdfaf6;
@@ -409,20 +442,10 @@
       align-items: center;
       gap: 6px;
     }
-    .song-player-frame {
-      width: 100%;
-      border: none;
-      border-radius: 8px;
-    }
+    .song-player-frame { width: 100%; border: none; border-radius: 8px; }
 
-    audio {
-      width: 100%;
-      height: 38px;
-      margin-top: 14px;
-      border-radius: 20px;
-    }
+    audio { width: 100%; height: 38px; margin-top: 14px; border-radius: 20px; }
 
-    /* Wax Stamp Seal */
     .wax-seal {
       position: absolute;
       bottom: -15px;
@@ -449,10 +472,14 @@
 <canvas id="ambientCanvas"></canvas>
 
 <div class="container">
-  <!-- Milestone Ribbon -->
-  <div class="milestone-banner">
+  <div class="top-shelf">
     <div class="milestone-pill">
       <span>📖</span> The Library Desk • Chapter 1
+    </div>
+    
+    <div class="candle-indicator" id="readingTogetherBox">
+      <span class="candle-icon" id="candleIcon">🕯️</span>
+      <span class="candle-text" id="candleText">At the desk</span>
     </div>
   </div>
 
@@ -496,7 +523,7 @@
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+  import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDqRjbss28gFR-3e9hvcvmAx5khdaEa-Dg",
@@ -510,7 +537,52 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  // Web Audio Context (Procedural sound generation)
+  // Presence & "Reading Together" System
+  function getSelectedAuthor() {
+    return document.querySelector('input[name="author"]:checked').value;
+  }
+
+  async function updatePresence() {
+    const author = getSelectedAuthor();
+    try {
+      await setDoc(doc(db, "presence", author), {
+        lastSeen: Date.now()
+      });
+    } catch(e) {}
+  }
+
+  // Update presence immediately, then every 20 seconds
+  updatePresence();
+  setInterval(updatePresence, 20000);
+
+  document.querySelectorAll('input[name="author"]').forEach(radio => {
+    radio.addEventListener('change', updatePresence);
+  });
+
+  // Listen for both presences
+  onSnapshot(collection(db, "presence"), snapshot => {
+    let presences = {};
+    const now = Date.now();
+    snapshot.forEach(doc => {
+      presences[doc.id] = doc.data().lastSeen;
+    });
+
+    const sakshamActive = (now - (presences["Saksham"] || 0)) < 45000;
+    const neelamActive = (now - (presences["Neelam"] || 0)) < 45000;
+
+    const candleBox = document.getElementById("readingTogetherBox");
+    const candleText = document.getElementById("candleText");
+
+    if (sakshamActive && neelamActive) {
+      candleBox.classList.add("together");
+      candleText.innerText = "Sitting at the desk together";
+    } else {
+      candleBox.classList.remove("together");
+      candleText.innerText = "At the desk";
+    }
+  });
+
+  // Procedural Web Audio
   let audioCtx;
   function getAudioContext() {
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -535,7 +607,7 @@
 
   function playSendChime() {
     const ctx = getAudioContext();
-    const notes = [440, 554.37, 659.25]; // Warm A-Major Acoustic Chime
+    const notes = [440, 554.37, 659.25];
     notes.forEach((freq, idx) => {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
@@ -551,7 +623,7 @@
     });
   }
 
-  // Synthesized Gentle Rain Generator (Zero files needed)
+  // Synthesized Gentle Rain Generator
   let rainNode = null;
   let isRaining = false;
   window.toggleRain = function() {
@@ -564,7 +636,7 @@
       let lastOut = 0.0;
       for (let i = 0; i < bufferSize; i++) {
         const white = Math.random() * 2 - 1;
-        output[i] = (lastOut + (0.02 * white)) / 1.02; // Pink rain noise
+        output[i] = (lastOut + (0.02 * white)) / 1.02;
         lastOut = output[i];
         output[i] *= 2.5;
       }
@@ -597,7 +669,7 @@
     }
   };
 
-  // Ambient Canvas Falling Petals & Leaves
+  // Ambient Falling Petals
   const canvas = document.getElementById("ambientCanvas");
   const canvasCtx = canvas.getContext("2d");
   let petals = [];
@@ -776,7 +848,7 @@
     const btn = document.getElementById("sendBtn");
     const text = document.getElementById("noteText").value.trim();
     const songUrl = document.getElementById("songUrl").value.trim();
-    const author = document.querySelector('input[name="author"]:checked').value;
+    const author = getSelectedAuthor();
     const file = mediaInput.files[0];
 
     if (!text && !file && !base64Audio && !songUrl) return;
@@ -820,7 +892,7 @@
     }
   };
 
-  // Real-time listener
+  // Real-time Feed Sync
   const notesQuery = query(collection(db, "notes"), orderBy("createdAt", "desc"));
   onSnapshot(notesQuery, snapshot => {
     const container = document.getElementById("notesList");
