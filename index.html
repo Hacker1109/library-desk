@@ -6,18 +6,20 @@
   <title>The Library Desk</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-cream: #faf6f0;
       --paper-neelam: #fff9fa;
       --paper-saksham: #f8fbf9;
       --accent-saksham: #285444;
-      --accent-neelam: #943d54;
+      --accent-neelam: #8c3249;
       --gold: #bfa15f;
       --border-soft: #e8ded2;
       --text-dark: #2a2521;
       --text-muted: #7d7265;
+      --wax-neelam: #8c263e;
+      --wax-saksham: #1d4d3c;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -26,18 +28,23 @@
       background-color: var(--bg-cream);
       background-image: 
         radial-gradient(var(--border-soft) 0.8px, transparent 0.8px),
-        radial-gradient(circle at 10% 20%, rgba(148, 61, 84, 0.03) 0%, transparent 40%),
+        radial-gradient(circle at 10% 20%, rgba(140, 50, 73, 0.03) 0%, transparent 40%),
         radial-gradient(circle at 90% 80%, rgba(40, 84, 68, 0.03) 0%, transparent 40%);
       background-size: 24px 24px, 100% 100%, 100% 100%;
       font-family: 'Plus Jakarta Sans', sans-serif;
       color: var(--text-dark);
-      padding: 40px 16px 80px;
+      padding: 30px 16px 80px;
       display: flex;
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
       overflow-x: hidden;
+      transition: background-color 1s ease;
       position: relative;
+    }
+
+    body.rain-mode {
+      background-color: #eee9e0;
     }
 
     #ambientCanvas {
@@ -57,22 +64,44 @@
       z-index: 1;
     }
 
+    /* Milestone Bookmark */
+    .milestone-banner {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 22px;
+    }
+    .milestone-pill {
+      background: #f1ebd8;
+      border: 1px solid #dfd3bd;
+      border-radius: 30px;
+      padding: 6px 18px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      font-style: italic;
+      color: #6a5a48;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+
+    /* Header */
     header {
       text-align: center;
-      margin-bottom: 35px;
+      margin-bottom: 30px;
       position: relative;
     }
     .header-tag {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--gold);
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     header h1 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.7rem;
+      font-size: 2.6rem;
       font-weight: 700;
       letter-spacing: -0.5px;
       color: var(--text-dark);
@@ -85,15 +114,34 @@
       margin-top: 4px;
     }
 
+    .ambient-switch {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #f2eee8;
+      border: 1px solid var(--border-soft);
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .ambient-switch:hover { background: #e8e1d5; }
+    .ambient-switch.active { background: #ded2bf; color: var(--text-dark); }
+
+    /* Writing Desk Box */
     .composer {
       background: #ffffff;
       border: 1px solid var(--border-soft);
       border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 10px 30px rgba(74, 58, 42, 0.05);
-      margin-bottom: 40px;
+      padding: 22px;
+      box-shadow: 0 10px 30px rgba(74, 58, 42, 0.04);
+      margin-bottom: 38px;
       position: relative;
-      backdrop-filter: blur(8px);
     }
     .composer::before {
       content: '';
@@ -107,7 +155,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       font-size: 0.88rem;
       font-weight: 600;
     }
@@ -130,7 +178,7 @@
     .author-pill label:has(input[value="Neelam"]:checked) {
       background: var(--accent-neelam);
       color: #fff;
-      box-shadow: 0 2px 8px rgba(148, 61, 84, 0.25);
+      box-shadow: 0 2px 8px rgba(140, 50, 73, 0.25);
     }
     .author-pill label:has(input[value="Saksham"]:checked) {
       background: var(--accent-saksham);
@@ -145,17 +193,17 @@
       border-radius: 10px;
       padding: 14px 16px;
       font-family: 'Caveat', cursive;
-      font-size: 1.5rem;
+      font-size: 1.55rem;
       background: #fffdfa;
       color: var(--text-dark);
       resize: vertical;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
       line-height: 1.4;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
     textarea:focus {
       outline: none;
       border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(191, 161, 95, 0.15);
+      box-shadow: 0 0 0 3px rgba(191, 161, 95, 0.12);
     }
 
     .song-input-row {
@@ -172,27 +220,25 @@
       color: var(--text-dark);
       outline: none;
     }
-    .song-input-row input:focus {
-      border-color: var(--gold);
-    }
+    .song-input-row input:focus { border-color: var(--gold); }
 
     .composer-toolbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 16px;
+      margin-top: 14px;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 10px;
     }
     .tools-group { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
     
     .btn-action {
       background: #f7f3ec;
       border: 1px solid var(--border-soft);
-      padding: 8px 13px;
+      padding: 7px 12px;
       border-radius: 8px;
       cursor: pointer;
-      font-size: 0.83rem;
+      font-size: 0.82rem;
       font-weight: 500;
       color: var(--text-dark);
       display: flex;
@@ -200,10 +246,8 @@
       gap: 6px;
       transition: all 0.2s ease;
     }
-    .btn-action:hover {
-      background: #eee8dc;
-      transform: translateY(-1px);
-    }
+    .btn-action:hover { background: #eee8dc; transform: translateY(-1px); }
+    .btn-action.active-tool { background: #dfd7cc; border-color: var(--gold); }
 
     .btn-send {
       background: var(--text-dark);
@@ -224,14 +268,15 @@
       box-shadow: 0 6px 18px rgba(0,0,0,0.15);
     }
 
+    /* Note Cards */
     .notes-list {
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 26px;
     }
     .note-card {
       border-radius: 14px;
-      padding: 26px 26px 22px;
+      padding: 24px 24px 20px;
       position: relative;
       box-shadow: 0 6px 22px rgba(60, 48, 36, 0.05);
       border: 1px solid #ebdcd0;
@@ -301,10 +346,36 @@
 
     .note-body {
       font-family: 'Caveat', cursive;
-      font-size: 1.6rem;
+      font-size: 1.65rem;
       line-height: 1.45;
       color: #332d27;
       white-space: pre-wrap;
+      position: relative;
+    }
+
+    /* Invisible Ink Blur Effect */
+    .invisible-text {
+      filter: blur(8px);
+      user-select: none;
+      transition: filter 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+      cursor: pointer;
+      background: linear-gradient(90deg, #c7a361, #b28c46);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .invisible-text:hover,
+    .invisible-text:active {
+      filter: blur(0px);
+      -webkit-text-fill-color: #332d27;
+    }
+    .invisible-hint {
+      display: block;
+      font-size: 0.78rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--gold);
+      margin-bottom: 6px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
     }
 
     .note-photo {
@@ -319,7 +390,7 @@
       display: block;
     }
 
-    /* Dedicated Song Player Container */
+    /* Song Box */
     .song-box {
       margin-top: 16px;
       background: #fdfaf6;
@@ -350,6 +421,27 @@
       margin-top: 14px;
       border-radius: 20px;
     }
+
+    /* Wax Stamp Seal */
+    .wax-seal {
+      position: absolute;
+      bottom: -15px;
+      right: 20px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2), inset 0 2px 3px rgba(255,255,255,0.3);
+      border: 2px solid rgba(255,255,255,0.15);
+    }
+    .note-card.Neelam .wax-seal { background: radial-gradient(circle at 35% 35%, #a83c54, var(--wax-neelam)); }
+    .note-card.Saksham .wax-seal { background: radial-gradient(circle at 35% 35%, #2a6952, var(--wax-saksham)); }
   </style>
 </head>
 <body>
@@ -357,10 +449,18 @@
 <canvas id="ambientCanvas"></canvas>
 
 <div class="container">
+  <!-- Milestone Ribbon -->
+  <div class="milestone-banner">
+    <div class="milestone-pill">
+      <span>📖</span> The Library Desk • Chapter 1
+    </div>
+  </div>
+
   <header>
-    <div class="header-tag">A Special Corner</div>
+    <div class="header-tag">A Private Corner</div>
     <h1>The Library Desk</h1>
     <p>“Some people really are worth the wait.”</p>
+    <button type="button" class="ambient-switch" id="rainToggleBtn" onclick="toggleRain()">🌧 Rain Ambiance</button>
   </header>
 
   <div class="composer">
@@ -375,7 +475,7 @@
     <textarea id="noteText" placeholder="Write a note in quiet ink..."></textarea>
 
     <div class="song-input-row" id="songInputContainer">
-      <input type="url" id="songUrl" placeholder="Paste YouTube or Spotify song link here..." />
+      <input type="url" id="songUrl" placeholder="Paste YouTube or Spotify song link..." />
     </div>
 
     <div class="composer-toolbar">
@@ -383,10 +483,11 @@
         <input type="file" id="mediaUpload" accept="image/*" style="display:none;" />
         <button type="button" class="btn-action" id="photoBtn" onclick="playPaperSound(); document.getElementById('mediaUpload').click()">📷 Photo</button>
         <button type="button" class="btn-action" id="recordBtn">🎙 Record</button>
-        <button type="button" class="btn-action" id="songBtn" onclick="toggleSongInput()">🎵 Dedicate Song</button>
+        <button type="button" class="btn-action" id="songBtn" onclick="toggleSongInput()">🎵 Song</button>
+        <button type="button" class="btn-action" id="invisibleBtn" onclick="toggleInvisibleInk()">✨ Invisible Ink</button>
         <span id="recordStatus" style="font-size:0.8rem; color:var(--text-muted); margin-left:4px;"></span>
       </div>
-      <button type="button" class="btn-send" id="sendBtn">Leave Note</button>
+      <button type="button" class="btn-send" id="sendBtn">Seal & Leave Note</button>
     </div>
   </div>
 
@@ -409,44 +510,96 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  // Web Audio Context (Procedural sound generation)
+  let audioCtx;
+  function getAudioContext() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    return audioCtx;
+  }
 
   window.playPaperSound = function() {
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
+    const ctx = getAudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
     osc.type = 'sine';
-    osc.frequency.setValueAtTime(520, audioCtx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(740, audioCtx.currentTime + 0.12);
-    gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
+    osc.frequency.setValueAtTime(520, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(740, ctx.currentTime + 0.12);
+    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
     osc.connect(gain);
-    gain.connect(audioCtx.destination);
+    gain.connect(ctx.destination);
     osc.start();
-    osc.stop(audioCtx.currentTime + 0.12);
+    osc.stop(ctx.currentTime + 0.12);
   };
 
   function playSendChime() {
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    const notes = [440, 554.37, 659.25];
+    const ctx = getAudioContext();
+    const notes = [440, 554.37, 659.25]; // Warm A-Major Acoustic Chime
     notes.forEach((freq, idx) => {
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
       osc.type = 'triangle';
       osc.frequency.value = freq;
-      const startTime = audioCtx.currentTime + (idx * 0.08);
+      const startTime = ctx.currentTime + (idx * 0.08);
       gain.gain.setValueAtTime(0.07, startTime);
       gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.5);
       osc.connect(gain);
-      gain.connect(audioCtx.destination);
+      gain.connect(ctx.destination);
       osc.start(startTime);
       osc.stop(startTime + 0.5);
     });
   }
 
-  // Floating ambient petals
+  // Synthesized Gentle Rain Generator (Zero files needed)
+  let rainNode = null;
+  let isRaining = false;
+  window.toggleRain = function() {
+    const ctx = getAudioContext();
+    const btn = document.getElementById("rainToggleBtn");
+    if (!isRaining) {
+      const bufferSize = ctx.sampleRate * 2;
+      const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+      let lastOut = 0.0;
+      for (let i = 0; i < bufferSize; i++) {
+        const white = Math.random() * 2 - 1;
+        output[i] = (lastOut + (0.02 * white)) / 1.02; // Pink rain noise
+        lastOut = output[i];
+        output[i] *= 2.5;
+      }
+      rainNode = ctx.createBufferSource();
+      rainNode.buffer = noiseBuffer;
+      rainNode.loop = true;
+
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.value = 1000;
+
+      const rainGain = ctx.createGain();
+      rainGain.gain.setValueAtTime(0.04, ctx.currentTime);
+
+      rainNode.connect(filter);
+      filter.connect(rainGain);
+      rainGain.connect(ctx.destination);
+
+      rainNode.start(0);
+      isRaining = true;
+      btn.classList.add("active");
+      document.body.classList.add("rain-mode");
+      btn.innerText = "🌧 Rain On";
+    } else {
+      if (rainNode) rainNode.stop();
+      isRaining = false;
+      btn.classList.remove("active");
+      document.body.classList.remove("rain-mode");
+      btn.innerText = "🌧 Rain Ambiance";
+    }
+  };
+
+  // Ambient Canvas Falling Petals & Leaves
   const canvas = document.getElementById("ambientCanvas");
-  const ctx = canvas.getContext("2d");
+  const canvasCtx = canvas.getContext("2d");
   let petals = [];
 
   function resizeCanvas() {
@@ -475,20 +628,20 @@
       if (this.y > canvas.height + 20) this.reset();
     }
     draw() {
-      ctx.save();
-      ctx.translate(this.x, this.y);
-      ctx.rotate(this.angle);
-      ctx.fillStyle = this.color;
-      ctx.beginPath();
-      ctx.ellipse(0, 0, this.size, this.size * 0.6, 0, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.restore();
+      canvasCtx.save();
+      canvasCtx.translate(this.x, this.y);
+      canvasCtx.rotate(this.angle);
+      canvasCtx.fillStyle = this.color;
+      canvasCtx.beginPath();
+      canvasCtx.ellipse(0, 0, this.size, this.size * 0.6, 0, 0, Math.PI * 2);
+      canvasCtx.fill();
+      canvasCtx.restore();
     }
   }
 
   for (let i = 0; i < 22; i++) petals.push(new Petal());
   function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
     petals.forEach(p => { p.update(); p.draw(); });
     requestAnimationFrame(animate);
   }
@@ -501,19 +654,31 @@
     playPaperSound();
     if (songBox.style.display === "block") {
       songBox.style.display = "none";
-      songBtn.style.background = "#f7f3ec";
+      songBtn.classList.remove("active-tool");
     } else {
       songBox.style.display = "block";
-      songBtn.style.background = "#dfd7cc";
+      songBtn.classList.add("active-tool");
       document.getElementById("songUrl").focus();
     }
   };
 
-  // Convert URLs to playable embeds
+  // Invisible Ink Toggle
+  let isInvisibleInk = false;
+  const invisibleBtn = document.getElementById("invisibleBtn");
+  window.toggleInvisibleInk = function() {
+    playPaperSound();
+    isInvisibleInk = !isInvisibleInk;
+    if (isInvisibleInk) {
+      invisibleBtn.classList.add("active-tool");
+      invisibleBtn.innerText = "✨ Ink Hidden";
+    } else {
+      invisibleBtn.classList.remove("active-tool");
+      invisibleBtn.innerText = "✨ Invisible Ink";
+    }
+  };
+
   function renderEmbed(url) {
     if (!url) return '';
-    
-    // YouTube
     const ytRegex = /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([a-zA-Z0-9_-]{11})/;
     const ytMatch = url.match(ytRegex);
     if (ytMatch) {
@@ -524,8 +689,6 @@
         </div>
       `;
     }
-
-    // Spotify
     const spRegex = /spotify\.com\/track\/([a-zA-Z0-9]+)/;
     const spMatch = url.match(spRegex);
     if (spMatch) {
@@ -536,7 +699,6 @@
         </div>
       `;
     }
-
     return '';
   }
 
@@ -552,7 +714,7 @@
   mediaInput.onchange = () => {
     if (mediaInput.files && mediaInput.files[0]) {
       photoBtn.innerText = "✓ Attached";
-      photoBtn.style.background = "#e4dbce";
+      photoBtn.classList.add("active-tool");
     }
   };
 
@@ -576,10 +738,10 @@
           };
         };
         mediaRecorder.start();
-        recordStatus.innerText = "Recording...";
+        recordStatus.innerText = "Listening...";
         recordBtn.innerText = "Stop";
       } catch (err) {
-        alert("Allow microphone permissions to record.");
+        alert("Microphone permission required.");
       }
     } else if (mediaRecorder.state === "recording") {
       mediaRecorder.stop();
@@ -620,7 +782,7 @@
     if (!text && !file && !base64Audio && !songUrl) return;
 
     btn.disabled = true;
-    btn.innerText = "Sealing...";
+    btn.innerText = "Melting wax...";
 
     let finalImage = null;
     if (file) finalImage = await compressImage(file);
@@ -630,6 +792,7 @@
         author,
         text: text || "",
         songUrl: songUrl || "",
+        isInvisible: isInvisibleInk,
         mediaUrl: finalImage,
         audioUrl: base64Audio,
         createdAt: new Date()
@@ -639,18 +802,21 @@
       document.getElementById("noteText").value = "";
       document.getElementById("songUrl").value = "";
       songBox.style.display = "none";
-      songBtn.style.background = "#f7f3ec";
+      songBtn.classList.remove("active-tool");
       mediaInput.value = "";
       photoBtn.innerText = "📷 Photo";
-      photoBtn.style.background = "#f7f3ec";
+      photoBtn.classList.remove("active-tool");
       base64Audio = null;
       recordStatus.innerText = "";
       recordBtn.innerText = "🎙 Record";
+      isInvisibleInk = false;
+      invisibleBtn.classList.remove("active-tool");
+      invisibleBtn.innerText = "✨ Invisible Ink";
     } catch (e) {
       alert("Error: " + e.message);
     } finally {
       btn.disabled = false;
-      btn.innerText = "Leave Note";
+      btn.innerText = "Seal & Leave Note";
     }
   };
 
@@ -662,7 +828,20 @@
     snapshot.forEach(doc => {
       const data = doc.data();
       const dateStr = data.createdAt ? new Date(data.createdAt.toDate()).toLocaleDateString('en-GB', { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' }) : '';
+      const monogram = data.author === "Saksham" ? "S" : "N";
       
+      let textBlock = '';
+      if (data.text) {
+        if (data.isInvisible) {
+          textBlock = `
+            <span class="invisible-hint">✨ Secret note (hover or slide finger to reveal)</span>
+            <div class="note-body invisible-text">${data.text}</div>
+          `;
+        } else {
+          textBlock = `<div class="note-body">${data.text}</div>`;
+        }
+      }
+
       let card = `
         <div class="note-card ${data.author}">
           <div class="bookmark-ribbon"></div>
@@ -670,10 +849,11 @@
             <span class="author-name ${data.author}">${data.author}</span>
             <span class="note-time">${dateStr}</span>
           </div>
-          ${data.text ? `<div class="note-body">${data.text}</div>` : ''}
+          ${textBlock}
           ${data.mediaUrl ? `<div class="note-photo"><img src="${data.mediaUrl}" loading="lazy"/></div>` : ''}
           ${data.audioUrl ? `<audio controls playsinline src="${data.audioUrl}"></audio>` : ''}
           ${renderEmbed(data.songUrl)}
+          <div class="wax-seal">${monogram}</div>
         </div>
       `;
       container.innerHTML += card;
