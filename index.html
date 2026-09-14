@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Library Corner</title>
+  <title>The Library Desk</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -40,7 +40,6 @@
       position: relative;
     }
 
-    /* Floating Petals Canvas */
     #ambientCanvas {
       position: fixed;
       top: 0;
@@ -58,7 +57,6 @@
       z-index: 1;
     }
 
-    /* Header */
     header {
       text-align: center;
       margin-bottom: 35px;
@@ -87,7 +85,6 @@
       margin-top: 4px;
     }
 
-    /* Writing Desk Box */
     .composer {
       background: #ffffff;
       border: 1px solid var(--border-soft);
@@ -130,10 +127,6 @@
       color: var(--text-muted);
     }
     .author-pill input { display: none; }
-    .author-pill input:checked + span {
-      display: block;
-      color: #fff;
-    }
     .author-pill label:has(input[value="Neelam"]:checked) {
       background: var(--accent-neelam);
       color: #fff;
@@ -147,7 +140,7 @@
 
     textarea {
       width: 100%;
-      height: 120px;
+      height: 110px;
       border: 1px solid #ebd9c8;
       border-radius: 10px;
       padding: 14px 16px;
@@ -165,6 +158,24 @@
       box-shadow: 0 0 0 3px rgba(191, 161, 95, 0.15);
     }
 
+    .song-input-row {
+      margin-top: 10px;
+      display: none;
+    }
+    .song-input-row input {
+      width: 100%;
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      border: 1px solid #ebd9c8;
+      border-radius: 8px;
+      background: #faf7f2;
+      color: var(--text-dark);
+      outline: none;
+    }
+    .song-input-row input:focus {
+      border-color: var(--gold);
+    }
+
     .composer-toolbar {
       display: flex;
       justify-content: space-between;
@@ -173,15 +184,15 @@
       flex-wrap: wrap;
       gap: 12px;
     }
-    .tools-group { display: flex; gap: 8px; align-items: center; }
+    .tools-group { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
     
     .btn-action {
       background: #f7f3ec;
       border: 1px solid var(--border-soft);
-      padding: 8px 14px;
+      padding: 8px 13px;
       border-radius: 8px;
       cursor: pointer;
-      font-size: 0.85rem;
+      font-size: 0.83rem;
       font-weight: 500;
       color: var(--text-dark);
       display: flex;
@@ -213,7 +224,6 @@
       box-shadow: 0 6px 18px rgba(0,0,0,0.15);
     }
 
-    /* Notes Cards */
     .notes-list {
       display: flex;
       flex-direction: column;
@@ -228,9 +238,7 @@
       transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
       animation: appear 0.5s ease-out;
     }
-    .note-card:hover {
-      transform: translateY(-2px);
-    }
+    .note-card:hover { transform: translateY(-2px); }
 
     @keyframes appear {
       from { opacity: 0; transform: translateY(12px); }
@@ -246,7 +254,6 @@
       border-left: 4px solid var(--accent-saksham);
     }
 
-    /* Little Silk Bookmark Ribbon */
     .bookmark-ribbon {
       position: absolute;
       top: -2px;
@@ -312,6 +319,31 @@
       display: block;
     }
 
+    /* Dedicated Song Player Container */
+    .song-box {
+      margin-top: 16px;
+      background: #fdfaf6;
+      border: 1px solid #e7dcce;
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+    .song-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .song-player-frame {
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+    }
+
     audio {
       width: 100%;
       height: 38px;
@@ -342,11 +374,16 @@
 
     <textarea id="noteText" placeholder="Write a note in quiet ink..."></textarea>
 
+    <div class="song-input-row" id="songInputContainer">
+      <input type="url" id="songUrl" placeholder="Paste YouTube or Spotify song link here..." />
+    </div>
+
     <div class="composer-toolbar">
       <div class="tools-group">
         <input type="file" id="mediaUpload" accept="image/*" style="display:none;" />
         <button type="button" class="btn-action" id="photoBtn" onclick="playPaperSound(); document.getElementById('mediaUpload').click()">📷 Photo</button>
         <button type="button" class="btn-action" id="recordBtn">🎙 Record</button>
+        <button type="button" class="btn-action" id="songBtn" onclick="toggleSongInput()">🎵 Dedicate Song</button>
         <span id="recordStatus" style="font-size:0.8rem; color:var(--text-muted); margin-left:4px;"></span>
       </div>
       <button type="button" class="btn-send" id="sendBtn">Leave Note</button>
@@ -372,7 +409,6 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  // Synthesized Sound Effects (No external files needed)
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
   window.playPaperSound = function() {
@@ -392,7 +428,7 @@
 
   function playSendChime() {
     if (audioCtx.state === 'suspended') audioCtx.resume();
-    const notes = [440, 554.37, 659.25]; // Warm A-major chime
+    const notes = [440, 554.37, 659.25];
     notes.forEach((freq, idx) => {
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
@@ -408,7 +444,7 @@
     });
   }
 
-  // Floating Ambient Leaves & Petals Animation
+  // Floating ambient petals
   const canvas = document.getElementById("ambientCanvas");
   const ctx = canvas.getContext("2d");
   let petals = [];
@@ -457,6 +493,52 @@
     requestAnimationFrame(animate);
   }
   animate();
+
+  // Song Input Toggle
+  const songBox = document.getElementById("songInputContainer");
+  const songBtn = document.getElementById("songBtn");
+  window.toggleSongInput = function() {
+    playPaperSound();
+    if (songBox.style.display === "block") {
+      songBox.style.display = "none";
+      songBtn.style.background = "#f7f3ec";
+    } else {
+      songBox.style.display = "block";
+      songBtn.style.background = "#dfd7cc";
+      document.getElementById("songUrl").focus();
+    }
+  };
+
+  // Convert URLs to playable embeds
+  function renderEmbed(url) {
+    if (!url) return '';
+    
+    // YouTube
+    const ytRegex = /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([a-zA-Z0-9_-]{11})/;
+    const ytMatch = url.match(ytRegex);
+    if (ytMatch) {
+      return `
+        <div class="song-box">
+          <div class="song-label">🎵 Dedicated Melody</div>
+          <iframe class="song-player-frame" height="180" src="https://www.youtube.com/embed/${ytMatch[1]}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      `;
+    }
+
+    // Spotify
+    const spRegex = /spotify\.com\/track\/([a-zA-Z0-9]+)/;
+    const spMatch = url.match(spRegex);
+    if (spMatch) {
+      return `
+        <div class="song-box">
+          <div class="song-label">🎵 Dedicated Melody</div>
+          <iframe class="song-player-frame" height="80" src="https://open.spotify.com/embed/track/${spMatch[1]}?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      `;
+    }
+
+    return '';
+  }
 
   // Voice recording & Upload handlers
   let mediaRecorder;
@@ -531,10 +613,11 @@
   document.getElementById("sendBtn").onclick = async () => {
     const btn = document.getElementById("sendBtn");
     const text = document.getElementById("noteText").value.trim();
+    const songUrl = document.getElementById("songUrl").value.trim();
     const author = document.querySelector('input[name="author"]:checked').value;
     const file = mediaInput.files[0];
 
-    if (!text && !file && !base64Audio) return;
+    if (!text && !file && !base64Audio && !songUrl) return;
 
     btn.disabled = true;
     btn.innerText = "Sealing...";
@@ -546,6 +629,7 @@
       await addDoc(collection(db, "notes"), {
         author,
         text: text || "",
+        songUrl: songUrl || "",
         mediaUrl: finalImage,
         audioUrl: base64Audio,
         createdAt: new Date()
@@ -553,6 +637,9 @@
 
       playSendChime();
       document.getElementById("noteText").value = "";
+      document.getElementById("songUrl").value = "";
+      songBox.style.display = "none";
+      songBtn.style.background = "#f7f3ec";
       mediaInput.value = "";
       photoBtn.innerText = "📷 Photo";
       photoBtn.style.background = "#f7f3ec";
@@ -586,6 +673,7 @@
           ${data.text ? `<div class="note-body">${data.text}</div>` : ''}
           ${data.mediaUrl ? `<div class="note-photo"><img src="${data.mediaUrl}" loading="lazy"/></div>` : ''}
           ${data.audioUrl ? `<audio controls playsinline src="${data.audioUrl}"></audio>` : ''}
+          ${renderEmbed(data.songUrl)}
         </div>
       `;
       container.innerHTML += card;
