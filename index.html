@@ -2,53 +2,60 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Library Desk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>The Library Desk — Saksham & Neelam</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Marck+Script&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Marck+Script&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-cream: #f4eee3;
-      --paper-linen: #fffcf7;
-      --paper-floral: #fff5f7;
-      --paper-midnight: #1a1e29;
-      --paper-grid: #f9f5ea;
-      --accent-saksham: #234d3d;
-      --accent-neelam: #882f45;
-      --gold: #bfa15f;
-      --gold-dark: #8e7339;
-      --border-soft: #e2d6c3;
-      --text-dark: #1c1611;
-      --text-muted: #7d7062;
-      --wax-neelam: #84233a;
-      --wax-saksham: #1b4535;
-      --desk-leather: #ede5d8;
+      --bg-cream: #f6f1e8;
+      --paper-linen: #fffdfa;
+      --paper-floral: #fff6f8;
+      --paper-midnight: #161922;
+      --paper-grid: #faf6ed;
+      --accent-saksham: #1b4d3e;
+      --accent-saksham-light: #e8f3ef;
+      --accent-neelam: #83273e;
+      --accent-neelam-light: #fbebed;
+      --gold: #c5a059;
+      --gold-dark: #8c6d32;
+      --gold-glow: rgba(197, 160, 89, 0.28);
+      --border-soft: #e5d8c5;
+      --text-dark: #201a15;
+      --text-muted: #796b5c;
+      --wax-neelam: #801e36;
+      --wax-saksham: #174233;
+      --desk-leather: #ede3d4;
+      --shadow-soft: 0 10px 30px rgba(58, 42, 28, 0.07);
+      --shadow-card: 0 12px 32px rgba(44, 32, 20, 0.08);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     body {
       background-color: var(--bg-cream);
       background-image: 
-        radial-gradient(#dbcbb5 1px, transparent 1px),
-        radial-gradient(ellipse at top left, rgba(191, 161, 95, 0.08) 0%, transparent 60%);
-      background-size: 26px 26px, 100% 100%;
+        radial-gradient(circle at 50% 0%, rgba(243, 230, 211, 0.9) 0%, transparent 80%),
+        radial-gradient(#dbcbb5 1px, transparent 1px);
+      background-size: 100% 100%, 28px 28px;
       font-family: 'Plus Jakarta Sans', sans-serif;
       color: var(--text-dark);
-      padding: 30px 16px 90px;
+      padding: 24px 16px 90px;
       display: flex;
       justify-content: center;
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
+      transition: background-color 0.8s ease;
     }
 
     body.night-mode {
-      background-color: #1a1612;
+      background-color: #12100e;
+      color: #ede2d3;
     }
 
-    /* Aesthetic Keepsake Memory Background Layer */
+    /* Keepsake Background Memory Tapestry */
     .keepsake-background-layer {
       position: fixed;
       top: 0;
@@ -57,18 +64,17 @@
       height: 100vh;
       pointer-events: none !important;
       z-index: 0;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200"><defs><filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="2" dy="6" stdDeviation="5" flood-color="%23000" flood-opacity="0.18"/></filter></defs><g filter="url(%23shadow)"><g transform="translate(60, 80) rotate(-3)"><rect width="320" height="230" rx="8" fill="%23e8f4ec" stroke="%23305c48" stroke-width="4"/><text x="25" y="55" font-family="cursive" font-size="28" fill="%23234d3d">Have a</text><rect x="25" y="75" width="270" height="60" rx="5" fill="%23d62327"/><text x="160" y="116" font-family="sans-serif" font-weight="900" font-size="26" fill="%23ffffff" text-anchor="middle">KitKat</text><text x="30" y="180" font-family="cursive" font-size="30" fill="%23234d3d">Break ! , My treat ☺</text></g><g transform="translate(480, 60) rotate(4)"><rect width="330" height="250" rx="4" fill="%23ffeaf1" stroke="%23f2cedb" stroke-width="2"/><text x="20" y="45" font-family="serif" font-size="22" fill="%23681d33">Hello Mr..... ?</text><text x="20" y="90" font-family="cursive" font-size="24" fill="%23882f45">Thank you so much!</text><text x="20" y="130" font-family="cursive" font-size="23" fill="%23882f45">Your bookshey is</text><text x="20" y="170" font-family="cursive" font-size="23" fill="%23882f45">officially my fav library.</text><text x="240" y="225" font-family="cursive" font-size="20" fill="%23882f45">~ Neelam ☺</text></g><g transform="translate(40, 390) rotate(2)"><rect width="340" height="280" rx="4" fill="%23f7ede1" stroke="%23dfcbb4" stroke-width="2"/><text x="20" y="50" font-family="cursive" font-size="22" fill="%23432f22">"Sayad kuch log worthy</text><text x="25" y="85" font-family="cursive" font-size="22" fill="%23432f22">honge wait ke leye......</text><text x="20" y="135" font-family="cursive" font-size="22" fill="%23432f22">lekin mujhe yakeen nahi</text><text x="20" y="170" font-family="cursive" font-size="22" fill="%23432f22">ki mai aisi hoon jiske</text><text x="20" y="205" font-family="cursive" font-size="22" fill="%23432f22">leye koi itna sabr kare"</text><text x="200" y="255" font-family="cursive" font-size="22" fill="%23882f45">— Neelam ☺</text></g><g transform="translate(520, 370) rotate(-4)"><rect width="280" height="340" rx="10" fill="%23faeed6" stroke="%23d8c19f" stroke-width="2"/><circle cx="140" cy="115" r="50" fill="none" stroke="%23d64045" stroke-width="3" stroke-dasharray="8 5"/><text x="140" y="210" font-family="serif" font-weight="bold" font-size="18" fill="%232b1a10" text-anchor="middle">Agar Tum Sath Ho</text><text x="140" y="235" font-family="sans-serif" font-size="14" fill="%23685647" text-anchor="middle">Alka Yagnik, Arijit Singh</text><line x1="30" y1="270" x2="250" y2="270" stroke="%23882f45" stroke-width="4"/><circle cx="160" cy="270" r="6" fill="%23882f45"/><text x="30" y="295" font-family="sans-serif" font-size="12" fill="%238c7b6c">4:13</text><text x="250" y="295" font-family="sans-serif" font-size="12" fill="%238c7b6c" text-anchor="end">5:41</text></g><g transform="translate(80, 750) rotate(-6)"><rect width="130" height="360" rx="10" fill="%23fcdfe8" stroke="%23f1b5c9" stroke-width="2"/><circle cx="65" cy="24" r="7" fill="%23882f45"/><text x="65" y="80" font-family="cursive" font-size="26" fill="%23882f45" text-anchor="middle">the urge</text><text x="65" y="115" font-family="cursive" font-size="24" fill="%23882f45" text-anchor="middle">to become</text><text x="65" y="150" font-family="cursive" font-size="22" fill="%23882f45" text-anchor="middle">someone%27s</text><text x="65" y="195" font-family="cursive" font-weight="bold" font-size="30" fill="%2370182e" text-anchor="middle">Latika</text><text x="65" y="240" font-size="20" fill="%23882f45" text-anchor="middle">♥</text><circle cx="65" cy="300" r="28" fill="%23ffedf3"/><text x="65" y="306" font-family="sans-serif" font-size="18" fill="%23882f45" text-anchor="middle">☺</text></g><g transform="translate(290, 720) rotate(3)"><rect width="360" height="230" rx="8" fill="%23e8f1fa" stroke="%23bcd1eb" stroke-width="2"/><text x="30" y="55" font-family="cursive" font-size="26" fill="%232b4b77">You deserve</text><rect x="35" y="70" width="290" height="60" rx="6" fill="%23f9bf15"/><text x="180" y="112" font-family="sans-serif" font-weight="900" font-size="32" fill="%2394231b" text-anchor="middle">5 Star</text><text x="30" y="165" font-family="cursive" font-size="24" fill="%232b4b77">for book recommendation</text><text x="240" y="205" font-family="cursive" font-size="24" fill="%23882f45">~ Neelam</text></g><g transform="translate(710, 750) rotate(5)"><rect width="130" height="360" rx="10" fill="%23ffeef3" stroke="%23f5c7d8" stroke-width="2"/><circle cx="65" cy="24" r="7" fill="%23c99a22"/><text x="65" y="110" font-family="sans-serif" font-weight="bold" font-size="20" fill="%233b2a1f" text-anchor="middle">THANK</text><text x="65" y="145" font-family="sans-serif" font-weight="bold" font-size="20" fill="%233b2a1f" text-anchor="middle">YOU</text><text x="65" y="195" font-family="cursive" font-size="28" fill="%23882f45" text-anchor="middle">for being</text><text x="65" y="235" font-family="cursive" font-size="28" fill="%23882f45" text-anchor="middle">part of my</text><text x="65" y="275" font-family="sans-serif" font-weight="bold" font-size="20" fill="%233b2a1f" text-anchor="middle">STORY</text><text x="65" y="325" font-family="cursive" font-size="22" fill="%23882f45" text-anchor="middle">~ Neelam</text></g></g></svg>');
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200"><defs><filter id="s" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="2" dy="5" stdDeviation="6" flood-color="%23000" flood-opacity="0.16"/></filter></defs><g filter="url(%23s)"><g transform="translate(60, 80) rotate(-3)"><rect width="320" height="230" rx="10" fill="%23e8f4ec" stroke="%23305c48" stroke-width="4"/><text x="25" y="55" font-family="cursive" font-size="28" fill="%23234d3d">Have a</text><rect x="25" y="75" width="270" height="60" rx="6" fill="%23d62327"/><text x="160" y="116" font-family="sans-serif" font-weight="900" font-size="26" fill="%23ffffff" text-anchor="middle">KitKat</text><text x="30" y="180" font-family="cursive" font-size="30" fill="%23234d3d">Break ! , My treat ☺</text></g><g transform="translate(480, 60) rotate(4)"><rect width="330" height="250" rx="8" fill="%23ffeaf1" stroke="%23f2cedb" stroke-width="2"/><text x="20" y="45" font-family="serif" font-size="22" fill="%23681d33">Hello Mr..... ?</text><text x="20" y="90" font-family="cursive" font-size="24" fill="%23882f45">Thank you so much!</text><text x="20" y="130" font-family="cursive" font-size="23" fill="%23882f45">Your bookshey is</text><text x="20" y="170" font-family="cursive" font-size="23" fill="%23882f45">officially my fav library.</text><text x="240" y="225" font-family="cursive" font-size="20" fill="%23882f45">~ Neelam ☺</text></g><g transform="translate(40, 390) rotate(2)"><rect width="340" height="280" rx="6" fill="%23f7ede1" stroke="%23dfcbb4" stroke-width="2"/><text x="20" y="50" font-family="cursive" font-size="22" fill="%23432f22">"Sayad kuch log worthy</text><text x="25" y="85" font-family="cursive" font-size="22" fill="%23432f22">honge wait ke leye......</text><text x="20" y="135" font-family="cursive" font-size="22" fill="%23432f22">lekin mujhe yakeen nahi</text><text x="20" y="170" font-family="cursive" font-size="22" fill="%23432f22">ki mai aisi hoon jiske</text><text x="20" y="205" font-family="cursive" font-size="22" fill="%23432f22">leye koi itna sabr kare"</text><text x="200" y="255" font-family="cursive" font-size="22" fill="%23882f45">— Neelam ☺</text></g><g transform="translate(520, 370) rotate(-4)"><rect width="280" height="340" rx="12" fill="%23faeed6" stroke="%23d8c19f" stroke-width="2"/><circle cx="140" cy="115" r="50" fill="none" stroke="%23d64045" stroke-width="3" stroke-dasharray="8 5"/><text x="140" y="210" font-family="serif" font-weight="bold" font-size="18" fill="%232b1a10" text-anchor="middle">Agar Tum Sath Ho</text><text x="140" y="235" font-family="sans-serif" font-size="14" fill="%23685647" text-anchor="middle">Alka Yagnik, Arijit Singh</text><line x1="30" y1="270" x2="250" y2="270" stroke="%23882f45" stroke-width="4"/><circle cx="160" cy="270" r="6" fill="%23882f45"/><text x="30" y="295" font-family="sans-serif" font-size="12" fill="%238c7b6c">4:13</text><text x="250" y="295" font-family="sans-serif" font-size="12" fill="%238c7b6c" text-anchor="end">5:41</text></g><g transform="translate(80, 750) rotate(-6)"><rect width="130" height="360" rx="10" fill="%23fcdfe8" stroke="%23f1b5c9" stroke-width="2"/><circle cx="65" cy="24" r="7" fill="%23882f45"/><text x="65" y="80" font-family="cursive" font-size="26" fill="%23882f45" text-anchor="middle">the urge</text><text x="65" y="115" font-family="cursive" font-size="24" fill="%23882f45" text-anchor="middle">to become</text><text x="65" y="150" font-family="cursive" font-size="22" fill="%23882f45" text-anchor="middle">someone%27s</text><text x="65" y="195" font-family="cursive" font-weight="bold" font-size="30" fill="%2370182e" text-anchor="middle">Latika</text><text x="65" y="240" font-size="20" fill="%23882f45" text-anchor="middle">♥</text><circle cx="65" cy="300" r="28" fill="%23ffedf3"/><text x="65" y="306" font-family="sans-serif" font-size="18" fill="%23882f45" text-anchor="middle">☺</text></g><g transform="translate(290, 720) rotate(3)"><rect width="360" height="230" rx="8" fill="%23e8f1fa" stroke="%23bcd1eb" stroke-width="2"/><text x="30" y="55" font-family="cursive" font-size="26" fill="%232b4b77">You deserve</text><rect x="35" y="70" width="290" height="60" rx="6" fill="%23f9bf15"/><text x="180" y="112" font-family="sans-serif" font-weight="900" font-size="32" fill="%2394231b" text-anchor="middle">5 Star</text><text x="30" y="165" font-family="cursive" font-size="24" fill="%232b4b77">for book recommendation</text><text x="240" y="205" font-family="cursive" font-size="24" fill="%23882f45">~ Neelam</text></g><g transform="translate(710, 750) rotate(5)"><rect width="130" height="360" rx="10" fill="%23ffeef3" stroke="%23f5c7d8" stroke-width="2"/><circle cx="65" cy="24" r="7" fill="%23c99a22"/><text x="65" y="110" font-family="sans-serif" font-weight="bold" font-size="20" fill="%233b2a1f" text-anchor="middle">THANK</text><text x="65" y="145" font-family="sans-serif" font-weight="bold" font-size="20" fill="%233b2a1f" text-anchor="middle">YOU</text><text x="65" y="195" font-family="cursive" font-size="28" fill="%23882f45" text-anchor="middle">for being</text><text x="65" y="235" font-family="cursive" font-size="28" fill="%23882f45" text-anchor="middle">part of my</text><text x="65" y="275" font-family="sans-serif" font-weight="bold" font-size="20" fill="%233b2a1f" text-anchor="middle">STORY</text><text x="65" y="325" font-family="cursive" font-size="22" fill="%23882f45" text-anchor="middle">~ Neelam</text></g></g></svg>');
       background-repeat: repeat-y;
       background-position: center top;
-      background-size: 840px auto;
-      opacity: 0.18;
-      filter: saturate(0.85);
+      background-size: 880px auto;
+      opacity: 0.17;
       transition: opacity 0.5s ease;
     }
 
     body.night-mode .keepsake-background-layer {
       opacity: 0.11;
-      filter: invert(0.2) saturate(0.8);
+      filter: invert(0.15) contrast(1.1);
     }
 
     .night-candle-spot {
@@ -76,7 +82,7 @@
       top: 0; left: 0; width: 100vw; height: 100vh;
       pointer-events: none !important;
       z-index: 1;
-      background: radial-gradient(circle 380px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 220, 140, 0.12), rgba(12, 10, 8, 0.65) 85%);
+      background: radial-gradient(circle 420px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 215, 130, 0.15), rgba(12, 10, 8, 0.72) 85%);
       display: none;
     }
     body.night-mode .night-candle-spot { display: block; }
@@ -96,12 +102,11 @@
       position: relative;
       z-index: 10;
       align-items: flex-start;
-      pointer-events: auto;
     }
 
     .main-column {
       flex: 1;
-      max-width: 640px;
+      max-width: 650px;
       width: 100%;
     }
 
@@ -109,58 +114,72 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
-      padding: 0 6px;
+      margin-bottom: 24px;
+      padding: 0 4px;
     }
     .clock-widget {
       display: flex;
       align-items: center;
       gap: 8px;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
-      background: #ece1cc;
-      border: 1px solid #d8c7ad;
-      padding: 4px 14px;
+      font-size: 1.05rem;
+      background: rgba(236, 225, 204, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid #d6c4a8;
+      padding: 5px 16px;
       border-radius: 20px;
-      box-shadow: inset 0 1px 2px rgba(255,255,255,0.4);
-      color: #28221c;
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.6), 0 3px 10px rgba(0,0,0,0.04);
+      color: #2b231c;
+      font-weight: 600;
     }
+    body.night-mode .clock-widget {
+      background: rgba(36, 31, 26, 0.85);
+      border-color: #4a3e30;
+      color: #dfd1be;
+    }
+
     .polaroid-stack {
       display: flex;
-      gap: 4px;
+      gap: 5px;
       cursor: pointer;
     }
     .mini-polaroid {
-      width: 32px;
-      height: 38px;
+      width: 34px;
+      height: 42px;
       background: #fff;
-      border: 1px solid #d4c4b0;
-      padding: 3px 3px 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      border: 1px solid #d8cbba;
+      padding: 3px 3px 9px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.14);
       transform: rotate(var(--rot, -4deg));
-      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
-    .polaroid-stack:hover .mini-polaroid:nth-child(1) { transform: rotate(-14deg) translateY(-4px); }
-    .polaroid-stack:hover .mini-polaroid:nth-child(2) { transform: rotate(12deg) translateY(-4px); }
-    .polaroid-inner { width: 100%; height: 100%; background: #dfd2be; }
+    .polaroid-stack:hover .mini-polaroid:nth-child(1) { transform: rotate(-12deg) translateY(-5px) scale(1.08); }
+    .polaroid-stack:hover .mini-polaroid:nth-child(2) { transform: rotate(10deg) translateY(-5px) scale(1.08); }
+    .polaroid-inner {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #e4d7c5, #d2c0a9);
+      border-radius: 1px;
+    }
 
     .candle-indicator {
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 5px 14px;
-      background: #ede3d1;
+      padding: 6px 16px;
+      background: rgba(237, 227, 209, 0.85);
+      backdrop-filter: blur(8px);
       border: 1px solid var(--border-soft);
       border-radius: 30px;
-      transition: all 0.6s ease;
-      color: #28221c;
+      transition: all 0.5s ease;
+      color: #2b231c;
     }
-    .candle-icon { font-size: 1.1rem; filter: grayscale(80%) opacity(0.5); }
-    .candle-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.9rem; }
+    .candle-icon { font-size: 1.15rem; filter: grayscale(80%) opacity(0.5); transition: all 0.4s ease; }
+    .candle-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.95rem; }
     .candle-indicator.together {
-      background: #fff8e6;
+      background: #fff8e8;
       border-color: #ebd39b;
-      box-shadow: 0 0 18px rgba(235, 185, 78, 0.35);
+      box-shadow: 0 0 20px rgba(235, 185, 78, 0.4);
     }
     .candle-indicator.together .candle-icon {
       filter: grayscale(0%) opacity(1);
@@ -168,114 +187,121 @@
     }
     .candle-indicator.together .candle-text {
       color: #795516;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     @keyframes flicker {
-      0% { transform: scale(1) rotate(-1deg); filter: drop-shadow(0 0 4px #ffc107); }
-      50% { transform: scale(1.1) rotate(2deg); filter: drop-shadow(0 0 9px #ff9800); }
-      100% { transform: scale(1.05) rotate(-1deg); filter: drop-shadow(0 0 6px #ffb300); }
+      0% { transform: scale(1) rotate(-1deg); filter: drop-shadow(0 0 5px #ffc107); }
+      50% { transform: scale(1.12) rotate(2deg); filter: drop-shadow(0 0 11px #ff9800); }
+      100% { transform: scale(1.06) rotate(-1deg); filter: drop-shadow(0 0 8px #ffb300); }
     }
 
-    header { text-align: center; margin-bottom: 24px; position: relative; }
-    .tea-cup { position: absolute; top: -6px; left: 8px; font-size: 1.4rem; user-select: none; }
-    .tea-steam { position: absolute; top: -16px; left: 17px; font-size: 0.85rem; opacity: 0.6; animation: steamFloat 2.8s infinite ease-out; }
+    header { text-align: center; margin-bottom: 26px; position: relative; }
+    .tea-cup { position: absolute; top: -4px; left: 4px; font-size: 1.5rem; user-select: none; }
+    .tea-steam { position: absolute; top: -16px; left: 16px; font-size: 0.95rem; opacity: 0.6; animation: steamFloat 2.8s infinite ease-out; }
     @keyframes steamFloat {
-      0% { transform: translateY(0) scaleX(0.9); opacity: 0; }
-      40% { opacity: 0.7; }
-      100% { transform: translateY(-14px) scaleX(1.3); opacity: 0; }
+      0% { transform: translateY(0) scaleX(0.8); opacity: 0; }
+      40% { opacity: 0.8; }
+      100% { transform: translateY(-16px) scaleX(1.4); opacity: 0; }
     }
-    .header-tag { font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold-dark); font-weight: 600; margin-bottom: 6px; }
-    header h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.75rem; font-weight: 700; color: #28221c; }
-    body.night-mode header h1 { color: #f7ede1; }
-    header p { color: var(--text-muted); font-size: 1.1rem; font-family: 'Cormorant Garamond', serif; font-style: italic; margin-top: 4px; }
+    .header-tag { font-size: 0.74rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold-dark); font-weight: 700; margin-bottom: 6px; }
+    header h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.9rem; font-weight: 700; color: #251e18; letter-spacing: 0.5px; }
+    body.night-mode header h1 { color: #f7ece1; }
+    header p { color: var(--text-muted); font-size: 1.15rem; font-family: 'Cormorant Garamond', serif; font-style: italic; margin-top: 4px; }
+    body.night-mode header p { color: #b7a896; }
 
-    /* Pinned Ribbons Corkboard */
+    /* Corkboard for Ribbons */
     .corkboard {
-      background: #c8b293;
-      border: 3px solid #7c5c3e;
-      border-radius: 8px;
-      padding: 10px 14px;
-      margin-bottom: 28px;
-      box-shadow: inset 0 2px 6px rgba(0,0,0,0.35), 0 4px 12px rgba(0,0,0,0.06);
+      background: #cbb497;
+      background-image: radial-gradient(#be9f7f 1px, transparent 1px);
+      background-size: 12px 12px;
+      border: 4px solid #795738;
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 32px;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.38), 0 8px 24px rgba(0,0,0,0.06);
       position: relative;
     }
     .cork-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
     .cork-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       font-weight: 700;
-      color: #4a3422;
-      letter-spacing: 1.5px;
+      color: #422d1b;
+      letter-spacing: 2px;
       text-transform: uppercase;
     }
     .pin-btn {
       background: #ebdcc7;
       border: 1px solid #7c5c3e;
-      font-size: 0.76rem;
-      padding: 4px 12px;
-      border-radius: 14px;
+      font-size: 0.78rem;
+      padding: 5px 14px;
+      border-radius: 16px;
       cursor: pointer;
       font-family: 'Cormorant Garamond', serif;
       font-weight: 700;
       color: #3b2818;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
+    .pin-btn:hover { background: #fdf5ea; transform: translateY(-1px); }
     .bookmarks-row {
       display: flex;
-      gap: 14px;
+      gap: 16px;
       overflow-x: auto;
-      padding: 8px 4px 6px;
-      min-height: 75px;
+      padding: 10px 6px 8px;
+      min-height: 80px;
     }
     .pinned-ribbon {
       flex-shrink: 0;
-      width: 66px;
-      background: #882f45;
-      color: #fcecef;
-      border-radius: 2px 2px 0 0;
+      width: 70px;
+      background: var(--accent-neelam);
+      color: #fdeef1;
+      border-radius: 3px 3px 0 0;
       position: relative;
-      padding: 20px 4px 12px;
+      padding: 22px 6px 14px;
       font-family: 'Caveat', cursive;
-      font-size: 0.92rem;
+      font-size: 1rem;
+      font-weight: 600;
       text-align: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.24);
       animation: ribbonSway 4s ease-in-out infinite alternate;
     }
     .pinned-ribbon::after {
       content: '';
       position: absolute;
-      bottom: -12px; left: 0;
-      border-left: 33px solid #882f45;
-      border-right: 33px solid #882f45;
-      border-bottom: 12px solid transparent;
+      bottom: -14px; left: 0;
+      border-left: 35px solid var(--accent-neelam);
+      border-right: 35px solid var(--accent-neelam);
+      border-bottom: 14px solid transparent;
     }
-    .pinned-ribbon.saksham-ribbon { background: #234d3d; }
+    .pinned-ribbon.saksham-ribbon { background: var(--accent-saksham); }
     .pinned-ribbon.saksham-ribbon::after {
-      border-left-color: #234d3d; border-right-color: #234d3d;
+      border-left-color: var(--accent-saksham); border-right-color: var(--accent-saksham);
     }
     .tack-pin {
       position: absolute;
-      top: 4px; left: calc(50% - 4px);
-      width: 8px; height: 8px;
-      background: #dfbe76;
+      top: 5px; left: calc(50% - 5px);
+      width: 10px; height: 10px;
+      background: radial-gradient(circle at 35% 35%, #fff2be, #cda756);
       border-radius: 50%;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
     .unpin-ribbon-btn {
       position: absolute;
       top: 2px; right: 2px;
-      background: rgba(0,0,0,0.4);
+      background: rgba(0,0,0,0.45);
       color: #fff;
       border: none;
       border-radius: 50%;
-      width: 14px; height: 14px;
-      font-size: 9px;
-      line-height: 14px;
+      width: 16px; height: 16px;
+      font-size: 10px;
+      line-height: 16px;
       cursor: pointer;
       opacity: 0;
       transition: opacity 0.2s;
@@ -283,44 +309,51 @@
     .pinned-ribbon:hover .unpin-ribbon-btn { opacity: 1; }
 
     @keyframes ribbonSway {
-      from { transform: rotate(-1.5deg); }
-      to { transform: rotate(1.5deg); }
+      from { transform: rotate(-2deg); }
+      to { transform: rotate(2deg); }
     }
 
+    /* Composer Blotter */
     .composer-blotter {
       background: var(--desk-leather);
-      padding: 12px;
-      border-radius: 20px;
-      box-shadow: 0 12px 36px rgba(50, 38, 26, 0.08);
-      border: 1px solid #ded0bd;
-      margin-bottom: 38px;
+      padding: 14px;
+      border-radius: 24px;
+      box-shadow: 0 16px 40px rgba(45, 34, 22, 0.09), inset 0 1px 2px rgba(255,255,255,0.7);
+      border: 1px solid #dfd1be;
+      margin-bottom: 40px;
       position: relative;
+    }
+    body.night-mode .composer-blotter {
+      background: #25201b;
+      border-color: #3e3328;
     }
     .composer {
       background: var(--paper-linen);
       border: 1px solid var(--border-soft);
-      border-radius: 14px;
-      padding: 24px;
+      border-radius: 16px;
+      padding: 26px;
       position: relative;
-      transition: background 0.3s ease;
+      transition: all 0.3s ease;
       color: var(--text-dark);
+      box-shadow: inset 0 0 30px rgba(230, 218, 198, 0.25);
     }
     .composer.floral { background: var(--paper-floral); }
-    .composer.midnight { background: var(--paper-midnight); color: #e5e9f0; }
+    .composer.midnight { background: var(--paper-midnight); color: #e7ebf2; }
     .composer.grid {
       background: var(--paper-grid);
-      background-image: linear-gradient(#e9e2d3 1px, transparent 1px), linear-gradient(90deg, #e9e2d3 1px, transparent 1px);
-      background-size: 20px 20px;
+      background-image: linear-gradient(#e9dfcc 1px, transparent 1px), linear-gradient(90deg, #e9dfcc 1px, transparent 1px);
+      background-size: 22px 22px;
     }
 
     .quill-rest {
       position: absolute;
-      top: -16px; right: 28px;
-      font-size: 1.5rem;
+      top: -18px; right: 28px;
+      font-size: 1.6rem;
       transform: rotate(45deg);
       transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
       cursor: pointer;
       user-select: none;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
     }
     .quill-rest.writing { transform: rotate(15deg) translateY(6px); }
 
@@ -328,187 +361,216 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 12px;
-      font-size: 0.78rem;
+      margin-bottom: 14px;
+      font-size: 0.8rem;
       font-family: 'Cormorant Garamond', serif;
       font-weight: 700;
     }
     .stationery-chip {
-      padding: 4px 12px;
-      border-radius: 12px;
-      border: 1px solid #d5c3aa;
+      padding: 5px 14px;
+      border-radius: 14px;
+      border: 1px solid #d8c7b0;
       background: #f7efe4;
       cursor: pointer;
-      color: #28221c;
+      color: #2d241c;
       user-select: none;
+      transition: all 0.2s ease;
     }
+    .stationery-chip:hover { transform: translateY(-1px); }
     .stationery-chip.active {
-      background: #503d2e;
+      background: #4a382a;
+      border-color: #4a382a;
       color: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
-    .author-toggle { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; font-size: 0.88rem; font-weight: 600; color: #28221c; }
-    .author-pill { display: flex; background: #f2ebd9; padding: 4px; border-radius: 30px; gap: 4px; }
-    .author-pill label { padding: 6px 18px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; color: var(--text-muted); }
+    .author-toggle { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; font-size: 0.9rem; font-weight: 600; color: #2d241c; }
+    body.night-mode .author-toggle { color: #f0e3d2; }
+    .author-pill { display: flex; background: #eedfc7; padding: 4px; border-radius: 30px; gap: 4px; }
+    body.night-mode .author-pill { background: #382e23; }
+    .author-pill label { padding: 6px 20px; border-radius: 20px; cursor: pointer; font-size: 0.88rem; color: #736453; transition: all 0.2s ease; }
     .author-pill input { display: none; }
-    .author-pill label:has(input[value="Neelam"]:checked) { background: var(--accent-neelam); color: #fff; }
-    .author-pill label:has(input[value="Saksham"]:checked) { background: var(--accent-saksham); color: #fff; }
+    .author-pill label:has(input[value="Neelam"]:checked) { background: var(--accent-neelam); color: #fff; font-weight: 700; box-shadow: 0 3px 8px rgba(131,39,62,0.3); }
+    .author-pill label:has(input[value="Saksham"]:checked) { background: var(--accent-saksham); color: #fff; font-weight: 700; box-shadow: 0 3px 8px rgba(27,77,62,0.3); }
 
     textarea {
-      width: 100%; height: 110px; border: 1px solid #ebdccb; border-radius: 10px;
-      padding: 14px 16px; font-family: 'Caveat', cursive; font-size: 1.6rem;
-      background: rgba(255,255,255,0.7); color: #1c1611 !important; resize: vertical; line-height: 1.45;
+      width: 100%; height: 115px; border: 1px solid #e7dac9; border-radius: 12px;
+      padding: 14px 18px; font-family: 'Caveat', cursive; font-size: 1.7rem;
+      background: rgba(255,255,255,0.85); color: #1c1611 !important; resize: vertical; line-height: 1.45;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.03);
+      transition: border-color 0.2s;
     }
-    .composer.midnight textarea { background: rgba(255,255,255,0.06); color: #f0e6d2 !important; }
+    .composer.midnight textarea { background: rgba(255,255,255,0.08); color: #f5eedf !important; border-color: #3b4256; }
     textarea:focus { outline: none; border-color: var(--gold); }
 
     .drawing-preview-box {
-      margin-top: 10px;
+      margin-top: 12px;
       display: none;
       position: relative;
-      border-radius: 8px;
+      border-radius: 10px;
       overflow: hidden;
       border: 1px solid #dfcfb7;
-      max-height: 180px;
+      max-height: 190px;
     }
     .drawing-preview-box img { width: 100%; height: auto; display: block; }
     .clear-drawing-btn {
       position: absolute;
-      top: 6px; right: 6px;
-      background: rgba(0,0,0,0.6);
+      top: 8px; right: 8px;
+      background: rgba(0,0,0,0.65);
       color: #fff; border: none; border-radius: 50%;
-      width: 24px; height: 24px; cursor: pointer;
+      width: 26px; height: 26px; cursor: pointer;
     }
 
-    .song-input-row { margin-top: 10px; display: none; }
+    .song-input-row { margin-top: 12px; display: none; }
     .song-input-row input {
-      width: 100%; padding: 8px 12px; font-size: 0.86rem; border: 1px solid #ebdccb;
-      border-radius: 8px; background: #faf6ef; outline: none; color: #1c1611;
+      width: 100%; padding: 10px 14px; font-size: 0.9rem; border: 1px solid #e5d5c1;
+      border-radius: 10px; background: #faf6ef; outline: none; color: #1c1611;
     }
 
     .composer-toolbar {
-      display: flex; justify-content: space-between; align-items: center; margin-top: 15px; flex-wrap: wrap; gap: 10px;
+      display: flex; justify-content: space-between; align-items: center; margin-top: 18px; flex-wrap: wrap; gap: 10px;
     }
     .tools-group { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
     .btn-action {
       background: #f7f1e6; border: 1px solid var(--border-soft); padding: 8px 14px;
-      border-radius: 8px; cursor: pointer; font-size: 0.84rem; font-weight: 500;
-      color: #28221c; display: flex; align-items: center; gap: 6px;
-      user-select: none;
+      border-radius: 10px; cursor: pointer; font-size: 0.85rem; font-weight: 600;
+      color: #2e261e; display: flex; align-items: center; gap: 6px;
+      user-select: none; transition: all 0.2s ease;
     }
-    .btn-action:hover { background: #ecdfcd; }
-    .btn-action.active-tool { background: #ded0bc; border-color: var(--gold); }
+    .btn-action:hover { background: #ece0ce; transform: translateY(-1px); }
+    .btn-action.active-tool { background: #e3d2bc; border-color: var(--gold-dark); }
     .btn-send {
-      background: #25201b; color: #f7efe4; border: none; padding: 10px 24px;
-      border-radius: 8px; font-weight: 600; font-size: 0.92rem; cursor: pointer;
+      background: linear-gradient(135deg, #30261e, #1c1611);
+      color: #f7efe4; border: 1px solid rgba(255,255,255,0.1); padding: 10px 26px;
+      border-radius: 10px; font-weight: 700; font-size: 0.95rem; cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15); transition: all 0.2s ease;
     }
+    .btn-send:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,0,0,0.22); }
 
-    /* Fixed Note Cards */
-    .notes-list { display: flex; flex-direction: column; gap: 28px; position: relative; }
+    /* Note Cards Styling */
+    .notes-list { display: flex; flex-direction: column; gap: 32px; position: relative; }
     .note-card {
-      border-radius: 12px; padding: 26px 26px 22px; position: relative;
-      box-shadow: 0 8px 24px rgba(60, 48, 36, 0.06); border: 1px solid #e7dac9;
+      border-radius: 16px; padding: 28px 28px 24px; position: relative;
+      box-shadow: var(--shadow-card); border: 1px solid #e7dac9;
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
+    .note-card:hover { transform: translateY(-3px); }
     .note-card.paper-linen { background: var(--paper-linen); }
     .note-card.paper-floral { background: var(--paper-floral); }
     .note-card.paper-midnight { background: var(--paper-midnight); border-color: #2d3345; }
     .note-card.paper-grid {
       background: var(--paper-grid);
-      background-image: linear-gradient(#e9e2d3 1px, transparent 1px), linear-gradient(90deg, #e9e2d3 1px, transparent 1px);
-      background-size: 20px 20px;
+      background-image: linear-gradient(#e9dfcc 1px, transparent 1px), linear-gradient(90deg, #e9dfcc 1px, transparent 1px);
+      background-size: 22px 22px;
     }
-    .note-card.Neelam { border-left: 5px solid var(--accent-neelam); }
-    .note-card.Saksham { border-left: 5px solid var(--accent-saksham); }
+    .note-card.Neelam { border-left: 6px solid var(--accent-neelam); }
+    .note-card.Saksham { border-left: 6px solid var(--accent-saksham); }
+
+    /* Washi tape accent on top */
+    .washi-tape {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 110px;
+      height: 22px;
+      background: rgba(235, 218, 192, 0.65);
+      backdrop-filter: blur(4px);
+      border-left: 2px dashed rgba(160, 140, 110, 0.4);
+      border-right: 2px dashed rgba(160, 140, 110, 0.4);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
 
     .bookmark-ribbon {
-      position: absolute; top: -2px; right: 28px; width: 14px; height: 28px; border-radius: 0 0 2px 2px;
+      position: absolute; top: -3px; right: 30px; width: 15px; height: 32px; border-radius: 0 0 2px 2px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.18);
     }
     .note-card.Neelam .bookmark-ribbon { background: var(--accent-neelam); }
     .note-card.Saksham .bookmark-ribbon { background: var(--accent-saksham); }
 
     .note-header {
-      display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;
-      padding-bottom: 10px; border-bottom: 1px dashed #ded2c0;
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;
+      padding-bottom: 10px; border-bottom: 1px dashed #ded0bd;
     }
-    .author-name { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 700; }
+    .author-name { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 700; letter-spacing: 0.5px; }
     .author-name.Neelam { color: var(--accent-neelam); }
     .author-name.Saksham { color: var(--accent-saksham); }
-    .note-time { font-size: 0.76rem; color: #7a6b5c !important; }
+    .note-time { font-size: 0.78rem; color: #7a6b5c !important; font-weight: 500; }
 
     .note-body {
       font-family: 'Caveat', cursive;
-      font-size: 1.72rem;
-      line-height: 1.45;
+      font-size: 1.8rem;
+      line-height: 1.48;
       white-space: pre-wrap;
       color: #1a1510 !important;
-      font-weight: 500;
+      font-weight: 600;
     }
     .note-card.paper-midnight .note-body {
-      color: #f5eedb !important;
+      color: #f7eedd !important;
     }
 
     .invisible-text {
-      filter: blur(8px); cursor: pointer; background: linear-gradient(90deg, #c7a361, #b28c46);
+      filter: blur(9px); cursor: pointer; background: linear-gradient(90deg, #c7a361, #b28c46);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; transition: filter 0.6s ease;
     }
     .invisible-text:hover { filter: blur(0); -webkit-text-fill-color: inherit; }
-    .invisible-hint { font-size: 0.78rem; color: var(--gold-dark); display: block; margin-bottom: 6px; font-weight: 600; }
+    .invisible-hint { font-size: 0.8rem; color: var(--gold-dark); display: block; margin-bottom: 8px; font-weight: 600; }
 
-    .note-photo img, .note-drawing img { width: 100%; border-radius: 8px; margin-top: 14px; border: 1px solid rgba(0,0,0,0.06); }
-    .song-box { margin-top: 14px; background: rgba(255,255,255,0.4); border: 1px solid #ebdcc9; border-radius: 10px; padding: 10px 12px; }
-    .song-label { font-size: 0.75rem; font-weight: 600; color: var(--gold-dark); margin-bottom: 8px; }
+    .note-photo img, .note-drawing img { width: 100%; border-radius: 10px; margin-top: 16px; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 14px rgba(0,0,0,0.06); }
+    .song-box { margin-top: 16px; background: rgba(255,255,255,0.5); border: 1px solid #ebdcc9; border-radius: 12px; padding: 12px 14px; }
+    .song-label { font-size: 0.76rem; font-weight: 700; color: var(--gold-dark); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
     .song-player-frame { width: 100%; border: none; border-radius: 8px; }
-    audio { width: 100%; height: 38px; margin-top: 14px; }
+    audio { width: 100%; height: 40px; margin-top: 16px; border-radius: 20px; }
 
     .wax-seal {
       position: absolute;
-      bottom: -15px;
-      right: 22px;
-      width: 38px;
-      height: 38px;
+      bottom: -16px;
+      right: 24px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: 'Cormorant Garamond', serif;
       font-weight: 700;
-      font-size: 1.15rem;
-      color: rgba(255, 255, 255, 0.92);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.22), inset 0 2px 3px rgba(255,255,255,0.3);
-      border: 2px solid rgba(255,255,255,0.18);
+      font-size: 1.25rem;
+      color: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25), inset 0 2px 4px rgba(255,255,255,0.4);
+      border: 2px solid rgba(255,255,255,0.22);
       user-select: none;
     }
-    .note-card.Neelam .wax-seal { background: radial-gradient(circle at 35% 35%, #a1324c, var(--wax-neelam)); }
-    .note-card.Saksham .wax-seal { background: radial-gradient(circle at 35% 35%, #245c47, var(--wax-saksham)); }
+    .note-card.Neelam .wax-seal { background: radial-gradient(circle at 35% 35%, #a62e49, var(--wax-neelam)); }
+    .note-card.Saksham .wax-seal { background: radial-gradient(circle at 35% 35%, #23604b, var(--wax-saksham)); }
 
     /* Studio Modal */
     .studio-modal-overlay {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(18, 14, 11, 0.82); backdrop-filter: blur(8px);
+      background: rgba(16, 12, 9, 0.84); backdrop-filter: blur(10px);
       z-index: 10001; display: none; align-items: center; justify-content: center; padding: 16px;
     }
     .studio-box {
-      width: 100%; max-width: 680px; background: #fdfaf5; border: 2px solid #dcd0bc;
-      border-radius: 16px; padding: 22px; box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+      width: 100%; max-width: 680px; background: #fdfbf7; border: 2px solid #ded3c1;
+      border-radius: 20px; padding: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.4);
       position: relative;
     }
-    .studio-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .studio-header h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: #3b2818; }
+    .studio-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .studio-header h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; color: #3b2818; }
     .sketch-canvas {
       width: 100%; height: 340px; background: #fffdfa; border: 1px solid #dfd3bf;
-      border-radius: 8px; cursor: crosshair; touch-action: none;
+      border-radius: 12px; cursor: crosshair; touch-action: none; box-shadow: inset 0 2px 6px rgba(0,0,0,0.04);
     }
     .palette-toolbar {
-      display: flex; justify-content: space-between; align-items: center; margin-top: 14px; flex-wrap: wrap; gap: 8px;
+      display: flex; justify-content: space-between; align-items: center; margin-top: 16px; flex-wrap: wrap; gap: 10px;
     }
-    .color-dots { display: flex; gap: 6px; align-items: center; }
+    .color-dots { display: flex; gap: 8px; align-items: center; }
     .color-dot {
-      width: 24px; height: 24px; border-radius: 50%; cursor: pointer;
-      border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      width: 26px; height: 26px; border-radius: 50%; cursor: pointer;
+      border: 2px solid #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.25); transition: transform 0.2s;
     }
-    .color-dot.active { transform: scale(1.2); border-color: #3b2818; }
+    .color-dot.active { transform: scale(1.22); border-color: #3b2818; }
     .brush-tools { display: flex; gap: 8px; align-items: center; }
-    .brush-slider { width: 90px; }
+    .brush-slider { width: 95px; }
 
     /* Postal Overlay */
     #postalOverlay {
@@ -517,7 +579,7 @@
     }
     .animated-envelope {
       width: 320px; height: 200px; background: #e8ded0; position: absolute;
-      border-radius: 6px; box-shadow: 0 15px 35px rgba(45, 32, 20, 0.35);
+      border-radius: 6px; box-shadow: 0 18px 40px rgba(45, 32, 20, 0.38);
       border: 1px solid #d2c3af; transform-style: preserve-3d;
     }
     .animated-envelope::before {
@@ -531,89 +593,90 @@
     }
     .envelope-flap.closed { transform: rotateX(180deg); border-top-color: #cbb69c; }
     .envelope-wax {
-      position: absolute; top: -30px; left: calc(50% - 20px); width: 40px; height: 40px;
+      position: absolute; top: -30px; left: calc(50% - 20px); width: 42px; height: 42px;
       border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      color: #fff; font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.2rem;
+      color: #fff; font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.25rem;
       opacity: 0; transform: scale(0.5); transition: all 0.4s ease; z-index: 5;
     }
     .envelope-wax.stamped { opacity: 1; transform: scale(1); }
-    .envelope-wax.Neelam { background: radial-gradient(circle at 35% 35%, #a1324c, var(--wax-neelam)); }
-    .envelope-wax.Saksham { background: radial-gradient(circle at 35% 35%, #245c47, var(--wax-saksham)); }
+    .envelope-wax.Neelam { background: radial-gradient(circle at 35% 35%, #a62e49, var(--wax-neelam)); }
+    .envelope-wax.Saksham { background: radial-gradient(circle at 35% 35%, #23604b, var(--wax-saksham)); }
     .flying-letter {
       position: absolute; width: 290px; height: 160px; background: #fdfaf6; border: 1px solid #dfd3c3;
-      border-radius: 4px; padding: 14px; left: 15px; top: 20px; z-index: 2;
-      font-family: 'Caveat', cursive; font-size: 1.25rem; color: #1c1611; overflow: hidden;
+      border-radius: 6px; padding: 16px; left: 15px; top: 20px; z-index: 2;
+      font-family: 'Caveat', cursive; font-size: 1.3rem; color: #1c1611; overflow: hidden;
       transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
     }
 
     /* Bookshelf Column */
-    .shelf-column { width: 280px; position: sticky; top: 24px; }
+    .shelf-column { width: 290px; position: sticky; top: 24px; }
     .bookshelf {
-      background: #412a1c; border: 4px solid #2b1a10; border-radius: 12px; padding: 20px 14px 10px;
-      box-shadow: 0 14px 32px rgba(0,0,0,0.24);
+      background: #3e2617; border: 4px solid #28170d; border-radius: 16px; padding: 22px 16px 12px;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.28);
     }
     .shelf-title {
-      font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 700; color: #e5cd9c;
-      text-align: center; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 14px;
-      border-bottom: 1px solid rgba(229, 205, 156, 0.2); padding-bottom: 6px;
+      font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 700; color: #ebd4a5;
+      text-align: center; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 16px;
+      border-bottom: 1px solid rgba(235, 212, 165, 0.25); padding-bottom: 8px;
     }
-    .books-row { display: flex; justify-content: space-around; align-items: flex-end; height: 230px; padding: 0 8px; }
-    .wood-plank { height: 14px; background: #27170e; border-radius: 3px; margin-top: -2px; }
+    .books-row { display: flex; justify-content: space-around; align-items: flex-end; height: 235px; padding: 0 6px; }
+    .wood-plank { height: 16px; background: #24140a; border-radius: 4px; margin-top: -2px; }
     .book-spine {
-      width: 82px; height: 215px; border-radius: 6px 6px 2px 2px; cursor: pointer; padding: 14px 8px;
+      width: 86px; height: 220px; border-radius: 8px 8px 3px 3px; cursor: pointer; padding: 16px 8px;
       display: flex; flex-direction: column; justify-content: space-between; align-items: center;
-      box-shadow: -4px 0 8px rgba(0,0,0,0.4); transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      box-shadow: -5px 0 10px rgba(0,0,0,0.45); transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
-    .book-spine:hover { transform: translateY(-16px) rotate(-2deg); }
-    .book-spine.saksham { background: linear-gradient(90deg, #18382c, #26503f 60%, #143126); }
-    .book-spine.neelam { background: linear-gradient(90deg, #571b29, #752839 60%, #44141f); }
-    .spine-gold-line { width: 100%; height: 2px; background: #dfbe76; opacity: 0.7; }
+    .book-spine:hover { transform: translateY(-18px) rotate(-2deg); }
+    .book-spine.saksham { background: linear-gradient(90deg, #16362a, #23513f 60%, #122f24); }
+    .book-spine.neelam { background: linear-gradient(90deg, #531826, #742536 60%, #3f111c); }
+    .spine-gold-line { width: 100%; height: 2px; background: #dfbe76; opacity: 0.75; }
     .spine-text {
       writing-mode: vertical-rl; transform: rotate(180deg); font-family: 'Cormorant Garamond', serif;
-      font-weight: 700; font-size: 0.95rem; letter-spacing: 2px; color: #ebd7a8; white-space: nowrap;
+      font-weight: 700; font-size: 1rem; letter-spacing: 2.5px; color: #ebd7a8; white-space: nowrap;
     }
 
-    /* Tome Modal */
+    /* Ancient Book Modal */
     .book-modal-overlay {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(20, 15, 12, 0.78); backdrop-filter: blur(6px); z-index: 10000;
+      background: rgba(18, 14, 11, 0.82); backdrop-filter: blur(8px); z-index: 10000;
       display: none; align-items: center; justify-content: center; padding: 16px;
     }
     .ancient-book {
-      width: 100%; max-width: 640px; min-height: 520px; background: #f4ecdc;
-      border-radius: 8px 18px 18px 8px; box-shadow: -12px 0 25px rgba(0,0,0,0.6);
-      padding: 38px 40px 30px; position: relative; display: flex; flex-direction: column; justify-content: space-between;
+      width: 100%; max-width: 650px; min-height: 520px; background: #f4ecdc;
+      border-radius: 10px 20px 20px 10px; box-shadow: -14px 0 30px rgba(0,0,0,0.65);
+      padding: 40px 42px 32px; position: relative; display: flex; flex-direction: column; justify-content: space-between;
     }
-    .book-ribbon { position: absolute; top: -10px; left: 60px; width: 22px; height: 60px; background: #8c263e; }
-    .book-close-btn { position: absolute; top: 14px; right: 18px; background: transparent; border: none; font-size: 1.4rem; cursor: pointer; color: #7d6b56; }
-    .book-header { text-align: center; border-bottom: 2px solid #dfcfb7; padding-bottom: 12px; margin-bottom: 18px; }
-    .book-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; color: #4a3525; }
+    .book-ribbon { position: absolute; top: -12px; left: 60px; width: 24px; height: 65px; background: #8c263e; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+    .book-close-btn { position: absolute; top: 16px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: #7d6b56; }
+    .book-header { text-align: center; border-bottom: 2px solid #dfcfb7; padding-bottom: 14px; margin-bottom: 18px; }
+    .book-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: #443021; }
     .book-tabs { display: flex; justify-content: center; gap: 12px; margin-bottom: 18px; }
-    .book-tab-btn { background: #ebdcc7; border: 1px solid #d5be9f; padding: 6px 16px; border-radius: 20px; font-family: 'Cormorant Garamond', serif; font-weight: 700; cursor: pointer; }
-    .book-tab-btn.active { background: #5c4533; color: #f4ecdc; }
+    .book-tab-btn { background: #ebdcc7; border: 1px solid #d5be9f; padding: 6px 18px; border-radius: 20px; font-family: 'Cormorant Garamond', serif; font-weight: 700; cursor: pointer; }
+    .book-tab-btn.active { background: #563f2d; color: #f4ecdc; }
     .book-write-view textarea {
       width: 100%; height: 180px; background: transparent; border: none;
       background-image: repeating-linear-gradient(transparent, transparent 31px, #e4d3bc 31px, #e4d3bc 32px);
-      line-height: 32px; font-family: 'Caveat', cursive; font-size: 1.6rem; padding: 0 8px; resize: none;
+      line-height: 32px; font-family: 'Caveat', cursive; font-size: 1.7rem; padding: 0 8px; resize: none;
       color: #1c1611 !important;
     }
     .signature-row { display: flex; justify-content: flex-end; align-items: baseline; gap: 8px; margin-top: 15px; }
-    .sig-name { font-family: 'Marck Script', cursive; font-size: 1.9rem; color: #1f3b2f; }
+    .sig-name { font-family: 'Marck Script', cursive; font-size: 2rem; color: #1f3b2f; }
     .sig-name.neelam-sig { color: #7c2237; }
     .book-read-view { display: none; min-height: 220px; }
-    .archived-note-body { font-family: 'Caveat', cursive; font-size: 1.65rem; line-height: 1.5; min-height: 160px; color: #1c1611 !important; }
-    .page-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 10px; border-top: 1px dashed #dfcfb7; }
-    .page-btn { background: #ebdcc7; border: 1px solid #d5be9f; padding: 4px 14px; border-radius: 6px; cursor: pointer; }
+    .archived-note-body { font-family: 'Caveat', cursive; font-size: 1.7rem; line-height: 1.5; min-height: 160px; color: #1c1611 !important; }
+    .page-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 12px; border-top: 1px dashed #dfcfb7; }
+    .page-btn { background: #ebdcc7; border: 1px solid #d5be9f; padding: 6px 16px; border-radius: 8px; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-weight: 700; }
 
     @media (max-width: 840px) {
       .desk-wrapper { flex-direction: column; align-items: center; }
-      .shelf-column { width: 100%; max-width: 440px; position: static; margin-top: 18px; }
+      .shelf-column { width: 100%; max-width: 440px; position: static; margin-top: 20px; }
+      header h1 { font-size: 2.4rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- Aesthetic Background Collage Layer -->
+<!-- Keepsake Memory Tapestry Layer -->
 <div class="keepsake-background-layer" id="keepsakeBg"></div>
 
 <canvas id="ambientCanvas"></canvas>
@@ -774,7 +837,7 @@
     <div>
       <div class="book-header">
         <h2 id="bookTitle">Volume I: For Saksham</h2>
-        <p id="bookSubtitle">Permanent keepsakes preserved in time</p>
+        <p id="bookSubtitle" style="font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1.05rem; color:#786653;">Permanent keepsakes preserved in time</p>
       </div>
 
       <div class="book-tabs">
@@ -801,13 +864,13 @@
       </div>
       <div class="page-nav">
         <button type="button" class="page-btn" id="prevPageBtn" onclick="window.navigatePage(-1)">← Older Page</button>
-        <span class="page-indicator" id="pageIndicator">Page 1 of 1</span>
+        <span class="page-indicator" id="pageIndicator" style="font-family:'Cormorant Garamond', serif; font-weight:700;">Page 1 of 1</span>
         <button type="button" class="page-btn" id="nextPageBtn" onclick="window.navigatePage(1)">Newer Page →</button>
       </div>
     </div>
 
-    <div class="book-footer">
-      <span style="font-family:'Cormorant Garamond', serif; font-style:italic; font-size:0.9rem; color:#8c7863;" id="bookFooterAuthor">Author: Neelam</span>
+    <div class="book-footer" style="display:flex; justify-content:space-between; align-items:center; margin-top:16px;">
+      <span style="font-family:'Cormorant Garamond', serif; font-style:italic; font-size:0.95rem; color:#8c7863;" id="bookFooterAuthor">Author: Neelam</span>
       <button type="button" class="btn-send" id="bookSaveBtn" onclick="window.savePageToBook()">Bind to Book</button>
     </div>
   </div>
@@ -846,9 +909,9 @@
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(520, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(740, ctx.currentTime + 0.12);
-      gain.gain.setValueAtTime(0.08, ctx.currentTime);
+      osc.frequency.setValueAtTime(480, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(680, ctx.currentTime + 0.12);
+      gain.gain.setValueAtTime(0.06, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
       osc.connect(gain);
       gain.connect(ctx.destination);
@@ -860,18 +923,18 @@
   function playChime() {
     try {
       const ctx = getAudioCtx();
-      [440, 554.37, 659.25].forEach((freq, idx) => {
+      [440, 554.37, 659.25, 880].forEach((freq, idx) => {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.type = 'triangle';
         osc.frequency.value = freq;
-        const startTime = ctx.currentTime + (idx * 0.08);
+        const startTime = ctx.currentTime + (idx * 0.09);
         gain.gain.setValueAtTime(0.07, startTime);
-        gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.5);
+        gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.6);
         osc.connect(gain);
         gain.connect(ctx.destination);
         osc.start(startTime);
-        osc.stop(startTime + 0.5);
+        osc.stop(startTime + 0.6);
       });
     } catch(e) {}
   }
@@ -1076,8 +1139,8 @@
       this.isFirefly = Math.random() > 0.65;
       this.x = Math.random() * canvas.width;
       this.y = this.isFirefly ? Math.random() * canvas.height : -20;
-      this.size = this.isFirefly ? Math.random() * 2 + 1.2 : Math.random() * 6 + 4;
-      this.speedY = this.isFirefly ? Math.random() * 0.3 - 0.15 : Math.random() * 0.7 + 0.35;
+      this.size = this.isFirefly ? Math.random() * 2.2 + 1.2 : Math.random() * 6 + 4;
+      this.speedY = this.isFirefly ? Math.random() * 0.3 - 0.15 : Math.random() * 0.65 + 0.35;
       this.speedX = Math.random() * 0.6 - 0.3;
       this.angle = Math.random() * 360;
       this.spin = Math.random() * 0.02 - 0.01;
@@ -1086,11 +1149,11 @@
     }
     update() {
       this.y += this.speedY;
-      this.x += this.speedX + Math.sin(this.y * 0.01) * 0.3;
+      this.x += this.speedX + Math.sin(this.y * 0.01) * 0.35;
       this.angle += this.spin;
       if (this.isFirefly) {
-        this.glowPhase += 0.03;
-        this.currentOpacity = this.opacity + Math.sin(this.glowPhase) * 0.25;
+        this.glowPhase += 0.035;
+        this.currentOpacity = this.opacity + Math.sin(this.glowPhase) * 0.28;
         if (this.y < -10 || this.y > canvas.height + 10 || this.x < -10 || this.x > canvas.width + 10) this.reset();
       } else {
         if (this.y > canvas.height + 20) this.reset();
@@ -1100,15 +1163,15 @@
       pCtx.save();
       pCtx.translate(this.x, this.y);
       if (this.isFirefly) {
-        pCtx.fillStyle = `rgba(235, 195, 105, ${Math.max(0.05, this.currentOpacity)})`;
-        pCtx.shadowColor = 'rgba(240, 200, 110, 0.6)';
-        pCtx.shadowBlur = 6;
+        pCtx.fillStyle = `rgba(238, 198, 108, ${Math.max(0.06, this.currentOpacity)})`;
+        pCtx.shadowColor = 'rgba(245, 205, 115, 0.7)';
+        pCtx.shadowBlur = 8;
         pCtx.beginPath();
         pCtx.arc(0, 0, this.size, 0, Math.PI * 2);
         pCtx.fill();
       } else {
         pCtx.rotate(this.angle);
-        pCtx.fillStyle = Math.random() > 0.5 ? 'rgba(215, 172, 184, 0.42)' : 'rgba(210, 192, 160, 0.38)';
+        pCtx.fillStyle = Math.random() > 0.5 ? 'rgba(215, 168, 180, 0.38)' : 'rgba(212, 194, 162, 0.35)';
         pCtx.beginPath();
         pCtx.ellipse(0, 0, this.size, this.size * 0.6, 0, 0, Math.PI * 2);
         pCtx.fill();
@@ -1217,7 +1280,7 @@
           else if (h > maxDim) { w *= maxDim / h; h = maxDim; }
           canvas.width = w; canvas.height = h;
           canvas.getContext("2d").drawImage(img, 0, 0, w, h);
-          resolve(canvas.toDataURL("image/jpeg", 0.72));
+          resolve(canvas.toDataURL("image/jpeg", 0.74));
         };
         img.src = e.target.result;
       };
@@ -1380,6 +1443,7 @@
 
       container.innerHTML += `
         <div class="note-card ${data.author} ${paperClass}">
+          <div class="washi-tape"></div>
           <div class="bookmark-ribbon"></div>
           <div class="note-header"><span class="author-name ${data.author}">${data.author}</span><span class="note-time">${dateStr}</span></div>
           ${textBlock}
@@ -1414,10 +1478,10 @@
     
     if (targetRecipient === "Saksham") {
       title.innerText = "Volume I: For Saksham";
-      ribbon.style.background = "#1b3d30";
+      ribbon.style.background = "#18382c";
     } else {
       title.innerText = "Volume II: For Neelam";
-      ribbon.style.background = "#8c263e";
+      ribbon.style.background = "#801e36";
     }
 
     syncSignature();
