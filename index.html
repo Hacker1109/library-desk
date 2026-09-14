@@ -42,20 +42,20 @@
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
-      transition: background-color 1s ease, filter 1s ease;
     }
 
-    /* Night Glow Spotlight */
     body.night-mode {
-      background-color: #12100e;
+      background-color: #1a1612;
       color: #e5dac9;
     }
+
+    /* Fixed: pointer-events: none ensures this never blocks clicks */
     .night-candle-spot {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
-      pointer-events: none;
-      z-index: 2;
-      background: radial-gradient(circle 320px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 215, 130, 0.15), rgba(10, 8, 7, 0.75) 85%);
+      pointer-events: none !important;
+      z-index: 1;
+      background: radial-gradient(circle 380px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 220, 140, 0.12), rgba(12, 10, 8, 0.65) 85%);
       display: none;
     }
     body.night-mode .night-candle-spot { display: block; }
@@ -63,18 +63,20 @@
     #ambientCanvas {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
-      pointer-events: none;
+      pointer-events: none !important;
       z-index: 0;
     }
 
+    /* Fixed: high z-index and explicit clickability */
     .desk-wrapper {
       width: 100%;
       max-width: 980px;
       display: flex;
       gap: 36px;
       position: relative;
-      z-index: 3;
+      z-index: 10;
       align-items: flex-start;
+      pointer-events: auto;
     }
 
     .main-column {
@@ -83,7 +85,6 @@
       width: 100%;
     }
 
-    /* Desk Clutter Bar */
     .clutter-shelf {
       display: flex;
       justify-content: space-between;
@@ -102,6 +103,7 @@
       padding: 4px 14px;
       border-radius: 20px;
       box-shadow: inset 0 1px 2px rgba(255,255,255,0.4);
+      color: var(--text-dark);
     }
     .polaroid-stack {
       display: flex;
@@ -122,7 +124,6 @@
     .polaroid-stack:hover .mini-polaroid:nth-child(2) { transform: rotate(12deg) translateY(-4px); }
     .polaroid-inner { width: 100%; height: 100%; background: #dfd2be; }
 
-    /* Candle Presence Indicator */
     .candle-indicator {
       display: flex;
       align-items: center;
@@ -132,6 +133,7 @@
       border: 1px solid var(--border-soft);
       border-radius: 30px;
       transition: all 0.6s ease;
+      color: var(--text-dark);
     }
     .candle-icon { font-size: 1.1rem; filter: grayscale(80%) opacity(0.5); }
     .candle-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.9rem; }
@@ -144,13 +146,17 @@
       filter: grayscale(0%) opacity(1);
       animation: flicker 1.8s infinite alternate ease-in-out;
     }
+    .candle-indicator.together .candle-text {
+      color: #795516;
+      font-weight: 600;
+    }
+
     @keyframes flicker {
       0% { transform: scale(1) rotate(-1deg); filter: drop-shadow(0 0 4px #ffc107); }
       50% { transform: scale(1.1) rotate(2deg); filter: drop-shadow(0 0 9px #ff9800); }
       100% { transform: scale(1.05) rotate(-1deg); filter: drop-shadow(0 0 6px #ffb300); }
     }
 
-    /* Header */
     header { text-align: center; margin-bottom: 24px; position: relative; }
     .tea-cup { position: absolute; top: -6px; left: 8px; font-size: 1.4rem; user-select: none; }
     .tea-steam { position: absolute; top: -16px; left: 17px; font-size: 0.85rem; opacity: 0.6; animation: steamFloat 2.8s infinite ease-out; }
@@ -164,7 +170,6 @@
     body.night-mode header h1 { color: #f7ede1; }
     header p { color: var(--text-muted); font-size: 1.1rem; font-family: 'Cormorant Garamond', serif; font-style: italic; margin-top: 4px; }
 
-    /* Corkboard for Ribbon Bookmarks */
     .corkboard {
       background: #c8b293;
       border: 3px solid #7c5c3e;
@@ -192,7 +197,7 @@
       background: #ebdcc7;
       border: 1px solid #7c5c3e;
       font-size: 0.76rem;
-      padding: 3px 10px;
+      padding: 4px 12px;
       border-radius: 14px;
       cursor: pointer;
       font-family: 'Cormorant Garamond', serif;
@@ -245,7 +250,6 @@
       to { transform: rotate(1.5deg); }
     }
 
-    /* Composer Blotter */
     .composer-blotter {
       background: var(--desk-leather);
       padding: 12px;
@@ -262,6 +266,7 @@
       padding: 24px;
       position: relative;
       transition: background 0.3s ease;
+      color: var(--text-dark);
     }
     .composer.floral { background: var(--paper-floral); }
     .composer.midnight { background: var(--paper-midnight); color: #e5e9f0; }
@@ -271,7 +276,6 @@
       background-size: 20px 20px;
     }
 
-    /* Fountain Pen Resting Indicator */
     .quill-rest {
       position: absolute;
       top: -16px; right: 28px;
@@ -279,10 +283,10 @@
       transform: rotate(45deg);
       transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
       cursor: pointer;
+      user-select: none;
     }
     .quill-rest.writing { transform: rotate(15deg) translateY(6px); }
 
-    /* Stationery Paper Selector */
     .stationery-tray {
       display: flex;
       align-items: center;
@@ -293,11 +297,13 @@
       font-weight: 700;
     }
     .stationery-chip {
-      padding: 3px 10px;
+      padding: 4px 12px;
       border-radius: 12px;
       border: 1px solid #d5c3aa;
       background: #f7efe4;
       cursor: pointer;
+      color: var(--text-dark);
+      user-select: none;
     }
     .stationery-chip.active {
       background: #503d2e;
@@ -306,7 +312,7 @@
 
     .author-toggle { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; font-size: 0.88rem; font-weight: 600; }
     .author-pill { display: flex; background: #f2ebd9; padding: 4px; border-radius: 30px; gap: 4px; }
-    .author-pill label { padding: 5px 16px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; color: var(--text-muted); }
+    .author-pill label { padding: 6px 18px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; color: var(--text-muted); }
     .author-pill input { display: none; }
     .author-pill label:has(input[value="Neelam"]:checked) { background: var(--accent-neelam); color: #fff; }
     .author-pill label:has(input[value="Saksham"]:checked) { background: var(--accent-saksham); color: #fff; }
@@ -348,13 +354,15 @@
     }
     .tools-group { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
     .btn-action {
-      background: #f7f1e6; border: 1px solid var(--border-soft); padding: 7px 12px;
-      border-radius: 8px; cursor: pointer; font-size: 0.82rem; font-weight: 500;
+      background: #f7f1e6; border: 1px solid var(--border-soft); padding: 8px 14px;
+      border-radius: 8px; cursor: pointer; font-size: 0.84rem; font-weight: 500;
       color: var(--text-dark); display: flex; align-items: center; gap: 6px;
+      user-select: none;
     }
+    .btn-action:hover { background: #ecdfcd; }
     .btn-action.active-tool { background: #ded0bc; border-color: var(--gold); }
     .btn-send {
-      background: #25201b; color: #f7efe4; border: none; padding: 9px 22px;
+      background: #25201b; color: #f7efe4; border: none; padding: 10px 24px;
       border-radius: 8px; font-weight: 600; font-size: 0.92rem; cursor: pointer;
     }
 
@@ -412,9 +420,7 @@
     .note-card.Neelam .wax-seal { background: radial-gradient(circle at 35% 35%, #a1324c, var(--wax-neelam)); }
     .note-card.Saksham .wax-seal { background: radial-gradient(circle at 35% 35%, #245c47, var(--wax-saksham)); }
 
-    /* =========================================================
-       NEELAM'S DRAWING STUDIO MODAL
-       ========================================================= */
+    /* Studio Modal */
     .studio-modal-overlay {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       background: rgba(18, 14, 11, 0.82); backdrop-filter: blur(8px);
@@ -446,7 +452,7 @@
     /* Envelope Flight Overlay */
     #postalOverlay {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      pointer-events: none; z-index: 9999; display: none; perspective: 1200px;
+      pointer-events: none !important; z-index: 9999; display: none; perspective: 1200px;
     }
     .animated-envelope {
       width: 320px; height: 200px; background: #e8ded0; position: absolute;
@@ -518,7 +524,7 @@
       padding: 38px 40px 30px; position: relative; display: flex; flex-direction: column; justify-content: space-between;
     }
     .book-ribbon { position: absolute; top: -10px; left: 60px; width: 22px; height: 60px; background: #8c263e; }
-    .book-close-btn { position: absolute; top: 14px; right: 18px; background: transparent; border: none; font-size: 1.4rem; cursor: pointer; }
+    .book-close-btn { position: absolute; top: 14px; right: 18px; background: transparent; border: none; font-size: 1.4rem; cursor: pointer; color: #7d6b56; }
     .book-header { text-align: center; border-bottom: 2px solid #dfcfb7; padding-bottom: 12px; margin-bottom: 18px; }
     .book-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; color: #4a3525; }
     .book-tabs { display: flex; justify-content: center; gap: 12px; margin-bottom: 18px; }
@@ -533,6 +539,7 @@
     .sig-name { font-family: 'Marck Script', cursive; font-size: 1.9rem; color: #1f3b2f; }
     .sig-name.neelam-sig { color: #7c2237; }
     .book-read-view { display: none; min-height: 220px; }
+    .archived-note-body { font-family: 'Caveat', cursive; font-size: 1.65rem; line-height: 1.5; min-height: 160px; }
     .page-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 10px; border-top: 1px dashed #dfcfb7; }
     .page-btn { background: #ebdcc7; border: 1px solid #d5be9f; padding: 4px 14px; border-radius: 6px; cursor: pointer; }
 
@@ -547,7 +554,6 @@
 <canvas id="ambientCanvas"></canvas>
 <div class="night-candle-spot" id="nightSpotlight"></div>
 
-<!-- Postal Envelope Transit Overlay -->
 <div id="postalOverlay">
   <div class="animated-envelope" id="transitEnvelope">
     <div class="envelope-flap" id="transitFlap"></div>
@@ -559,10 +565,9 @@
 <div class="desk-wrapper">
   <div class="main-column">
     
-    <!-- Clutter Top Bar: Clock, Polaroids, Presence -->
     <div class="clutter-shelf">
       <div class="clock-widget">
-        <span>🕰</span> <span id="deskTime">00:00</span>
+        <span>🕰</span> <span id="deskTime">--:--</span>
       </div>
 
       <div class="polaroid-stack" title="Memories resting on desk">
@@ -586,26 +591,24 @@
       <p>“Some people really are worth the wait.”</p>
     </header>
 
-    <!-- Pinned Ribbon Bookmarks Corkboard -->
     <div class="corkboard">
       <div class="cork-header">
         <span class="cork-title">Pinned Keepsake Ribbons</span>
-        <button type="button" class="pin-btn" onclick="promptNewRibbon()">+ Pin Ribbon</button>
+        <button type="button" class="pin-btn" onclick="window.promptNewRibbon()">+ Pin Ribbon</button>
       </div>
       <div class="bookmarks-row" id="corkboardRow"></div>
     </div>
 
-    <!-- Composer with Stationery & Resting Fountain Pen -->
     <div class="composer-blotter" id="composerBlotter">
       <div class="quill-rest" id="restingQuill" title="Resting fountain pen">🖋️</div>
       <div class="composer" id="composerCard">
         
         <div class="stationery-tray">
-          <span style="color:var(--text-muted);">Paper:</span>
-          <span class="stationery-chip active" onclick="setStationery('linen')">Linen</span>
-          <span class="stationery-chip" onclick="setStationery('floral')">Floral</span>
-          <span class="stationery-chip" onclick="setStationery('midnight')">Midnight</span>
-          <span class="stationery-chip" onclick="setStationery('grid')">Manuscript</span>
+          <span style="color:var(--text-muted); margin-right:4px;">Paper:</span>
+          <span class="stationery-chip active" onclick="window.setStationery('linen', this)">Linen</span>
+          <span class="stationery-chip" onclick="window.setStationery('floral', this)">Floral</span>
+          <span class="stationery-chip" onclick="window.setStationery('midnight', this)">Midnight</span>
+          <span class="stationery-chip" onclick="window.setStationery('grid', this)">Manuscript</span>
         </div>
 
         <div class="author-toggle">
@@ -620,7 +623,7 @@
 
         <div class="drawing-preview-box" id="drawingPreviewBox">
           <img id="drawingPreviewImg" src="" alt="Drawn creation" />
-          <button type="button" class="clear-drawing-btn" onclick="clearAttachedDrawing()">✕</button>
+          <button type="button" class="clear-drawing-btn" onclick="window.clearAttachedDrawing()">✕</button>
         </div>
 
         <div class="song-input-row" id="songInputContainer">
@@ -630,11 +633,11 @@
         <div class="composer-toolbar">
           <div class="tools-group">
             <input type="file" id="mediaUpload" accept="image/*" style="display:none;" />
-            <button type="button" class="btn-action" id="photoBtn" onclick="playPaperSound(); document.getElementById('mediaUpload').click()">📷 Photo</button>
-            <button type="button" class="btn-action" id="drawBtn" onclick="openStudioModal()">🎨 Draw</button>
+            <button type="button" class="btn-action" id="photoBtn" onclick="window.playPaperSound(); document.getElementById('mediaUpload').click()">📷 Photo</button>
+            <button type="button" class="btn-action" id="drawBtn" onclick="window.openStudioModal()">🎨 Draw</button>
             <button type="button" class="btn-action" id="recordBtn">🎙 Record</button>
-            <button type="button" class="btn-action" id="songBtn" onclick="toggleSongInput()">🎵 Song</button>
-            <button type="button" class="btn-action" id="invisibleBtn" onclick="toggleInvisibleInk()">✨ Invisible Ink</button>
+            <button type="button" class="btn-action" id="songBtn" onclick="window.toggleSongInput()">🎵 Song</button>
+            <button type="button" class="btn-action" id="invisibleBtn" onclick="window.toggleInvisibleInk()">✨ Invisible Ink</button>
             <span id="recordStatus" style="font-size:0.8rem; color:var(--text-muted); margin-left:4px;"></span>
           </div>
           <button type="button" class="btn-send" id="sendBtn">Seal & Leave Note</button>
@@ -645,18 +648,17 @@
     <div class="notes-list" id="notesList"></div>
   </div>
 
-  <!-- Keepsake Bookshelf -->
   <div class="shelf-column">
     <div class="bookshelf">
       <div class="shelf-title">Keepsake Shelf</div>
       <div class="books-row">
-        <div class="book-spine saksham" onclick="openBookModal('Saksham')">
+        <div class="book-spine saksham" onclick="window.openBookModal('Saksham')">
           <div class="spine-gold-line"></div>
           <span class="spine-text">FOR SAKSHAM</span>
           <div class="spine-gold-line"></div>
         </div>
 
-        <div class="book-spine neelam" onclick="openBookModal('Neelam')">
+        <div class="book-spine neelam" onclick="window.openBookModal('Neelam')">
           <div class="spine-gold-line"></div>
           <span class="spine-text">FOR NEELAM</span>
           <div class="spine-gold-line"></div>
@@ -667,42 +669,42 @@
   </div>
 </div>
 
-<!-- NEELAM'S DRAWING STUDIO MODAL -->
+<!-- Studio Modal -->
 <div class="studio-modal-overlay" id="studioModalOverlay">
   <div class="studio-box">
     <div class="studio-header">
       <h3>Neelam & Saksham's Art Studio</h3>
-      <button type="button" class="book-close-btn" onclick="closeStudioModal()">✕</button>
+      <button type="button" class="book-close-btn" onclick="window.closeStudioModal()">✕</button>
     </div>
 
     <canvas id="sketchCanvas" class="sketch-canvas" width="630" height="340"></canvas>
 
     <div class="palette-toolbar">
       <div class="color-dots">
-        <div class="color-dot active" style="background:#28221c;" onclick="setStudioColor('#28221c', this)"></div>
-        <div class="color-dot" style="background:#882f45;" onclick="setStudioColor('#882f45', this)"></div>
-        <div class="color-dot" style="background:#234d3d;" onclick="setStudioColor('#234d3d', this)"></div>
-        <div class="color-dot" style="background:#bfa15f;" onclick="setStudioColor('#bfa15f', this)"></div>
-        <div class="color-dot" style="background:#3b5998;" onclick="setStudioColor('#3b5998', this)"></div>
-        <div class="color-dot" style="background:#e07a5f;" onclick="setStudioColor('#e07a5f', this)"></div>
+        <div class="color-dot active" style="background:#28221c;" onclick="window.setStudioColor('#28221c', this)"></div>
+        <div class="color-dot" style="background:#882f45;" onclick="window.setStudioColor('#882f45', this)"></div>
+        <div class="color-dot" style="background:#234d3d;" onclick="window.setStudioColor('#234d3d', this)"></div>
+        <div class="color-dot" style="background:#bfa15f;" onclick="window.setStudioColor('#bfa15f', this)"></div>
+        <div class="color-dot" style="background:#3b5998;" onclick="window.setStudioColor('#3b5998', this)"></div>
+        <div class="color-dot" style="background:#e07a5f;" onclick="window.setStudioColor('#e07a5f', this)"></div>
       </div>
 
       <div class="brush-tools">
         <span style="font-size:0.8rem; font-family:'Cormorant Garamond', serif; font-weight:700;">Nib:</span>
         <input type="range" class="brush-slider" id="brushSize" min="1" max="24" value="3">
-        <button type="button" class="btn-action" onclick="setEraser()">Eraser</button>
-        <button type="button" class="btn-action" onclick="clearStudioCanvas()">Clear</button>
-        <button type="button" class="btn-send" onclick="attachDrawingToNote()">Attach Drawing</button>
+        <button type="button" class="btn-action" onclick="window.setEraser()">Eraser</button>
+        <button type="button" class="btn-action" onclick="window.clearStudioCanvas()">Clear</button>
+        <button type="button" class="btn-send" onclick="window.attachDrawingToNote()">Attach Drawing</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ANCIENT BOOK MODAL -->
+<!-- Ancient Book Modal -->
 <div class="book-modal-overlay" id="bookModalOverlay">
   <div class="ancient-book">
     <div class="book-ribbon" id="modalRibbon"></div>
-    <button type="button" class="book-close-btn" onclick="closeBookModal()">✕</button>
+    <button type="button" class="book-close-btn" onclick="window.closeBookModal()">✕</button>
 
     <div>
       <div class="book-header">
@@ -711,8 +713,8 @@
       </div>
 
       <div class="book-tabs">
-        <button type="button" class="book-tab-btn active" id="tabWriteBtn" onclick="switchBookTab('write')">✍️ Inscribe Page</button>
-        <button type="button" class="book-tab-btn" id="tabReadBtn" onclick="switchBookTab('read')">📜 Read Preserved</button>
+        <button type="button" class="book-tab-btn active" id="tabWriteBtn" onclick="window.switchBookTab('write')">✍️ Inscribe Page</button>
+        <button type="button" class="book-tab-btn" id="tabReadBtn" onclick="window.switchBookTab('read')">📜 Read Preserved</button>
       </div>
     </div>
 
@@ -733,15 +735,15 @@
         </div>
       </div>
       <div class="page-nav">
-        <button type="button" class="page-btn" id="prevPageBtn" onclick="navigatePage(-1)">← Older Page</button>
+        <button type="button" class="page-btn" id="prevPageBtn" onclick="window.navigatePage(-1)">← Older Page</button>
         <span class="page-indicator" id="pageIndicator">Page 1 of 1</span>
-        <button type="button" class="page-btn" id="nextPageBtn" onclick="navigatePage(1)">Newer Page →</button>
+        <button type="button" class="page-btn" id="nextPageBtn" onclick="window.navigatePage(1)">Newer Page →</button>
       </div>
     </div>
 
     <div class="book-footer">
       <span style="font-family:'Cormorant Garamond', serif; font-style:italic; font-size:0.9rem; color:#8c7863;" id="bookFooterAuthor">Author: Neelam</span>
-      <button type="button" class="btn-send" id="bookSaveBtn" onclick="savePageToBook()">Bind to Book</button>
+      <button type="button" class="btn-send" id="bookSaveBtn" onclick="window.savePageToBook()">Bind to Book</button>
     </div>
   </div>
 </div>
@@ -766,16 +768,57 @@
     return document.querySelector('input[name="author"]:checked').value;
   }
 
-  // ==========================================
-  // CLOCK & LIVING LIGHTING (DAY TO NIGHT)
-  // ==========================================
+  // Audio system
+  let audioCtx;
+  function getAudioCtx() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    return audioCtx;
+  }
+
+  window.playPaperSound = function() {
+    try {
+      const ctx = getAudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(520, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(740, ctx.currentTime + 0.12);
+      gain.gain.setValueAtTime(0.08, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.12);
+    } catch(e) {}
+  };
+
+  function playChime() {
+    try {
+      const ctx = getAudioCtx();
+      [440, 554.37, 659.25].forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.value = freq;
+        const startTime = ctx.currentTime + (idx * 0.08);
+        gain.gain.setValueAtTime(0.07, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.5);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(startTime);
+        osc.stop(startTime + 0.5);
+      });
+    } catch(e) {}
+  }
+
+  // Clock & Night check
   function updateDeskAtmosphere() {
     const now = new Date();
     const hrs = now.getHours();
     const mins = String(now.getMinutes()).padStart(2, '0');
     document.getElementById("deskTime").innerText = `${hrs}:${mins}`;
 
-    // Night Mode active between 8 PM and 5 AM
     if (hrs >= 20 || hrs < 5) {
       document.body.classList.add("night-mode");
     } else {
@@ -785,32 +828,28 @@
   updateDeskAtmosphere();
   setInterval(updateDeskAtmosphere, 10000);
 
-  // Mouse match light tracker during night
   window.addEventListener("mousemove", e => {
     document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
     document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
   });
 
-  // Resting quill tilts when focused on writing
   const noteArea = document.getElementById("noteText");
   const quill = document.getElementById("restingQuill");
   noteArea.addEventListener("focus", () => quill.classList.add("writing"));
   noteArea.addEventListener("blur", () => quill.classList.remove("writing"));
 
-  // Stationery selection
+  // Stationery
   let currentStationery = 'linen';
-  window.setStationery = function(type) {
-    playPaperSound();
+  window.setStationery = function(type, elem) {
+    window.playPaperSound();
     currentStationery = type;
     document.querySelectorAll('.stationery-chip').forEach(c => c.classList.remove('active'));
-    event.target.classList.add('active');
+    if (elem) elem.classList.add('active');
     const card = document.getElementById("composerCard");
     card.className = "composer " + (type !== 'linen' ? type : '');
   };
 
-  // ==========================================
-  // PINNED RIBBONS CORKBOARD
-  // ==========================================
+  // Ribbons
   window.promptNewRibbon = async function() {
     const text = prompt("Write a one or two word dedication for the ribbon (e.g. 'Coffee Date', 'Rainy Night'):");
     if (!text) return;
@@ -825,24 +864,24 @@
     } catch(e) { alert(e.message); }
   };
 
-  onSnapshot(query(collection(db, "ribbons"), orderBy("createdAt", "asc")), snapshot => {
-    const row = document.getElementById("corkboardRow");
-    row.innerHTML = "";
-    snapshot.forEach(d => {
-      const rib = d.data();
-      const isSaksham = rib.author === "Saksham";
-      row.innerHTML += `
-        <div class="pinned-ribbon ${isSaksham ? 'saksham-ribbon' : ''}" title="Pinned by ${rib.author}">
-          <div class="tack-pin"></div>
-          ${rib.text}
-        </div>
-      `;
+  try {
+    onSnapshot(collection(db, "ribbons"), snapshot => {
+      const row = document.getElementById("corkboardRow");
+      row.innerHTML = "";
+      snapshot.forEach(d => {
+        const rib = d.data();
+        const isSaksham = rib.author === "Saksham";
+        row.innerHTML += `
+          <div class="pinned-ribbon ${isSaksham ? 'saksham-ribbon' : ''}" title="Pinned by ${rib.author}">
+            <div class="tack-pin"></div>
+            ${rib.text}
+          </div>
+        `;
+      });
     });
-  });
+  } catch(e) {}
 
-  // ==========================================
-  // NEELAM'S DRAWING STUDIO
-  // ==========================================
+  // Drawing studio
   let drawingCanvas = document.getElementById("sketchCanvas");
   let dCtx = drawingCanvas.getContext("2d");
   let isDrawing = false;
@@ -850,29 +889,29 @@
   let attachedDrawingBase64 = null;
 
   window.openStudioModal = function() {
-    playPaperSound();
+    window.playPaperSound();
     document.getElementById("studioModalOverlay").style.display = "flex";
   };
   window.closeStudioModal = function() {
-    playPaperSound();
+    window.playPaperSound();
     document.getElementById("studioModalOverlay").style.display = "none";
   };
   window.setStudioColor = function(col, elem) {
-    playPaperSound();
+    window.playPaperSound();
     currentColor = col;
     document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
     elem.classList.add('active');
   };
   window.setEraser = function() {
-    playPaperSound();
+    window.playPaperSound();
     currentColor = "#fffdfa";
   };
   window.clearStudioCanvas = function() {
-    playPaperSound();
+    window.playPaperSound();
     dCtx.fillStyle = "#fffdfa";
     dCtx.fillRect(0, 0, drawingCanvas.width, drawingCanvas.height);
   };
-  clearStudioCanvas();
+  window.clearStudioCanvas();
 
   function getCanvasCoords(e) {
     const rect = drawingCanvas.getBoundingClientRect();
@@ -910,21 +949,19 @@
   window.addEventListener("touchend", stopDraw);
 
   window.attachDrawingToNote = function() {
-    playPaperSound();
+    window.playPaperSound();
     attachedDrawingBase64 = drawingCanvas.toDataURL("image/png");
     document.getElementById("drawingPreviewImg").src = attachedDrawingBase64;
     document.getElementById("drawingPreviewBox").style.display = "block";
-    closeStudioModal();
+    window.closeStudioModal();
   };
   window.clearAttachedDrawing = function() {
-    playPaperSound();
+    window.playPaperSound();
     attachedDrawingBase64 = null;
     document.getElementById("drawingPreviewBox").style.display = "none";
   };
 
-  // ==========================================
-  // PRESENCE & SYNTHESIZED SOUNDS
-  // ==========================================
+  // Presence
   async function updatePresence() {
     const author = getSelectedAuthor();
     try {
@@ -955,42 +992,9 @@
     }
   });
 
-  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  window.playPaperSound = function() {
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(520, audioCtx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(740, audioCtx.currentTime + 0.12);
-    gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.start();
-    osc.stop(audioCtx.currentTime + 0.12);
-  };
-
-  function playChime() {
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    [440, 554.37, 659.25].forEach((freq, idx) => {
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = 'triangle';
-      osc.frequency.value = freq;
-      const startTime = audioCtx.currentTime + (idx * 0.08);
-      gain.gain.setValueAtTime(0.07, startTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.5);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start(startTime);
-      osc.stop(startTime + 0.5);
-    });
-  }
-
-  // Floating ambient petals
+  // Canvas ambient petals
   const canvas = document.getElementById("ambientCanvas");
-  const ctx = canvas.getContext("2d");
+  const pCtx = canvas.getContext("2d");
   let particles = [];
   function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
   window.addEventListener('resize', resizeCanvas);
@@ -1023,37 +1027,38 @@
       }
     }
     draw() {
-      ctx.save();
-      ctx.translate(this.x, this.y);
+      pCtx.save();
+      pCtx.translate(this.x, this.y);
       if (this.isFirefly) {
-        ctx.fillStyle = `rgba(235, 195, 105, ${Math.max(0.05, this.currentOpacity)})`;
-        ctx.shadowColor = 'rgba(240, 200, 110, 0.6)';
-        ctx.shadowBlur = 6;
-        ctx.beginPath();
-        ctx.arc(0, 0, this.size, 0, Math.PI * 2);
-        ctx.fill();
+        pCtx.fillStyle = `rgba(235, 195, 105, ${Math.max(0.05, this.currentOpacity)})`;
+        pCtx.shadowColor = 'rgba(240, 200, 110, 0.6)';
+        pCtx.shadowBlur = 6;
+        pCtx.beginPath();
+        pCtx.arc(0, 0, this.size, 0, Math.PI * 2);
+        pCtx.fill();
       } else {
-        ctx.rotate(this.angle);
-        ctx.fillStyle = Math.random() > 0.5 ? 'rgba(215, 172, 184, 0.42)' : 'rgba(210, 192, 160, 0.38)';
-        ctx.beginPath();
-        ctx.ellipse(0, 0, this.size, this.size * 0.6, 0, 0, Math.PI * 2);
-        ctx.fill();
+        pCtx.rotate(this.angle);
+        pCtx.fillStyle = Math.random() > 0.5 ? 'rgba(215, 172, 184, 0.42)' : 'rgba(210, 192, 160, 0.38)';
+        pCtx.beginPath();
+        pCtx.ellipse(0, 0, this.size, this.size * 0.6, 0, 0, Math.PI * 2);
+        pCtx.fill();
       }
-      ctx.restore();
+      pCtx.restore();
     }
   }
   for (let i = 0; i < 35; i++) particles.push(new AmbientParticle());
   function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    pCtx.clearRect(0, 0, canvas.width, canvas.height);
     particles.forEach(p => { p.update(); p.draw(); });
     requestAnimationFrame(animate);
   }
   animate();
 
+  // Song
   const songBox = document.getElementById("songInputContainer");
   const songBtn = document.getElementById("songBtn");
   window.toggleSongInput = function() {
-    playPaperSound();
+    window.playPaperSound();
     if (songBox.style.display === "block") {
       songBox.style.display = "none";
       songBtn.classList.remove("active-tool");
@@ -1064,10 +1069,11 @@
     }
   };
 
+  // Invisible Ink
   let isInvisibleInk = false;
   const invisibleBtn = document.getElementById("invisibleBtn");
   window.toggleInvisibleInk = function() {
-    playPaperSound();
+    window.playPaperSound();
     isInvisibleInk = !isInvisibleInk;
     if (isInvisibleInk) {
       invisibleBtn.classList.add("active-tool");
@@ -1091,6 +1097,7 @@
     return '';
   }
 
+  // Audio recording
   let mediaRecorder, audioChunks = [], base64Audio = null;
   const recordBtn = document.getElementById("recordBtn");
   const recordStatus = document.getElementById("recordStatus");
@@ -1105,7 +1112,7 @@
   };
 
   recordBtn.onclick = async () => {
-    playPaperSound();
+    window.playPaperSound();
     if (!mediaRecorder || mediaRecorder.state === "inactive") {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -1151,9 +1158,7 @@
     });
   }
 
-  // =========================================================
-  // ENVELOPE POSTAL FLIGHT ANIMATION
-  // =========================================================
+  // Envelope Postal Animation
   function runPostalAnimation(author, previewText) {
     return new Promise((resolve) => {
       const overlay = document.getElementById("postalOverlay");
@@ -1182,7 +1187,7 @@
       envelope.style.opacity = "0";
       overlay.style.display = "block";
 
-      playPaperSound();
+      window.playPaperSound();
 
       requestAnimationFrame(() => {
         envelope.style.transition = "all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)";
@@ -1190,18 +1195,18 @@
         envelope.style.transform = "scale(1) translateY(0)";
 
         setTimeout(() => {
-          playPaperSound();
+          window.playPaperSound();
           letter.style.transform = "translateY(0) scale(0.9)";
         }, 500);
 
         setTimeout(() => {
-          playPaperSound();
+          window.playPaperSound();
           flap.classList.add("closed");
         }, 1100);
 
         setTimeout(() => {
           wax.classList.add("stamped");
-          playPaperSound();
+          window.playPaperSound();
         }, 1500);
 
         setTimeout(() => {
@@ -1280,19 +1285,31 @@
       isInvisibleInk = false;
       invisibleBtn.classList.remove("active-tool");
       invisibleBtn.innerText = "✨ Invisible Ink";
-      clearAttachedDrawing();
+      window.clearAttachedDrawing();
     } catch(e) { alert("Error: " + e.message); }
     finally { btn.disabled = false; btn.innerText = "Seal & Leave Note"; }
   };
 
-  // Sync Feed
-  const notesQuery = query(collection(db, "notes"), orderBy("createdAt", "desc"));
-  onSnapshot(notesQuery, snapshot => {
+  // Notes Feed Listener (Robust sort: loads both existing and new notes)
+  onSnapshot(collection(db, "notes"), snapshot => {
     const container = document.getElementById("notesList");
+    let docs = [];
+    snapshot.forEach(d => docs.push(d.data()));
+
+    // Safe chronological sorting (latest first)
+    docs.sort((a, b) => {
+      const tA = a.createdAt ? (a.createdAt.toMillis ? a.createdAt.toMillis() : new Date(a.createdAt).getTime()) : 0;
+      const tB = b.createdAt ? (b.createdAt.toMillis ? b.createdAt.toMillis() : new Date(b.createdAt).getTime()) : 0;
+      return tB - tA;
+    });
+
     container.innerHTML = "";
-    snapshot.forEach(doc => {
-      const data = doc.data();
-      const dateStr = data.createdAt ? new Date(data.createdAt.toDate()).toLocaleDateString('en-GB', { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' }) : '';
+    docs.forEach(data => {
+      let dateStr = '';
+      if (data.createdAt) {
+        const rawDate = data.createdAt.toDate ? data.createdAt.toDate() : new Date(data.createdAt);
+        dateStr = rawDate.toLocaleDateString('en-GB', { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
+      }
       const monogram = data.author === "Saksham" ? "S" : "N";
       const paperClass = "paper-" + (data.paperType || "linen");
 
@@ -1327,7 +1344,7 @@
   }
 
   window.openBookModal = function(targetRecipient) {
-    playPaperSound();
+    window.playPaperSound();
     activeBookTarget = targetRecipient;
     const overlay = document.getElementById("bookModalOverlay");
     const title = document.getElementById("bookTitle");
@@ -1342,18 +1359,18 @@
     }
 
     syncSignature();
-    switchBookTab('write');
+    window.switchBookTab('write');
     overlay.style.display = "flex";
     loadBookPages(targetRecipient);
   };
 
   window.closeBookModal = function() {
-    playPaperSound();
+    window.playPaperSound();
     document.getElementById("bookModalOverlay").style.display = "none";
   };
 
   window.switchBookTab = function(tab) {
-    playPaperSound();
+    window.playPaperSound();
     const writeView = document.getElementById("bookWriteView");
     const readView = document.getElementById("bookReadView");
     const tabWrite = document.getElementById("tabWriteBtn");
@@ -1377,10 +1394,14 @@
   };
 
   function loadBookPages(volumeRecipient) {
-    const bookQuery = query(collection(db, `book_${volumeRecipient}`), orderBy("createdAt", "desc"));
-    onSnapshot(bookQuery, snapshot => {
+    onSnapshot(collection(db, `book_${volumeRecipient}`), snapshot => {
       bookPages = [];
       snapshot.forEach(doc => { bookPages.push(doc.data()); });
+      bookPages.sort((a, b) => {
+        const tA = a.createdAt ? (a.createdAt.toMillis ? a.createdAt.toMillis() : new Date(a.createdAt).getTime()) : 0;
+        const tB = b.createdAt ? (b.createdAt.toMillis ? b.createdAt.toMillis() : new Date(b.createdAt).getTime()) : 0;
+        return tB - tA;
+      });
       currentPageIndex = 0;
       renderCurrentPage();
     });
@@ -1414,7 +1435,7 @@
   }
 
   window.navigatePage = function(direction) {
-    playPaperSound();
+    window.playPaperSound();
     currentPageIndex -= direction;
     renderCurrentPage();
   };
@@ -1436,7 +1457,7 @@
       });
       playChime();
       document.getElementById("bookNoteText").value = "";
-      switchBookTab('read');
+      window.switchBookTab('read');
     } catch (e) {
       alert("Error preserving note: " + e.message);
     } finally {
