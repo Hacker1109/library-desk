@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Library Desk</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -51,7 +51,7 @@
     .author-select label { cursor: pointer; display: flex; align-items: center; gap: 6px; }
     textarea {
       width: 100%;
-      height: 110px;
+      height: 100px;
       border: 1px solid #d9d0c3;
       border-radius: 8px;
       padding: 12px;
@@ -69,11 +69,11 @@
       flex-wrap: wrap;
       gap: 10px;
     }
-    .tools { display: flex; gap: 8px; }
+    .tools { display: flex; gap: 8px; align-items: center; }
     .btn-tool {
       background: #eee7dc;
       border: none;
-      padding: 6px 12px;
+      padding: 7px 12px;
       border-radius: 6px;
       cursor: pointer;
       font-size: 0.85rem;
@@ -88,6 +88,7 @@
       font-weight: 600;
       cursor: pointer;
     }
+    .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
 
     .notes-list { display: flex; flex-direction: column; gap: 20px; }
     .note-card {
@@ -117,8 +118,8 @@
       white-space: pre-wrap;
     }
     .note-media { margin-top: 14px; }
-    .note-media img { max-width: 100%; border-radius: 8px; }
-    audio { width: 100%; margin-top: 12px; height: 36px; }
+    .note-media img { max-width: 100%; border-radius: 8px; border: 1px solid #e0d7cb; }
+    audio { width: 100%; margin-top: 14px; height: 38px; }
   </style>
 </head>
 <body>
@@ -139,9 +140,9 @@
     <div class="composer-actions">
       <div class="tools">
         <input type="file" id="mediaUpload" accept="image/*" style="display:none;" />
-        <button type="button" class="btn-tool" onclick="document.getElementById('mediaUpload').click()">+ Photo</button>
+        <button type="button" class="btn-tool" id="photoBtn" onclick="document.getElementById('mediaUpload').click()">+ Photo</button>
         <button type="button" class="btn-tool" id="recordBtn">🎙 Record</button>
-        <span id="recordStatus" style="font-size:0.8rem; color:var(--muted); align-self:center;"></span>
+        <span id="recordStatus" style="font-size:0.8rem; color:var(--muted);"></span>
       </div>
       <button type="button" class="btn-submit" id="sendBtn">Send Note</button>
     </div>
@@ -171,70 +172,122 @@
   let base64Audio = null;
   const recordBtn = document.getElementById("recordBtn");
   const recordStatus = document.getElementById("recordStatus");
+  const photoBtn = document.getElementById("photoBtn");
+  const mediaInput = document.getElementById("mediaUpload");
 
+  mediaInput.onchange = () => {
+    if (mediaInput.files && mediaInput.files[0]) {
+      photoBtn.innerText = "✓ Photo selected";
+      photoBtn.style.background = "#dfd7cc";
+    }
+  };
+
+  // Recording with Safari-friendly mime types
   recordBtn.onclick = async () => {
     if (!mediaRecorder || mediaRecorder.state === "inactive") {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        mediaRecorder = new MediaRecorder(stream);
+        const mimeType = MediaRecorder.isTypeSupported("audio/mp4") ? "audio/mp4" : "audio/webm";
+        mediaRecorder = new MediaRecorder(stream, { mimeType });
         audioChunks = [];
-        mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+        
+        mediaRecorder.ondataavailable = e => { if (e.data.size > 0) audioChunks.push(e.data); };
         mediaRecorder.onstop = () => {
-          const blob = new Blob(audioChunks, { type: 'audio/webm' });
+          const blob = new Blob(audioChunks, { type: mimeType });
           const reader = new FileReader();
           reader.readAsDataURL(blob);
           reader.onloadend = () => {
             base64Audio = reader.result;
-            recordStatus.innerText = "Voice clip saved";
+            recordStatus.innerText = "Audio attached";
             recordBtn.innerText = "Re-record";
           };
         };
+        
         mediaRecorder.start();
-        recordStatus.innerText = "Listening...";
+        recordStatus.innerText = "Recording...";
         recordBtn.innerText = "Stop";
       } catch (err) {
-        alert("Please allow microphone access to record.");
+        alert("Please allow microphone access to record audio.");
       }
     } else if (mediaRecorder.state === "recording") {
       mediaRecorder.stop();
     }
   };
 
+  // Image compressor to fit Firestore
+  function compressImage(file) {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const maxDimension = 900;
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height && width > maxDimension) {
+            height *= maxDimension / width;
+            width = maxDimension;
+          } else if (height > maxDimension) {
+            width *= maxDimension / height;
+            height = maxDimension;
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, width, height);
+          resolve(canvas.toDataURL("image/jpeg", 0.7));
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // Send Note
   document.getElementById("sendBtn").onclick = async () => {
+    const btn = document.getElementById("sendBtn");
     const text = document.getElementById("noteText").value.trim();
     const author = document.querySelector('input[name="author"]:checked').value;
-    const file = document.getElementById("mediaUpload").files[0];
+    const file = mediaInput.files[0];
 
     if (!text && !file && !base64Audio) return;
 
-    let base64Image = null;
+    btn.disabled = true;
+    btn.innerText = "Saving...";
+
+    let finalImage = null;
     if (file) {
-      base64Image = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result);
-        reader.readAsDataURL(file);
-      });
+      finalImage = await compressImage(file);
     }
 
     try {
       await addDoc(collection(db, "notes"), {
         author,
-        text,
-        mediaUrl: base64Image,
+        text: text || "",
+        mediaUrl: finalImage,
         audioUrl: base64Audio,
         createdAt: new Date()
       });
 
       document.getElementById("noteText").value = "";
-      document.getElementById("mediaUpload").value = "";
+      mediaInput.value = "";
+      photoBtn.innerText = "+ Photo";
+      photoBtn.style.background = "#eee7dc";
       base64Audio = null;
       recordStatus.innerText = "";
       recordBtn.innerText = "🎙 Record";
     } catch (e) {
-      console.error("Error adding document: ", e);
+      alert("Note could not be saved: " + e.message);
+    } finally {
+      btn.disabled = false;
+      btn.innerText = "Send Note";
     }
   };
 
+  // Feed sync
   const notesQuery = query(collection(db, "notes"), orderBy("createdAt", "desc"));
   onSnapshot(notesQuery, snapshot => {
     const container = document.getElementById("notesList");
@@ -250,8 +303,8 @@
             <span class="timestamp">${dateStr}</span>
           </div>
           ${data.text ? `<div class="note-content">${data.text}</div>` : ''}
-          ${data.mediaUrl ? `<div class="note-media"><img src="${data.mediaUrl}" loading="lazy"/></div>` : ''}
-          ${data.audioUrl ? `<audio controls src="${data.audioUrl}"></audio>` : ''}
+          ${data.mediaUrl ? `<div class="note-media"><img src="${data.mediaUrl}" /></div>` : ''}
+          ${data.audioUrl ? `<audio controls playsinline src="${data.audioUrl}"></audio>` : ''}
         </div>
       `;
       container.innerHTML += html;
