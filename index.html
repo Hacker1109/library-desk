@@ -55,7 +55,6 @@
       color: #ede2d3;
     }
 
-    /* Keepsake Background Memory Tapestry */
     .keepsake-background-layer {
       position: fixed;
       top: 0;
@@ -210,7 +209,7 @@
     header p { color: var(--text-muted); font-size: 1.15rem; font-family: 'Cormorant Garamond', serif; font-style: italic; margin-top: 4px; }
     body.night-mode header p { color: #b7a896; }
 
-    /* Corkboard for Ribbons */
+    /* Corkboard */
     .corkboard {
       background: #cbb497;
       background-image: radial-gradient(#be9f7f 1px, transparent 1px);
@@ -447,7 +446,7 @@
     }
     .btn-send:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,0,0,0.22); }
 
-    /* Note Cards Styling */
+    /* Note Cards */
     .notes-list { display: flex; flex-direction: column; gap: 32px; position: relative; }
     .note-card {
       border-radius: 16px; padding: 28px 28px 24px; position: relative;
@@ -466,7 +465,6 @@
     .note-card.Neelam { border-left: 6px solid var(--accent-neelam); }
     .note-card.Saksham { border-left: 6px solid var(--accent-saksham); }
 
-    /* Washi tape accent on top */
     .washi-tape {
       position: absolute;
       top: -10px;
@@ -664,8 +662,9 @@
     .sig-name.neelam-sig { color: #7c2237; }
     .book-read-view { display: none; min-height: 220px; }
     .archived-note-body { font-family: 'Caveat', cursive; font-size: 1.7rem; line-height: 1.5; min-height: 160px; color: #1c1611 !important; }
-    .page-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 12px; border-top: 1px dashed #dfcfb7; }
+    .page-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 12px; border-top: 1px dashed #dfcfb7; flex-wrap: wrap; gap: 8px; }
     .page-btn { background: #ebdcc7; border: 1px solid #d5be9f; padding: 6px 16px; border-radius: 8px; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-weight: 700; }
+    .page-btn:hover { background: #dfcfb7; }
 
     @media (max-width: 840px) {
       .desk-wrapper { flex-direction: column; align-items: center; }
@@ -863,9 +862,12 @@
         </div>
       </div>
       <div class="page-nav">
-        <button type="button" class="page-btn" id="prevPageBtn" onclick="window.navigatePage(-1)">← Older Page</button>
-        <span class="page-indicator" id="pageIndicator" style="font-family:'Cormorant Garamond', serif; font-weight:700;">Page 1 of 1</span>
-        <button type="button" class="page-btn" id="nextPageBtn" onclick="window.navigatePage(1)">Newer Page →</button>
+        <div>
+          <button type="button" class="page-btn" id="prevPageBtn" onclick="window.navigatePage(-1)">← Older Page</button>
+          <span class="page-indicator" id="pageIndicator" style="font-family:'Cormorant Garamond', serif; font-weight:700; margin: 0 8px;">Page 1 of 1</span>
+          <button type="button" class="page-btn" id="nextPageBtn" onclick="window.navigatePage(1)">Newer Page →</button>
+        </div>
+        <button type="button" class="page-btn" id="deletePageBtn" style="color:#882f45; border-color:#d7b4bd;" onclick="window.deleteCurrentPage()">🗑 Tear Out</button>
       </div>
     </div>
 
@@ -974,7 +976,6 @@
     card.className = "composer " + (type !== 'linen' ? type : '');
   };
 
-  // Ribbons Add & Delete
   window.promptNewRibbon = async function() {
     const text = prompt("Write a one or two word dedication for the ribbon (e.g. 'Coffee Date', 'Rainy Night'):");
     if (!text) return;
@@ -1522,7 +1523,7 @@
   function loadBookPages(volumeRecipient) {
     onSnapshot(collection(db, `book_${volumeRecipient}`), snapshot => {
       bookPages = [];
-      snapshot.forEach(doc => { bookPages.push(doc.data()); });
+      snapshot.forEach(d => { bookPages.push({ id: d.id, ...d.data() }); });
       bookPages.sort((a, b) => {
         const tA = a.createdAt ? (a.createdAt.toMillis ? a.createdAt.toMillis() : new Date(a.createdAt).getTime()) : 0;
         const tB = b.createdAt ? (b.createdAt.toMillis ? b.createdAt.toMillis() : new Date(b.createdAt).getTime()) : 0;
@@ -1539,19 +1540,22 @@
     const indicator = document.getElementById("pageIndicator");
     const prevBtn = document.getElementById("prevPageBtn");
     const nextBtn = document.getElementById("nextPageBtn");
+    const deleteBtn = document.getElementById("deletePageBtn");
 
-    if (bookPages.length === 0) {
+    if (!bookPages || bookPages.length === 0) {
       textElem.innerText = `This volume has no inscribed pages for ${activeBookTarget} yet. Write the very first page!`;
       sigElem.innerText = "";
       indicator.innerText = "Page 0 of 0";
       prevBtn.disabled = true;
       nextBtn.disabled = true;
+      if (deleteBtn) deleteBtn.style.display = "none";
       return;
     }
 
+    if (deleteBtn) deleteBtn.style.display = "inline-block";
     const page = bookPages[currentPageIndex];
-    textElem.innerText = page.text;
-    sigElem.innerText = page.author;
+    textElem.innerText = page.text || "";
+    sigElem.innerText = page.author || "";
     if (page.author === "Neelam") sigElem.classList.add("neelam-sig");
     else sigElem.classList.remove("neelam-sig");
 
@@ -1564,6 +1568,24 @@
     window.playPaperSound();
     currentPageIndex -= direction;
     renderCurrentPage();
+  };
+
+  window.deleteCurrentPage = async function() {
+    if (!bookPages || !bookPages.length) return;
+    const page = bookPages[currentPageIndex];
+    if (confirm("Tear this page out of the keepsake volume permanently?")) {
+      window.playPaperSound();
+      try {
+        if (page.id) {
+          await deleteDoc(doc(db, `book_${activeBookTarget}`, page.id));
+        }
+        bookPages.splice(currentPageIndex, 1);
+        if (currentPageIndex >= bookPages.length) currentPageIndex = Math.max(0, bookPages.length - 1);
+        renderCurrentPage();
+      } catch(e) {
+        alert("Could not remove page: " + e.message);
+      }
+    }
   };
 
   window.savePageToBook = async function() {
