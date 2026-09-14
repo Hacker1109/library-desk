@@ -49,7 +49,6 @@
       color: #e5dac9;
     }
 
-    /* Fixed: pointer-events: none ensures this never blocks clicks */
     .night-candle-spot {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
@@ -67,7 +66,6 @@
       z-index: 0;
     }
 
-    /* Fixed: high z-index and explicit clickability */
     .desk-wrapper {
       width: 100%;
       max-width: 980px;
@@ -412,13 +410,81 @@
     .song-player-frame { width: 100%; border: none; border-radius: 8px; }
     audio { width: 100%; height: 38px; margin-top: 14px; }
 
-    .wax-seal {
-      position: absolute; bottom: -15px; right: 22px; width: 38px; height: 38px;
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; color: #fff;
+    /* =========================================================
+       TACTILE WAX SEAL IMPRESSION (READ RECEIPT)
+       ========================================================= */
+    .wax-seal-wrapper {
+      position: absolute;
+      bottom: -16px;
+      right: 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
     }
-    .note-card.Neelam .wax-seal { background: radial-gradient(circle at 35% 35%, #a1324c, var(--wax-neelam)); }
-    .note-card.Saksham .wax-seal { background: radial-gradient(circle at 35% 35%, #245c47, var(--wax-saksham)); }
+    .wax-seal {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.22);
+      transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+    }
+    .wax-seal:hover { transform: scale(1.08); box-shadow: 0 6px 16px rgba(0,0,0,0.3); }
+
+    /* Stamped vs Unstamped Molten States */
+    .wax-seal.stamped-Saksham {
+      background: radial-gradient(circle at 35% 35%, #2a6952, var(--wax-saksham));
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    .wax-seal.stamped-Neelam {
+      background: radial-gradient(circle at 35% 35%, #a83c54, var(--wax-neelam));
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+
+    /* Warm Molten Pool (Waiting for reader's signet) */
+    .wax-seal.molten-pool {
+      background: radial-gradient(circle at 45% 45%, #e59958, #b04b2b);
+      border: 2px dashed rgba(255,255,255,0.5);
+      animation: moltenPulse 2.4s infinite alternate ease-in-out;
+      font-size: 0.85rem;
+    }
+    @keyframes moltenPulse {
+      0% { box-shadow: 0 0 6px rgba(229, 153, 88, 0.4); transform: scale(1); }
+      100% { box-shadow: 0 0 16px rgba(229, 153, 88, 0.85); transform: scale(1.06); }
+    }
+
+    /* Pressing Stamp Motion */
+    .wax-seal.pressing {
+      transform: scale(0.85) rotate(-6deg) !important;
+      filter: brightness(1.25);
+    }
+
+    .seal-read-dedication {
+      font-family: 'Marck Script', cursive;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .seal-hint-touch {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.78rem;
+      color: #9c6833;
+      user-select: none;
+      animation: fadeIn 0.4s ease;
+    }
 
     /* Studio Modal */
     .studio-modal-overlay {
@@ -750,7 +816,7 @@
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+  import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDqRjbss28gFR-3e9hvcvmAx5khdaEa-Dg",
@@ -792,6 +858,24 @@
       osc.stop(ctx.currentTime + 0.12);
     } catch(e) {}
   };
+
+  // Heavy Signet Brass Press Sound
+  function playStampThud() {
+    try {
+      const ctx = getAudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(140, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(45, ctx.currentTime + 0.22);
+      gain.gain.setValueAtTime(0.2, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.22);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.22);
+    } catch(e) {}
+  }
 
   function playChime() {
     try {
@@ -992,7 +1076,7 @@
     }
   });
 
-  // Canvas ambient petals
+  // Ambient Particles
   const canvas = document.getElementById("ambientCanvas");
   const pCtx = canvas.getContext("2d");
   let particles = [];
@@ -1242,6 +1326,37 @@
     });
   }
 
+  // ==========================================
+  // WAX IMPRESSION STAMP ACTION
+  // ==========================================
+  window.impressWaxSeal = async function(noteId, author, stampedBy, elem) {
+    const currentReader = getSelectedAuthor();
+
+    // Only the other person can stamp read receipt
+    if (author === currentReader) {
+      alert("You cannot stamp your own note—the seal waits for " + (author === 'Saksham' ? 'Neelam' : 'Saksham') + " to read and hold it close.");
+      return;
+    }
+
+    if (stampedBy) return; // Already stamped
+
+    elem.classList.add("pressing");
+    playStampThud();
+
+    setTimeout(async () => {
+      try {
+        await updateDoc(doc(db, "notes", noteId), {
+          stampedBy: currentReader,
+          stampedAt: new Date()
+        });
+        playChime();
+      } catch (e) {
+        alert("Error stamping seal: " + e.message);
+        elem.classList.remove("pressing");
+      }
+    }, 240);
+  };
+
   // Send Note
   document.getElementById("sendBtn").onclick = async () => {
     const btn = document.getElementById("sendBtn");
@@ -1269,6 +1384,7 @@
         isInvisible: isInvisibleInk,
         mediaUrl: finalImg,
         audioUrl: base64Audio,
+        stampedBy: null, // Initially unstamped molten wax
         createdAt: new Date()
       });
 
@@ -1290,13 +1406,12 @@
     finally { btn.disabled = false; btn.innerText = "Seal & Leave Note"; }
   };
 
-  // Notes Feed Listener (Robust sort: loads both existing and new notes)
+  // Notes Feed Listener with Dynamic Wax Impression
   onSnapshot(collection(db, "notes"), snapshot => {
     const container = document.getElementById("notesList");
     let docs = [];
-    snapshot.forEach(d => docs.push(d.data()));
+    snapshot.forEach(d => docs.push({ id: d.id, ...d.data() }));
 
-    // Safe chronological sorting (latest first)
     docs.sort((a, b) => {
       const tA = a.createdAt ? (a.createdAt.toMillis ? a.createdAt.toMillis() : new Date(a.createdAt).getTime()) : 0;
       const tB = b.createdAt ? (b.createdAt.toMillis ? b.createdAt.toMillis() : new Date(b.createdAt).getTime()) : 0;
@@ -1310,10 +1425,30 @@
         const rawDate = data.createdAt.toDate ? data.createdAt.toDate() : new Date(data.createdAt);
         dateStr = rawDate.toLocaleDateString('en-GB', { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
       }
-      const monogram = data.author === "Saksham" ? "S" : "N";
-      const paperClass = "paper-" + (data.paperType || "linen");
 
+      const paperClass = "paper-" + (data.paperType || "linen");
       let textBlock = data.text ? (data.isInvisible ? `<span class="invisible-hint">✨ Secret note (hover to reveal)</span><div class="note-body invisible-text">${data.text}</div>` : `<div class="note-body">${data.text}</div>`) : '';
+
+      // Wax Impression State Logic
+      let sealHtml = '';
+      if (data.stampedBy) {
+        // Hardened, stamped signet
+        const stampMonogram = data.stampedBy === "Saksham" ? "S" : "N";
+        sealHtml = `
+          <div class="wax-seal-wrapper">
+            <div class="wax-seal stamped-${data.stampedBy}" title="Stamped by ${data.stampedBy}">${stampMonogram}</div>
+            <div class="seal-read-dedication">Held close by ${data.stampedBy}</div>
+          </div>
+        `;
+      } else {
+        // Unstamped molten pool
+        sealHtml = `
+          <div class="wax-seal-wrapper">
+            <div class="wax-seal molten-pool" onclick="window.impressWaxSeal('${data.id}', '${data.author}', null, this)" title="Tap to stamp and hold close">🕯️</div>
+            <div class="seal-hint-touch">Tap to stamp & read</div>
+          </div>
+        `;
+      }
 
       container.innerHTML += `
         <div class="note-card ${data.author} ${paperClass}">
@@ -1324,7 +1459,7 @@
           ${data.mediaUrl ? `<div class="note-photo"><img src="${data.mediaUrl}" loading="lazy"/></div>` : ''}
           ${data.audioUrl ? `<audio controls playsinline src="${data.audioUrl}"></audio>` : ''}
           ${renderEmbed(data.songUrl)}
-          <div class="wax-seal">${monogram}</div>
+          ${sealHtml}
         </div>`;
     });
   });
