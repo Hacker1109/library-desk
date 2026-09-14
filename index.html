@@ -41,10 +41,8 @@
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
-      transition: background-color 1.2s ease, filter 1.2s ease;
     }
 
-    /* Ambient Canvas */
     #ambientCanvas {
       position: fixed;
       top: 0; left: 0;
@@ -69,7 +67,7 @@
       width: 100%;
     }
 
-    /* Top Shelf / Ambience Bar */
+    /* Top Shelf */
     .top-shelf {
       display: flex;
       justify-content: space-between;
@@ -90,10 +88,8 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
     }
 
-    /* Candle Presence Indicator */
     .candle-indicator {
       display: flex;
       align-items: center;
@@ -135,7 +131,6 @@
       100% { transform: scale(1.05) rotate(-1deg); filter: drop-shadow(0 0 6px #ffb300); }
     }
 
-    /* Header with Cozy Tea Cup */
     header {
       text-align: center;
       margin-bottom: 30px;
@@ -147,7 +142,6 @@
       left: 8px;
       font-size: 1.4rem;
       user-select: none;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
     }
     .tea-steam {
       position: absolute;
@@ -186,7 +180,7 @@
       margin-top: 4px;
     }
 
-    /* Desk Mat / Leather Blotter Composer */
+    /* Desk Mat Composer */
     .composer-blotter {
       background: var(--desk-leather);
       padding: 12px;
@@ -259,7 +253,6 @@
       color: var(--text-dark);
       resize: vertical;
       line-height: 1.45;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
     textarea:focus {
       outline: none;
@@ -277,7 +270,6 @@
       background: #faf6ef;
       outline: none;
     }
-    .song-input-row input:focus { border-color: var(--gold); }
 
     .composer-toolbar {
       display: flex;
@@ -314,39 +306,26 @@
       border-radius: 8px;
       font-weight: 600;
       font-size: 0.92rem;
-      letter-spacing: 0.3px;
       cursor: pointer;
       transition: all 0.2s ease;
       box-shadow: 0 4px 12px rgba(0,0,0,0.12);
     }
-    .btn-send:hover {
-      background: #111;
-      transform: translateY(-1.5px);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
-    }
 
-    /* Ragged Deckled Note Cards */
+    /* Note Cards */
     .notes-list {
       display: flex;
       flex-direction: column;
       gap: 28px;
+      position: relative;
     }
     .note-card {
       border-radius: 12px;
       padding: 26px 26px 22px;
       position: relative;
-      box-shadow: 0 8px 24px rgba(60, 48, 36, 0.06), 0 2px 4px rgba(0,0,0,0.02);
+      box-shadow: 0 8px 24px rgba(60, 48, 36, 0.06);
       border: 1px solid #e7dac9;
-      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-      animation: cardAppear 0.5s ease-out;
+      transition: transform 0.3s ease;
     }
-    .note-card:hover { transform: translateY(-2px); }
-
-    @keyframes cardAppear {
-      from { opacity: 0; transform: translateY(14px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     .note-card.Neelam {
       background: var(--paper-neelam);
       border-left: 5px solid var(--accent-neelam);
@@ -388,24 +367,16 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.45rem;
       font-weight: 700;
-      letter-spacing: 0.2px;
     }
     .author-name.Neelam { color: var(--accent-neelam); }
     .author-name.Saksham { color: var(--accent-saksham); }
-    
-    .note-time {
-      font-size: 0.76rem;
-      color: var(--text-muted);
-      letter-spacing: 0.5px;
-    }
-
+    .note-time { font-size: 0.76rem; color: var(--text-muted); }
     .note-body {
       font-family: 'Caveat', cursive;
       font-size: 1.68rem;
       line-height: 1.45;
       color: #312922;
       white-space: pre-wrap;
-      position: relative;
     }
 
     .invisible-text {
@@ -416,39 +387,12 @@
       -webkit-text-fill-color: transparent;
       transition: filter 0.6s ease;
     }
-    .invisible-text:hover {
-      filter: blur(0);
-      -webkit-text-fill-color: #312922;
-    }
-    .invisible-hint {
-      font-size: 0.78rem;
-      color: var(--gold-dark);
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 600;
-    }
+    .invisible-text:hover { filter: blur(0); -webkit-text-fill-color: #312922; }
+    .invisible-hint { font-size: 0.78rem; color: var(--gold-dark); display: block; margin-bottom: 6px; font-weight: 600; }
 
-    .note-photo img {
-      width: 100%;
-      border-radius: 8px;
-      margin-top: 16px;
-      border: 1px solid rgba(0,0,0,0.06);
-    }
-    .song-box {
-      margin-top: 16px;
-      background: #fcf8f2;
-      border: 1px solid #ebdcc9;
-      border-radius: 10px;
-      padding: 10px 12px;
-    }
-    .song-label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--gold-dark);
-      margin-bottom: 8px;
-    }
+    .note-photo img { width: 100%; border-radius: 8px; margin-top: 16px; }
+    .song-box { margin-top: 16px; background: #fcf8f2; border: 1px solid #ebdcc9; border-radius: 10px; padding: 10px 12px; }
+    .song-label { font-size: 0.75rem; font-weight: 600; color: var(--gold-dark); margin-bottom: 8px; }
     .song-player-frame { width: 100%; border: none; border-radius: 8px; }
     audio { width: 100%; height: 38px; margin-top: 14px; border-radius: 20px; }
 
@@ -472,6 +416,109 @@
     .note-card.Neelam .wax-seal { background: radial-gradient(circle at 35% 35%, #a1324c, var(--wax-neelam)); }
     .note-card.Saksham .wax-seal { background: radial-gradient(circle at 35% 35%, #245c47, var(--wax-saksham)); }
 
+    /* =========================================================
+       ENVELOPE POSTAL FLIGHT ANIMATION STYLES
+       ========================================================= */
+    #postalOverlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 9999;
+      display: none;
+      perspective: 1200px;
+    }
+
+    .animated-envelope {
+      width: 320px;
+      height: 200px;
+      background: #e8ded0;
+      position: absolute;
+      border-radius: 6px;
+      box-shadow: 0 15px 35px rgba(45, 32, 20, 0.35);
+      border: 1px solid #d2c3af;
+      transform-style: preserve-3d;
+      transform-origin: center center;
+    }
+
+    /* Envelope triangular pocket */
+    .animated-envelope::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      border-left: 160px solid #dbcbb5;
+      border-right: 160px solid #dbcbb5;
+      border-top: 100px solid transparent;
+      z-index: 3;
+    }
+
+    /* Envelope folding flap */
+    .envelope-flap {
+      position: absolute;
+      top: 0; left: 0;
+      width: 0; height: 0;
+      border-left: 160px solid transparent;
+      border-right: 160px solid transparent;
+      border-top: 105px solid #d5c3aa;
+      transform-origin: top center;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 4;
+    }
+
+    .envelope-flap.closed {
+      transform: rotateX(180deg);
+      border-top-color: #cbb69c;
+    }
+
+    /* Wax Seal on the Flap */
+    .envelope-wax {
+      position: absolute;
+      top: -30px;
+      left: calc(50% - 20px);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all 0.4s ease;
+      z-index: 5;
+    }
+    .envelope-wax.stamped {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .envelope-wax.Neelam { background: radial-gradient(circle at 35% 35%, #a1324c, var(--wax-neelam)); }
+    .envelope-wax.Saksham { background: radial-gradient(circle at 35% 35%, #245c47, var(--wax-saksham)); }
+
+    /* The letter card flying into/out of the envelope */
+    .flying-letter {
+      position: absolute;
+      width: 290px;
+      height: 160px;
+      background: #fdfaf6;
+      border: 1px solid #dfd3c3;
+      border-radius: 4px;
+      padding: 14px;
+      left: 15px;
+      top: 20px;
+      z-index: 2;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      font-family: 'Caveat', cursive;
+      font-size: 1.25rem;
+      line-height: 1.3;
+      color: #312922;
+      overflow: hidden;
+      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+    }
+
     /* Bookshelf Column */
     .shelf-column {
       width: 280px;
@@ -483,7 +530,7 @@
       border: 4px solid #2b1a10;
       border-radius: 12px;
       padding: 20px 14px 10px;
-      box-shadow: 0 14px 32px rgba(0,0,0,0.24), inset 0 2px 4px rgba(255,255,255,0.1);
+      box-shadow: 0 14px 32px rgba(0,0,0,0.24);
       position: relative;
     }
     .shelf-title {
@@ -524,13 +571,10 @@
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      box-shadow: -4px 0 8px rgba(0,0,0,0.4), inset -2px 0 5px rgba(0,0,0,0.3), inset 2px 0 5px rgba(255,255,255,0.15);
-      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s;
+      box-shadow: -4px 0 8px rgba(0,0,0,0.4);
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
-    .book-spine:hover {
-      transform: translateY(-16px) rotate(-2deg);
-      box-shadow: -6px 8px 18px rgba(0,0,0,0.5);
-    }
+    .book-spine:hover { transform: translateY(-16px) rotate(-2deg); }
     .book-spine.saksham {
       background: linear-gradient(90deg, #18382c, #26503f 60%, #143126);
       border: 1px solid #11281f;
@@ -549,11 +593,10 @@
       font-size: 0.95rem;
       letter-spacing: 2px;
       color: #ebd7a8;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
       white-space: nowrap;
     }
 
-    /* Ancient Book Modal */
+    /* Modal */
     .book-modal-overlay {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
@@ -564,192 +607,53 @@
       align-items: center;
       justify-content: center;
       padding: 16px;
-      animation: fadeIn 0.4s ease;
     }
     .ancient-book {
       width: 100%;
       max-width: 640px;
       min-height: 520px;
       background: #f4ecdc;
-      background-image: 
-        radial-gradient(#e2d3be 1px, transparent 1px),
-        linear-gradient(to right, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.02) 8%, transparent 15%, transparent 85%, rgba(0,0,0,0.03) 92%, rgba(0,0,0,0.15) 100%);
-      background-size: 20px 20px, 100% 100%;
       border-radius: 8px 18px 18px 8px;
-      box-shadow: -12px 0 25px rgba(0,0,0,0.6), 0 15px 40px rgba(0,0,0,0.4), inset 4px 0 8px rgba(255,255,255,0.4), inset 0 0 50px rgba(160, 130, 95, 0.25);
+      box-shadow: -12px 0 25px rgba(0,0,0,0.6), 0 15px 40px rgba(0,0,0,0.4);
       border: 1px solid #d4c2a7;
       padding: 38px 40px 30px;
       position: relative;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      animation: bookSlideUp 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
-    @keyframes bookSlideUp {
-      from { transform: translateY(40px) scale(0.96); opacity: 0; }
-      to { transform: translateY(0) scale(1); opacity: 1; }
-    }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
     .book-ribbon {
       position: absolute;
-      top: -10px;
-      left: 60px;
-      width: 22px;
-      height: 60px;
+      top: -10px; left: 60px;
+      width: 22px; height: 60px;
       background: #8c263e;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.25);
       border-radius: 0 0 2px 2px;
     }
     .book-ribbon::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0;
-      border-left: 11px solid transparent;
-      border-right: 11px solid transparent;
-      border-bottom: 10px solid #f4ecdc;
+      content: ''; position: absolute; bottom: 0; left: 0;
+      border-left: 11px solid transparent; border-right: 11px solid transparent; border-bottom: 10px solid #f4ecdc;
     }
-    .book-close-btn {
-      position: absolute;
-      top: 14px;
-      right: 18px;
-      background: transparent;
-      border: none;
-      font-size: 1.4rem;
-      cursor: pointer;
-      color: #7d6b56;
-    }
-    .book-header {
-      text-align: center;
-      border-bottom: 2px solid #dfcfb7;
-      padding-bottom: 12px;
-      margin-bottom: 18px;
-    }
-    .book-header h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.9rem;
-      color: #4a3525;
-      letter-spacing: 0.5px;
-    }
-    .book-header p {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      color: #8c7863;
-      font-size: 0.95rem;
-    }
-    .book-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-    .book-tab-btn {
-      background: #ebdcc7;
-      border: 1px solid #d5be9f;
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: #5c4533;
-      cursor: pointer;
-    }
+    .book-close-btn { position: absolute; top: 14px; right: 18px; background: transparent; border: none; font-size: 1.4rem; cursor: pointer; color: #7d6b56; }
+    .book-header { text-align: center; border-bottom: 2px solid #dfcfb7; padding-bottom: 12px; margin-bottom: 18px; }
+    .book-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; color: #4a3525; }
+    .book-header p { font-family: 'Cormorant Garamond', serif; font-style: italic; color: #8c7863; }
+    .book-tabs { display: flex; justify-content: center; gap: 12px; margin-bottom: 18px; }
+    .book-tab-btn { background: #ebdcc7; border: 1px solid #d5be9f; padding: 6px 16px; border-radius: 20px; font-family: 'Cormorant Garamond', serif; font-weight: 700; cursor: pointer; }
     .book-tab-btn.active { background: #5c4533; color: #f4ecdc; }
-
     .book-write-view textarea {
-      width: 100%;
-      height: 180px;
-      background: transparent;
-      border: none;
+      width: 100%; height: 180px; background: transparent; border: none;
       background-image: repeating-linear-gradient(transparent, transparent 31px, #e4d3bc 31px, #e4d3bc 32px);
-      line-height: 32px;
-      font-family: 'Caveat', cursive;
-      font-size: 1.6rem;
-      color: #2b221b;
-      padding: 0 8px;
-      resize: none;
+      line-height: 32px; font-family: 'Caveat', cursive; font-size: 1.6rem; padding: 0 8px; resize: none;
     }
     .book-write-view textarea:focus { outline: none; }
-
-    .signature-row {
-      display: flex;
-      justify-content: flex-end;
-      align-items: baseline;
-      gap: 8px;
-      margin-top: 15px;
-      padding-right: 12px;
-    }
-    .sig-prefix {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      color: #7a6652;
-      font-size: 1.1rem;
-    }
-    .sig-name {
-      font-family: 'Marck Script', cursive;
-      font-size: 1.9rem;
-      color: #1f3b2f;
-      transform: rotate(-3deg);
-    }
+    .signature-row { display: flex; justify-content: flex-end; align-items: baseline; gap: 8px; margin-top: 15px; }
+    .sig-name { font-family: 'Marck Script', cursive; font-size: 1.9rem; color: #1f3b2f; }
     .sig-name.neelam-sig { color: #7c2237; }
-
-    .book-read-view { display: none; min-height: 220px; position: relative; }
-    .archived-note-body {
-      font-family: 'Caveat', cursive;
-      font-size: 1.65rem;
-      line-height: 1.5;
-      color: #2a2018;
-      white-space: pre-wrap;
-      min-height: 160px;
-    }
-    .page-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 20px;
-      padding-top: 10px;
-      border-top: 1px dashed #dfcfb7;
-    }
-    .page-btn {
-      background: #ebdcc7;
-      border: 1px solid #d5be9f;
-      padding: 4px 14px;
-      border-radius: 6px;
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 700;
-      cursor: pointer;
-      color: #4a3525;
-    }
-    .page-btn:disabled { opacity: 0.35; cursor: not-allowed; }
-    .page-indicator {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 0.95rem;
-      color: #7a6652;
-    }
-
-    .book-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 16px;
-      padding-top: 12px;
-      border-top: 1px solid #dfcfb7;
-    }
-    .save-to-tome-btn {
-      background: #4a3525;
-      color: #f7f1e5;
-      border: none;
-      padding: 10px 24px;
-      border-radius: 8px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-      letter-spacing: 0.5px;
-    }
-    .save-to-tome-btn:hover { background: #2f2116; }
+    .book-read-view { display: none; min-height: 220px; }
+    .archived-note-body { font-family: 'Caveat', cursive; font-size: 1.65rem; line-height: 1.5; min-height: 160px; }
+    .page-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 10px; border-top: 1px dashed #dfcfb7; }
+    .page-btn { background: #ebdcc7; border: 1px solid #d5be9f; padding: 4px 14px; border-radius: 6px; cursor: pointer; }
+    .save-to-tome-btn { background: #4a3525; color: #f7f1e5; border: none; padding: 10px 24px; border-radius: 8px; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; cursor: pointer; }
 
     @media (max-width: 840px) {
       .desk-wrapper { flex-direction: column; align-items: center; }
@@ -764,8 +668,16 @@
 
 <canvas id="ambientCanvas"></canvas>
 
+<!-- Postal Envelope Transit Overlay -->
+<div id="postalOverlay">
+  <div class="animated-envelope" id="transitEnvelope">
+    <div class="envelope-flap" id="transitFlap"></div>
+    <div class="flying-letter" id="transitLetter"></div>
+    <div class="envelope-wax" id="transitWax"></div>
+  </div>
+</div>
+
 <div class="desk-wrapper">
-  <!-- The Desk -->
   <div class="main-column">
     <div class="top-shelf">
       <div class="milestone-pill">
@@ -788,7 +700,7 @@
       <p>“Some people really are worth the wait.”</p>
     </header>
 
-    <div class="composer-blotter">
+    <div class="composer-blotter" id="composerBlotter">
       <div class="composer">
         <div class="author-toggle">
           <span style="color: var(--text-muted);">Writing as:</span>
@@ -821,7 +733,6 @@
     <div class="notes-list" id="notesList"></div>
   </div>
 
-  <!-- The Keepsake Bookshelf -->
   <div class="shelf-column">
     <div class="bookshelf">
       <div class="shelf-title">Keepsake Shelf</div>
@@ -843,7 +754,7 @@
   </div>
 </div>
 
-<!-- ANCIENT BOOK MODAL -->
+<!-- Modal -->
 <div class="book-modal-overlay" id="bookModalOverlay">
   <div class="ancient-book">
     <div class="book-ribbon" id="modalRibbon"></div>
@@ -911,7 +822,6 @@
     return document.querySelector('input[name="author"]:checked').value;
   }
 
-  // Presence Pulse
   async function updatePresence() {
     const author = getSelectedAuthor();
     try {
@@ -942,7 +852,6 @@
     }
   });
 
-  // Synthesized sounds
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   window.playPaperSound = function() {
     if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -976,15 +885,11 @@
     });
   }
 
-  // Floating Ambient Petals + Firefly Dust Motes
+  // Floating Ambient Petals + Fireflies
   const canvas = document.getElementById("ambientCanvas");
   const ctx = canvas.getContext("2d");
   let particles = [];
-
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
+  function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
   window.addEventListener('resize', resizeCanvas);
   resizeCanvas();
 
@@ -1043,7 +948,6 @@
   }
   animate();
 
-  // Song Input Toggle
   const songBox = document.getElementById("songInputContainer");
   const songBtn = document.getElementById("songBtn");
   window.toggleSongInput = function() {
@@ -1058,7 +962,6 @@
     }
   };
 
-  // Invisible Ink Toggle
   let isInvisibleInk = false;
   const invisibleBtn = document.getElementById("invisibleBtn");
   window.toggleInvisibleInk = function() {
@@ -1086,7 +989,6 @@
     return '';
   }
 
-  // Voice recording & Compression
   let mediaRecorder, audioChunks = [], base64Audio = null;
   const recordBtn = document.getElementById("recordBtn");
   const recordStatus = document.getElementById("recordStatus");
@@ -1147,7 +1049,101 @@
     });
   }
 
-  // Post Daily Note
+  // =========================================================
+  // ENVELOPE POSTAL FLIGHT ANIMATION CONTROLLER
+  // =========================================================
+  function runPostalAnimation(author, previewText) {
+    return new Promise((resolve) => {
+      const overlay = document.getElementById("postalOverlay");
+      const envelope = document.getElementById("transitEnvelope");
+      const flap = document.getElementById("transitFlap");
+      const letter = document.getElementById("transitLetter");
+      const wax = document.getElementById("transitWax");
+      const blotter = document.getElementById("composerBlotter");
+      const notesList = document.getElementById("notesList");
+
+      // Reset styles
+      flap.className = "envelope-flap";
+      wax.className = `envelope-wax ${author}`;
+      wax.innerText = author === "Saksham" ? "S" : "N";
+      letter.innerText = previewText || (author + " left a quiet memory...");
+      letter.style.opacity = "1";
+      letter.style.transform = "translateY(-120px) scale(0.95)";
+
+      // Positioning start (Above Composer)
+      const blotterRect = blotter.getBoundingClientRect();
+      const startX = blotterRect.left + (blotterRect.width / 2) - 160;
+      const startY = blotterRect.top + 20;
+
+      envelope.style.transition = "none";
+      envelope.style.left = `${startX}px`;
+      envelope.style.top = `${startY}px`;
+      envelope.style.transform = "scale(0.8) translateY(-20px)";
+      envelope.style.opacity = "0";
+      overlay.style.display = "block";
+
+      playPaperSound();
+
+      // Phase 1: Envelope appears & opens
+      requestAnimationFrame(() => {
+        envelope.style.transition = "all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)";
+        envelope.style.opacity = "1";
+        envelope.style.transform = "scale(1) translateY(0)";
+
+        // Phase 2: Letter slides down into envelope
+        setTimeout(() => {
+          playPaperSound();
+          letter.style.transform = "translateY(0) scale(0.9)";
+        }, 500);
+
+        // Phase 3: Flap folds down & Wax Stamps
+        setTimeout(() => {
+          playPaperSound();
+          flap.classList.add("closed");
+        }, 1100);
+
+        setTimeout(() => {
+          wax.classList.add("stamped");
+          playPaperSound();
+        }, 1500);
+
+        // Phase 4: Fly down to destination list
+        setTimeout(() => {
+          const targetRect = notesList.getBoundingClientRect();
+          const targetX = targetRect.left + (targetRect.width / 2) - 160;
+          const targetY = Math.max(targetRect.top, 300);
+
+          envelope.style.transition = "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)";
+          envelope.style.left = `${targetX}px`;
+          envelope.style.top = `${targetY}px`;
+          envelope.style.transform = "scale(0.9) rotate(2deg)";
+        }, 2000);
+
+        // Phase 5: Open envelope at destination & unfold note
+        setTimeout(() => {
+          wax.classList.remove("stamped");
+          flap.classList.remove("closed");
+          playChime();
+        }, 2800);
+
+        setTimeout(() => {
+          letter.style.transform = "translateY(-110px) scale(1)";
+        }, 3100);
+
+        // Phase 6: Fade out envelope and reveal true card
+        setTimeout(() => {
+          envelope.style.transition = "all 0.5s ease";
+          envelope.style.opacity = "0";
+          setTimeout(() => {
+            overlay.style.display = "none";
+            resolve();
+          }, 500);
+        }, 3600);
+      });
+    });
+  }
+
+  // Post Daily Note with Postal Sequence
   document.getElementById("sendBtn").onclick = async () => {
     const btn = document.getElementById("sendBtn");
     const text = document.getElementById("noteText").value.trim();
@@ -1157,8 +1153,12 @@
     if (!text && !file && !base64Audio && !songUrl) return;
 
     btn.disabled = true;
-    btn.innerText = "Melting wax...";
+    btn.innerText = "Folding Letter...";
+
     let finalImg = file ? await compressImage(file) : null;
+
+    // Run the physical Envelope animation sequence
+    await runPostalAnimation(author, text);
 
     try {
       await addDoc(collection(db, "notes"), {
@@ -1170,7 +1170,7 @@
         audioUrl: base64Audio,
         createdAt: new Date()
       });
-      playChime();
+
       document.getElementById("noteText").value = "";
       document.getElementById("songUrl").value = "";
       songBox.style.display = "none";
@@ -1184,11 +1184,15 @@
       isInvisibleInk = false;
       invisibleBtn.classList.remove("active-tool");
       invisibleBtn.innerText = "✨ Invisible Ink";
-    } catch(e) { alert("Error: " + e.message); }
-    finally { btn.disabled = false; btn.innerText = "Seal & Leave Note"; }
+    } catch(e) { 
+      alert("Error: " + e.message); 
+    } finally { 
+      btn.disabled = false; 
+      btn.innerText = "Seal & Leave Note"; 
+    }
   };
 
-  // Sync Note Feed
+  // Sync Feed
   const notesQuery = query(collection(db, "notes"), orderBy("createdAt", "desc"));
   onSnapshot(notesQuery, snapshot => {
     const container = document.getElementById("notesList");
@@ -1221,11 +1225,8 @@
     const author = getSelectedAuthor();
     const sigElem = document.getElementById("bookSignature");
     sigElem.innerText = author;
-    if (author === "Neelam") {
-      sigElem.classList.add("neelam-sig");
-    } else {
-      sigElem.classList.remove("neelam-sig");
-    }
+    if (author === "Neelam") sigElem.classList.add("neelam-sig");
+    else sigElem.classList.remove("neelam-sig");
     document.getElementById("bookFooterAuthor").innerText = "Author: " + author;
   }
 
@@ -1308,11 +1309,8 @@
     const page = bookPages[currentPageIndex];
     textElem.innerText = page.text;
     sigElem.innerText = page.author;
-    if (page.author === "Neelam") {
-      sigElem.classList.add("neelam-sig");
-    } else {
-      sigElem.classList.remove("neelam-sig");
-    }
+    if (page.author === "Neelam") sigElem.classList.add("neelam-sig");
+    else sigElem.classList.remove("neelam-sig");
 
     indicator.innerText = `Page ${currentPageIndex + 1} of ${bookPages.length}`;
     prevBtn.disabled = (currentPageIndex >= bookPages.length - 1);
