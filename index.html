@@ -926,7 +926,8 @@
   const db = getFirestore(app);
 
   function getSelectedAuthor() {
-    return document.querySelector('input[name="author"]:checked').value;
+    const checked = document.querySelector('input[name="author"]:checked');
+    return checked ? checked.value : "Neelam";
   }
 
   let audioCtx;
@@ -935,6 +936,10 @@
     if (audioCtx.state === 'suspended') audioCtx.resume();
     return audioCtx;
   }
+
+  // Ensure audio context unlocks on first user tap anywhere
+  window.addEventListener('click', () => { getAudioCtx(); }, { once: true });
+  window.addEventListener('touchstart', () => { getAudioCtx(); }, { once: true });
 
   window.playPaperSound = function() {
     try {
@@ -962,7 +967,7 @@
         osc.type = 'triangle';
         osc.frequency.value = freq;
         const startTime = ctx.currentTime + (idx * 0.09);
-        gain.gain.setValueAtTime(0.07, startTime);
+        gain.gain.setValueAtTime(0.08, startTime);
         gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.6);
         osc.connect(gain);
         gain.connect(ctx.destination);
@@ -972,10 +977,11 @@
     } catch(e) {}
   }
 
-  // --- Browser Notification System ---
+  // --- Notification System ---
   window.requestNotificationPermission = async function() {
+    getAudioCtx();
     if (!("Notification" in window)) {
-      alert("This browser does not support desktop notifications.");
+      alert("This browser does not support notifications.");
       return;
     }
     const permission = await Notification.requestPermission();
@@ -983,7 +989,7 @@
     if (permission === "granted") {
       playChime();
       new Notification("The Library Desk", {
-        body: "Alerts activated! You will be notified whenever a new note arrives 💌",
+        body: "Alerts activated! You will receive a note alert whenever one is left for you 💌",
         icon: "https://fav.farm/☕"
       });
     }
@@ -1005,19 +1011,15 @@
     updateNotifButton(Notification.permission);
   }
 
-  let initialLoadDone = false;
-
   function triggerNoteNotification(author, previewText) {
-    const currentAuthor = getSelectedAuthor();
-    // Only notify if the OTHER person wrote the note
-    if (author === currentAuthor) return;
-
     playChime();
 
     if ("Notification" in window && Notification.permission === "granted") {
-      new Notification(`The Library Desk — Note from ${author} 💌`, {
-        body: previewText || "Left a quiet memory for you at the desk...",
-        icon: "https://fav.farm/☕"
+      const displayBody = previewText ? previewText.slice(0, 100) : "Left a quiet memory for you at the desk...";
+      new Notification(`The Library Desk: Note from ${author} 💌`, {
+        body: displayBody,
+        icon: "https://fav.farm/☕",
+        tag: "library-note"
       });
     }
   }
@@ -1500,7 +1502,22 @@
     finally { btn.disabled = false; btn.innerText = "Seal & Leave Note"; }
   };
 
+  let initialFirestoreLoad = true;
+
   onSnapshot(collection(db, "notes"), snapshot => {
+    // Check for new incoming documents in real-time
+    snapshot.docChanges().forEach(change => {
+      if (change.type === "added" && !initialFirestoreLoad) {
+        const newNote = change.doc.data();
+        const currentSelected = getSelectedAuthor();
+        // Trigger alert if the incoming note is from the other person
+        if (newNote.author !== currentSelected) {
+          triggerNoteNotification(newNote.author, newNote.text);
+        }
+      }
+    });
+    initialFirestoreLoad = false;
+
     const container = document.getElementById("notesList");
     let docs = [];
     snapshot.forEach(d => docs.push({ id: d.id, ...d.data() }));
@@ -1510,17 +1527,6 @@
       const tB = b.createdAt ? (b.createdAt.toMillis ? b.createdAt.toMillis() : new Date(b.createdAt).getTime()) : 0;
       return tB - tA;
     });
-
-    // Handle real-time alert for new incoming note
-    if (initialLoadDone && docs.length > 0) {
-      const newestNote = docs[0];
-      const createdTime = newestNote.createdAt ? (newestNote.createdAt.toMillis ? newestNote.createdAt.toMillis() : new Date(newestNote.createdAt).getTime()) : Date.now();
-      // If note was posted within the last 15 seconds
-      if (Date.now() - createdTime < 15000) {
-        triggerNoteNotification(newestNote.author, newestNote.text);
-      }
-    }
-    initialLoadDone = true;
 
     container.innerHTML = "";
     docs.forEach(data => {
