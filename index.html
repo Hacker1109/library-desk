@@ -115,6 +115,8 @@
       align-items: center;
       margin-bottom: 24px;
       padding: 0 4px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
     .clock-widget {
       display: flex;
@@ -136,6 +138,30 @@
       border-color: #4a3e30;
       color: #dfd1be;
     }
+
+    .shelf-right-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .notification-toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #ede2cf;
+      border: 1px solid #cfbeaa;
+      font-size: 0.78rem;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #3b2a1a;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+    }
+    .notification-toggle-btn:hover { background: #fdf5ea; }
+    .notification-toggle-btn.enabled { background: #e0eee6; border-color: #a8cfba; color: #1e4d3a; }
 
     .polaroid-stack {
       display: flex;
@@ -675,7 +701,6 @@
 </head>
 <body>
 
-<!-- Keepsake Memory Tapestry Layer -->
 <div class="keepsake-background-layer" id="keepsakeBg"></div>
 
 <canvas id="ambientCanvas"></canvas>
@@ -697,14 +722,20 @@
         <span>🕰</span> <span id="deskTime">--:--</span>
       </div>
 
-      <div class="polaroid-stack" title="Memories resting on desk">
-        <div class="mini-polaroid"><div class="polaroid-inner"></div></div>
-        <div class="mini-polaroid" style="--rot: 6deg;"><div class="polaroid-inner"></div></div>
-      </div>
+      <div class="shelf-right-group">
+        <button type="button" class="notification-toggle-btn" id="notifBtn" onclick="window.requestNotificationPermission()">
+          <span>🔔</span> <span id="notifLabel">Alert Chimes</span>
+        </button>
 
-      <div class="candle-indicator" id="readingTogetherBox">
-        <span class="candle-icon" id="candleIcon">🕯️</span>
-        <span class="candle-text" id="candleText">At the desk</span>
+        <div class="polaroid-stack" title="Memories resting on desk">
+          <div class="mini-polaroid"><div class="polaroid-inner"></div></div>
+          <div class="mini-polaroid" style="--rot: 6deg;"><div class="polaroid-inner"></div></div>
+        </div>
+
+        <div class="candle-indicator" id="readingTogetherBox">
+          <span class="candle-icon" id="candleIcon">🕯️</span>
+          <span class="candle-text" id="candleText">At the desk</span>
+        </div>
       </div>
     </div>
 
@@ -939,6 +970,56 @@
         osc.stop(startTime + 0.6);
       });
     } catch(e) {}
+  }
+
+  // --- Browser Notification System ---
+  window.requestNotificationPermission = async function() {
+    if (!("Notification" in window)) {
+      alert("This browser does not support desktop notifications.");
+      return;
+    }
+    const permission = await Notification.requestPermission();
+    updateNotifButton(permission);
+    if (permission === "granted") {
+      playChime();
+      new Notification("The Library Desk", {
+        body: "Alerts activated! You will be notified whenever a new note arrives 💌",
+        icon: "https://fav.farm/☕"
+      });
+    }
+  };
+
+  function updateNotifButton(status) {
+    const btn = document.getElementById("notifBtn");
+    const label = document.getElementById("notifLabel");
+    if (status === "granted") {
+      btn.classList.add("enabled");
+      label.innerText = "Alerts Active";
+    } else {
+      btn.classList.remove("enabled");
+      label.innerText = "Alert Chimes";
+    }
+  }
+
+  if ("Notification" in window) {
+    updateNotifButton(Notification.permission);
+  }
+
+  let initialLoadDone = false;
+
+  function triggerNoteNotification(author, previewText) {
+    const currentAuthor = getSelectedAuthor();
+    // Only notify if the OTHER person wrote the note
+    if (author === currentAuthor) return;
+
+    playChime();
+
+    if ("Notification" in window && Notification.permission === "granted") {
+      new Notification(`The Library Desk — Note from ${author} 💌`, {
+        body: previewText || "Left a quiet memory for you at the desk...",
+        icon: "https://fav.farm/☕"
+      });
+    }
   }
 
   function updateDeskAtmosphere() {
@@ -1429,6 +1510,17 @@
       const tB = b.createdAt ? (b.createdAt.toMillis ? b.createdAt.toMillis() : new Date(b.createdAt).getTime()) : 0;
       return tB - tA;
     });
+
+    // Handle real-time alert for new incoming note
+    if (initialLoadDone && docs.length > 0) {
+      const newestNote = docs[0];
+      const createdTime = newestNote.createdAt ? (newestNote.createdAt.toMillis ? newestNote.createdAt.toMillis() : new Date(newestNote.createdAt).getTime()) : Date.now();
+      // If note was posted within the last 15 seconds
+      if (Date.now() - createdTime < 15000) {
+        triggerNoteNotification(newestNote.author, newestNote.text);
+      }
+    }
+    initialLoadDone = true;
 
     container.innerHTML = "";
     docs.forEach(data => {
