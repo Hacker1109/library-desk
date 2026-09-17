@@ -93,6 +93,113 @@
       z-index: 2;
     }
 
+    /* Grand Reveal Modal for Neelam */
+    .welcome-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(18, 14, 11, 0.88);
+      backdrop-filter: blur(12px);
+      z-index: 20000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      transition: opacity 0.8s ease;
+    }
+    .welcome-envelope-box {
+      width: 100%;
+      max-width: 580px;
+      max-height: 90vh;
+      background: #fdfbf7;
+      border: 3px solid #dfcca9;
+      border-radius: 20px;
+      padding: 34px 26px 28px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.55), inset 0 0 40px rgba(220, 195, 155, 0.22);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: envelopeFloat 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    @keyframes envelopeFloat {
+      from { transform: translateY(30px) scale(0.92); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+    .welcome-seal {
+      width: 58px; height: 58px;
+      background: radial-gradient(circle at 35% 35%, #2a6853, var(--wax-saksham));
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.4);
+      cursor: pointer;
+      transition: transform 0.25s ease;
+      flex-shrink: 0;
+    }
+    .welcome-seal:hover { transform: scale(1.1); }
+    .welcome-tag {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--gold-dark);
+      font-weight: 700;
+      margin-bottom: 4px;
+      flex-shrink: 0;
+    }
+    .welcome-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.1rem;
+      color: #352618;
+      font-weight: 700;
+      margin-bottom: 14px;
+      flex-shrink: 0;
+    }
+    .welcome-letter-scroll {
+      width: 100%;
+      overflow-y: auto;
+      background: rgba(255,255,255,0.7);
+      border-radius: 12px;
+      padding: 20px 22px;
+      border: 1px solid #ebdcc8;
+      margin-bottom: 20px;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.03);
+    }
+    .welcome-letter-text {
+      font-family: 'Caveat', cursive;
+      font-size: 1.65rem;
+      line-height: 1.5;
+      color: #241c15;
+      text-align: left;
+      white-space: pre-wrap;
+    }
+    .welcome-enter-btn {
+      background: linear-gradient(135deg, #2c2118, #18120c);
+      color: #fcefe1;
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 12px 36px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+    .welcome-enter-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    }
+
     .desk-wrapper {
       width: 100%;
       max-width: 980px;
@@ -701,6 +808,50 @@
 </head>
 <body>
 
+<!-- FIRST VISIT GRAND REVEAL MODAL FOR NEELAM -->
+<div class="welcome-overlay" id="welcomeOverlay" style="display:none;">
+  <div class="welcome-envelope-box">
+    <div class="welcome-seal" title="Break the wax seal" onclick="window.enterDesk()">S</div>
+    <div class="welcome-tag">A Dedicated Delivery</div>
+    <h2 class="welcome-title">For Neelam</h2>
+    <div class="welcome-letter-scroll">
+      <div class="welcome-letter-text">Hey, Neelam.
+
+I don't know if you'll believe this, and maybe you don't have to believe it right away. But I hope, someday, you do.
+
+You are worth it.
+
+You don't have to earn someone's kindness.
+You don't have to become someone better, prettier, stronger, or more perfect before you deserve to be thought of.
+
+Sometimes, someone thinks of you simply because you crossed their mind and made them want to do something kind for you.
+And sometimes, someone sees something in you that you have forgotten to see in yourself.
+
+So please don't look at a thoughtful gesture and wonder, "Am I worth receiving this?"
+You are.
+
+Not because you've done something to deserve it.
+Not because you owe anything in return.
+Not because you have to give the same feeling back.
+Just because you're you.
+
+And if somewhere inside you there's a little voice telling you that you're not someone worth waiting for, worth caring for, worth choosing, or worth being loved deeply—
+I hope you learn to be a little kinder to that girl.
+Because she deserves more kindness from herself than she probably realizes.
+
+Maybe some things aren't meant to be measured by whether we think we're worthy of them.
+Maybe sometimes we simply let someone be kind to us.
+
+So keep this little reminder somewhere in your heart:
+You don't have to prove that you're worth choosing.
+You already are.
+
+— Saksham ❤️</div>
+    </div>
+    <button type="button" class="welcome-enter-btn" onclick="window.enterDesk()">Step Into The Library Desk ☕</button>
+  </div>
+</div>
+
 <div class="keepsake-background-layer" id="keepsakeBg"></div>
 
 <canvas id="ambientCanvas"></canvas>
@@ -937,7 +1088,7 @@
     return audioCtx;
   }
 
-  // Ensure audio context unlocks on first user tap anywhere
+  // Audio unlock on interaction
   window.addEventListener('click', () => { getAudioCtx(); }, { once: true });
   window.addEventListener('touchstart', () => { getAudioCtx(); }, { once: true });
 
@@ -977,11 +1128,29 @@
     } catch(e) {}
   }
 
+  // --- Reveal Experience for Neelam ---
+  const hasSeenWelcome = localStorage.getItem("desk_welcome_seen");
+  const welcomeOverlay = document.getElementById("welcomeOverlay");
+
+  if (!hasSeenWelcome) {
+    welcomeOverlay.style.display = "flex";
+  }
+
+  window.enterDesk = function() {
+    window.playPaperSound();
+    playChime();
+    localStorage.setItem("desk_welcome_seen", "true");
+    welcomeOverlay.style.opacity = "0";
+    setTimeout(() => {
+      welcomeOverlay.style.display = "none";
+    }, 800);
+    window.requestNotificationPermission();
+  };
+
   // --- Notification System ---
   window.requestNotificationPermission = async function() {
     getAudioCtx();
     if (!("Notification" in window)) {
-      alert("This browser does not support notifications.");
       return;
     }
     const permission = await Notification.requestPermission();
@@ -1505,12 +1674,10 @@
   let initialFirestoreLoad = true;
 
   onSnapshot(collection(db, "notes"), snapshot => {
-    // Check for new incoming documents in real-time
     snapshot.docChanges().forEach(change => {
       if (change.type === "added" && !initialFirestoreLoad) {
         const newNote = change.doc.data();
         const currentSelected = getSelectedAuthor();
-        // Trigger alert if the incoming note is from the other person
         if (newNote.author !== currentSelected) {
           triggerNoteNotification(newNote.author, newNote.text);
         }
