@@ -55,6 +55,130 @@
       color: #ede2d3;
     }
 
+    /* GATE / LOGIN MODAL */
+    .gate-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: radial-gradient(circle at center, rgba(30, 24, 19, 0.94), rgba(12, 9, 7, 0.98));
+      backdrop-filter: blur(14px);
+      z-index: 30000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      transition: opacity 0.8s ease;
+    }
+    .gate-box {
+      width: 100%;
+      max-width: 440px;
+      background: #fdfaf5;
+      border: 3px solid #dfcca9;
+      border-radius: 20px;
+      padding: 38px 28px 32px;
+      box-shadow: 0 28px 65px rgba(0,0,0,0.65), inset 0 0 35px rgba(220, 195, 155, 0.25);
+      text-align: center;
+      position: relative;
+    }
+    .gate-keyhole {
+      font-size: 2.3rem;
+      margin-bottom: 10px;
+      display: inline-block;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+    }
+    .gate-tag {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--gold-dark);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .gate-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      color: #352618;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .gate-user-select {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .gate-btn-user {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 25px;
+      border: 2px solid #dfd1bd;
+      background: #f4ecdf;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #584432;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .gate-btn-user.selected-neelam {
+      background: var(--accent-neelam);
+      border-color: var(--accent-neelam);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(131, 39, 62, 0.35);
+    }
+    .gate-btn-user.selected-saksham {
+      background: var(--accent-saksham);
+      border-color: var(--accent-saksham);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(27, 77, 62, 0.35);
+    }
+    .gate-riddle-text {
+      font-family: 'Caveat', cursive;
+      font-size: 1.45rem;
+      color: var(--accent-neelam);
+      margin-bottom: 14px;
+      min-height: 44px;
+      line-height: 1.35;
+      font-weight: 600;
+    }
+    .gate-input {
+      width: 100%;
+      padding: 12px 18px;
+      font-size: 1.2rem;
+      text-align: center;
+      border: 2px solid #e0ceba;
+      border-radius: 12px;
+      background: #fffdf9;
+      color: #241c15;
+      outline: none;
+      margin-bottom: 18px;
+      transition: border-color 0.2s;
+    }
+    .gate-input:focus { border-color: var(--gold); }
+    .gate-submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #2d2218, #18120b);
+      color: #fcefe1;
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 12px 24px;
+      border-radius: 25px;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+      transition: all 0.2s ease;
+    }
+    .gate-submit-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(0,0,0,0.3); }
+    .gate-error {
+      color: #a42c44;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 10px;
+      min-height: 20px;
+    }
+
     .keepsake-background-layer {
       position: fixed;
       top: 0;
@@ -200,7 +324,7 @@
       box-shadow: 0 8px 24px rgba(0,0,0,0.35);
     }
 
-    /* Upgraded Postal Overlay */
+    /* Postal Overlay */
     #postalOverlay {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       pointer-events: none !important; z-index: 9999; display: none; perspective: 1400px;
@@ -221,7 +345,6 @@
       background: linear-gradient(145deg, #f3f8f5, #dfede7);
       border: 2px solid #c2ded3;
     }
-    /* Front pocket cutout */
     .animated-envelope::before {
       content: ''; position: absolute; bottom: 0; left: 0;
       border-left: 160px solid rgba(228, 214, 195, 0.95);
@@ -238,7 +361,6 @@
       border-left-color: #d1e5dd;
       border-right-color: #d1e5dd;
     }
-    /* Flap */
     .envelope-flap {
       position: absolute; top: 0; left: 0; width: 0; height: 0;
       border-left: 160px solid transparent; border-right: 160px solid transparent;
@@ -258,7 +380,6 @@
     .animated-envelope.Neelam .envelope-flap.closed { border-top-color: #d99fad !important; }
     .animated-envelope.Saksham .envelope-flap.closed { border-top-color: #9fccb8 !important; }
 
-    /* Wax Stamp */
     .envelope-wax {
       position: absolute; top: -32px; left: calc(50% - 24px); width: 48px; height: 48px;
       border-radius: 50%; display: flex; align-items: center; justify-content: center;
@@ -272,7 +393,6 @@
     .envelope-wax.Neelam { background: radial-gradient(circle at 35% 35%, #b23551, var(--wax-neelam)); }
     .envelope-wax.Saksham { background: radial-gradient(circle at 35% 35%, #2a6a53, var(--wax-saksham)); }
 
-    /* Sparkle Particle Burst */
     .sparkle-burst {
       position: absolute;
       top: -10px; left: 50%;
@@ -290,7 +410,6 @@
       opacity: 0;
     }
 
-    /* Flying Letter Inside */
     .flying-letter {
       position: absolute; width: 290px; height: 165px; background: #fffcf8; border: 1px solid #dfd2c0;
       border-radius: 8px; padding: 18px; left: 15px; top: 15px; z-index: 2;
@@ -370,6 +489,19 @@
     }
     .notification-toggle-btn:hover { background: #fdf5ea; }
     .notification-toggle-btn.enabled { background: #e0eee6; border-color: #a8cfba; color: #1e4d3a; }
+
+    .lock-exit-btn {
+      background: #ebdcc7;
+      border: 1px solid #cbb89e;
+      border-radius: 20px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      color: #513e2f;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .lock-exit-btn:hover { background: #dfcbaf; }
 
     .polaroid-stack {
       display: flex;
@@ -873,6 +1005,28 @@
 </head>
 <body>
 
+<!-- GATEWAY / LOGIN MODAL -->
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-box">
+    <div class="gate-keyhole">🗝️</div>
+    <div class="gate-tag">The Library Desk</div>
+    <h2 class="gate-title">Enter Sanctuary</h2>
+    
+    <div class="gate-user-select">
+      <button type="button" class="gate-btn-user selected-neelam" id="btnSelectNeelam" onclick="window.selectGateUser('Neelam')">Neelam</button>
+      <button type="button" class="gate-btn-user" id="btnSelectSaksham" onclick="window.selectGateUser('Saksham')">Saksham</button>
+    </div>
+
+    <div class="gate-riddle-text" id="gateRiddleText">
+      “Password is the number you think you are...”
+    </div>
+
+    <input type="password" class="gate-input" id="gatePasswordInput" placeholder="Enter password..." autocomplete="off" onkeydown="if(event.key==='Enter') window.attemptUnlock()" />
+    <button type="button" class="gate-submit-btn" onclick="window.attemptUnlock()">Unlock Desk</button>
+    <div class="gate-error" id="gateErrorMsg"></div>
+  </div>
+</div>
+
 <!-- FIRST VISIT GRAND REVEAL MODAL FOR NEELAM -->
 <div class="welcome-overlay" id="welcomeOverlay" style="display:none;">
   <div class="welcome-envelope-box">
@@ -945,6 +1099,8 @@ You already are.
           <span>🔔</span> <span id="notifLabel">Alert Chimes</span>
         </button>
 
+        <button type="button" class="lock-exit-btn" onclick="window.lockDesk()" title="Lock desk">🔒 Lock</button>
+
         <div class="polaroid-stack" title="Memories resting on desk">
           <div class="mini-polaroid"><div class="polaroid-inner"></div></div>
           <div class="mini-polaroid" style="--rot: 6deg;"><div class="polaroid-inner"></div></div>
@@ -990,8 +1146,8 @@ You already are.
         <div class="author-toggle">
           <span style="color: var(--text-muted);">Writing as:</span>
           <div class="author-pill">
-            <label><input type="radio" name="author" value="Neelam" checked><span>Neelam</span></label>
-            <label><input type="radio" name="author" value="Saksham"><span>Saksham</span></label>
+            <label><input type="radio" name="author" value="Neelam" checked id="radioNeelam"><span>Neelam</span></label>
+            <label><input type="radio" name="author" value="Saksham" id="radioSaksham"><span>Saksham</span></label>
           </div>
         </div>
 
@@ -1143,6 +1299,111 @@ You already are.
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
+  let activeGateUser = "Neelam";
+
+  window.selectGateUser = function(user) {
+    activeGateUser = user;
+    const btnN = document.getElementById("btnSelectNeelam");
+    const btnS = document.getElementById("btnSelectSaksham");
+    const riddle = document.getElementById("gateRiddleText");
+    const err = document.getElementById("gateErrorMsg");
+    err.innerText = "";
+
+    if (user === "Neelam") {
+      btnN.className = "gate-btn-user selected-neelam";
+      btnS.className = "gate-btn-user";
+      riddle.innerText = "“Password is the number you think you are...”";
+      riddle.style.color = "var(--accent-neelam)";
+    } else {
+      btnN.className = "gate-btn-user";
+      btnS.className = "gate-btn-user selected-saksham";
+      riddle.innerText = "“Welcome back, Saksham. Key in your passcode.”";
+      riddle.style.color = "var(--accent-saksham)";
+    }
+    document.getElementById("gatePasswordInput").value = "";
+    document.getElementById("gatePasswordInput").focus();
+  };
+
+  window.attemptUnlock = async function() {
+    const input = document.getElementById("gatePasswordInput").value.trim().toLowerCase();
+    const errMsg = document.getElementById("gateErrorMsg");
+    errMsg.innerText = "";
+
+    let isMatch = false;
+
+    if (activeGateUser === "Neelam") {
+      // Password is "1" or "one"
+      if (input === "1" || input === "one") isMatch = true;
+    } else {
+      // Saksham's password
+      if (input === "1109" || input === "saksham") isMatch = true;
+    }
+
+    if (isMatch) {
+      playChime();
+      sessionStorage.setItem("desk_authenticated_user", activeGateUser);
+      
+      // Auto-set the radio toggle in the writer blotter to match logged-in person
+      if (activeGateUser === "Saksham") {
+        document.getElementById("radioSaksham").checked = true;
+      } else {
+        document.getElementById("radioNeelam").checked = true;
+      }
+      syncSignature();
+
+      // Log exact login into Firebase collection "logins"
+      try {
+        const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
+        await addDoc(collection(db, "logins"), {
+          user: activeGateUser,
+          time: new Date(),
+          timestamp: Date.now(),
+          device: isMobile ? "Mobile Phone" : "Laptop/Desktop",
+          screen: `${window.innerWidth}x${window.innerHeight}`
+        });
+      } catch(e) {}
+
+      // Update Presence immediately
+      updatePresence();
+
+      // Animate Gate Disappearing
+      const gate = document.getElementById("gateOverlay");
+      gate.style.opacity = "0";
+      setTimeout(() => {
+        gate.style.display = "none";
+        
+        // If Neelam, check if she has seen the grand reveal letter
+        if (activeGateUser === "Neelam") {
+          const hasSeenWelcome = localStorage.getItem("desk_welcome_seen");
+          if (!hasSeenWelcome) {
+            document.getElementById("welcomeOverlay").style.display = "flex";
+          }
+        }
+      }, 700);
+
+    } else {
+      errMsg.innerText = "That key doesn't turn the lock. Think gently...";
+      window.playPaperSound();
+    }
+  };
+
+  window.lockDesk = function() {
+    sessionStorage.removeItem("desk_authenticated_user");
+    const gate = document.getElementById("gateOverlay");
+    gate.style.display = "flex";
+    requestAnimationFrame(() => { gate.style.opacity = "1"; });
+    document.getElementById("gatePasswordInput").value = "";
+    document.getElementById("gateErrorMsg").innerText = "";
+  };
+
+  // Check existing session
+  const savedUser = sessionStorage.getItem("desk_authenticated_user");
+  if (savedUser) {
+    document.getElementById("gateOverlay").style.display = "none";
+    if (savedUser === "Saksham") document.getElementById("radioSaksham").checked = true;
+    else document.getElementById("radioNeelam").checked = true;
+  }
+
   function getSelectedAuthor() {
     const checked = document.querySelector('input[name="author"]:checked');
     return checked ? checked.value : "Neelam";
@@ -1155,7 +1416,6 @@ You already are.
     return audioCtx;
   }
 
-  // Audio unlock on interaction
   window.addEventListener('click', () => { getAudioCtx(); }, { once: true });
   window.addEventListener('touchstart', () => { getAudioCtx(); }, { once: true });
 
@@ -1212,26 +1472,18 @@ You already are.
     } catch(e) {}
   }
 
-  // --- Reveal Experience for Neelam ---
-  const hasSeenWelcome = localStorage.getItem("desk_welcome_seen");
-  const welcomeOverlay = document.getElementById("welcomeOverlay");
-
-  if (!hasSeenWelcome) {
-    welcomeOverlay.style.display = "flex";
-  }
-
   window.enterDesk = function() {
     window.playPaperSound();
     playChime();
     localStorage.setItem("desk_welcome_seen", "true");
-    welcomeOverlay.style.opacity = "0";
+    const welcome = document.getElementById("welcomeOverlay");
+    welcome.style.opacity = "0";
     setTimeout(() => {
-      welcomeOverlay.style.display = "none";
+      welcome.style.display = "none";
     }, 800);
     window.requestNotificationPermission();
   };
 
-  // --- Notification System ---
   window.requestNotificationPermission = async function() {
     getAudioCtx();
     if (!("Notification" in window)) {
@@ -1625,7 +1877,6 @@ You already are.
     });
   }
 
-  // Upgraded Sparkle Burst Generation
   function triggerSparkleBurst() {
     const container = document.getElementById("sparkleContainer");
     container.innerHTML = "";
@@ -1653,7 +1904,6 @@ You already are.
     }
   }
 
-  // UPGRADED SMOOTH POSTAL ANIMATION
   function runPostalAnimation(author, previewText) {
     return new Promise((resolve) => {
       const overlay = document.getElementById("postalOverlay");
@@ -1686,31 +1936,26 @@ You already are.
       window.playPaperSound();
 
       requestAnimationFrame(() => {
-        // Step 1: Envelope gently floats in above composer
         envelope.style.transition = "all 0.55s cubic-bezier(0.25, 1, 0.5, 1)";
         envelope.style.opacity = "1";
         envelope.style.transform = "scale(1) translateY(0) rotate(0deg)";
 
-        // Step 2: Letter slides smoothly into envelope pocket
         setTimeout(() => {
           window.playPaperSound();
           letter.style.transform = "translateY(0) scale(0.92)";
         }, 500);
 
-        // Step 3: Flap folds down with 3D depth
         setTimeout(() => {
           window.playPaperSound();
           flap.classList.add("closed");
         }, 1150);
 
-        // Step 4: Wax Seal Stamps Down with Stamp Pop sound & Gold Sparkles
         setTimeout(() => {
           wax.classList.add("stamped");
           playStampPop();
           triggerSparkleBurst();
         }, 1550);
 
-        // Step 5: Sealed envelope takes flight towards notes list
         setTimeout(() => {
           const targetRect = notesList.getBoundingClientRect();
           const targetX = targetRect.left + (targetRect.width / 2) - 160;
@@ -1722,19 +1967,16 @@ You already are.
           envelope.style.transform = "scale(0.92) translateY(20px) rotate(2.5deg)";
         }, 2100);
 
-        // Step 6: Flap opens, seal dissipates with chime
         setTimeout(() => {
           wax.classList.remove("stamped");
           flap.classList.remove("closed");
           playChime();
         }, 3000);
 
-        // Step 7: Letter lifts out as delivered note
         setTimeout(() => {
           letter.style.transform = "translateY(-120px) scale(1)";
         }, 3350);
 
-        // Step 8: Smooth fade out into website feed
         setTimeout(() => {
           envelope.style.transition = "all 0.5s ease";
           envelope.style.opacity = "0";
