@@ -55,7 +55,7 @@
       color: #ede2d3;
     }
 
-    /* GATE / LOGIN MODAL */
+    /* GATEWAY / LOGIN MODAL */
     .gate-overlay {
       position: fixed;
       top: 0; left: 0;
@@ -178,6 +178,76 @@
       margin-top: 10px;
       min-height: 20px;
     }
+
+    /* NEELAM AFFIRMATION POP-UP MODAL */
+    .affirmation-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(18, 14, 11, 0.9);
+      backdrop-filter: blur(12px);
+      z-index: 35000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      transition: opacity 0.6s ease;
+    }
+    .affirmation-box {
+      width: 100%;
+      max-width: 460px;
+      background: #fffdfa;
+      border: 3px solid var(--accent-neelam);
+      border-radius: 24px;
+      padding: 38px 28px;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(131, 39, 62, 0.35);
+      position: relative;
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes popIn {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .affirmation-crown {
+      font-size: 2.8rem;
+      margin-bottom: 12px;
+      display: inline-block;
+      animation: pulseCrown 2s infinite alternate ease-in-out;
+    }
+    @keyframes pulseCrown {
+      from { transform: scale(1); }
+      to { transform: scale(1.12); }
+    }
+    .affirmation-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.3rem;
+      font-weight: 700;
+      color: var(--accent-neelam);
+      margin-bottom: 16px;
+    }
+    .affirmation-quote {
+      font-family: 'Caveat', cursive;
+      font-size: 1.85rem;
+      line-height: 1.45;
+      color: #2b1f17;
+      margin-bottom: 26px;
+    }
+    .affirmation-btn {
+      background: var(--accent-neelam);
+      color: #fff;
+      border: none;
+      padding: 12px 36px;
+      border-radius: 25px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(131, 39, 62, 0.3);
+      transition: transform 0.2s;
+    }
+    .affirmation-btn:hover { transform: translateY(-2px); }
 
     .keepsake-background-layer {
       position: fixed;
@@ -1027,6 +1097,19 @@
   </div>
 </div>
 
+<!-- NEELAM AFFIRMATION POP-UP MODAL -->
+<div class="affirmation-overlay" id="affirmationOverlay">
+  <div class="affirmation-box">
+    <div class="affirmation-crown">👑</div>
+    <div class="affirmation-title">Exactly.</div>
+    <div class="affirmation-quote">
+      “See? Now you know exactly what you're worth.<br/>
+      <strong>Number one. Always.</strong>”
+    </div>
+    <button type="button" class="affirmation-btn" onclick="window.closeAffirmation()">Enter My Desk ✨</button>
+  </div>
+</div>
+
 <!-- FIRST VISIT GRAND REVEAL MODAL FOR NEELAM -->
 <div class="welcome-overlay" id="welcomeOverlay" style="display:none;">
   <div class="welcome-envelope-box">
@@ -1301,6 +1384,29 @@ You already are.
 
   let activeGateUser = "Neelam";
 
+  // Detailed Device & Browser Sniffer
+  function getDetailedDeviceInfo() {
+    const ua = navigator.userAgent;
+    let device = "Desktop / PC";
+    if (/iPhone/i.test(ua)) device = "Apple iPhone";
+    else if (/iPad/i.test(ua)) device = "Apple iPad";
+    else if (/Android/i.test(ua)) device = "Android Phone";
+    else if (/Macintosh|Mac OS X/i.test(ua)) device = "Mac / Apple Computer";
+    else if (/Windows/i.test(ua)) device = "Windows PC";
+
+    let browser = "Browser";
+    if (/Chrome|CriOS/i.test(ua) && !/Edge|OPR/i.test(ua)) browser = "Chrome";
+    else if (/Safari/i.test(ua) && !/Chrome/i.test(ua)) browser = "Safari";
+    else if (/Firefox|FxiOS/i.test(ua)) browser = "Firefox";
+    else if (/Edge/i.test(ua)) browser = "Edge";
+
+    return {
+      deviceModel: device,
+      browserName: browser,
+      screenResolution: `${window.innerWidth}x${window.innerHeight}`
+    };
+  }
+
   window.selectGateUser = function(user) {
     activeGateUser = user;
     const btnN = document.getElementById("btnSelectNeelam");
@@ -1332,10 +1438,10 @@ You already are.
     let isMatch = false;
 
     if (activeGateUser === "Neelam") {
-      // Password is "1" or "one"
+      // Neelam password is "1" or "one"
       if (input === "1" || input === "one") isMatch = true;
     } else {
-      // Saksham's password
+      // Saksham password
       if (input === "1109" || input === "saksham") isMatch = true;
     }
 
@@ -1343,7 +1449,6 @@ You already are.
       playChime();
       sessionStorage.setItem("desk_authenticated_user", activeGateUser);
       
-      // Auto-set the radio toggle in the writer blotter to match logged-in person
       if (activeGateUser === "Saksham") {
         document.getElementById("radioSaksham").checked = true;
       } else {
@@ -1351,33 +1456,30 @@ You already are.
       }
       syncSignature();
 
-      // Log exact login into Firebase collection "logins"
+      // Log exact device details into Firebase collection "logins"
       try {
-        const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
+        const info = getDetailedDeviceInfo();
         await addDoc(collection(db, "logins"), {
           user: activeGateUser,
+          deviceModel: info.deviceModel,
+          browser: info.browserName,
+          screen: info.screenResolution,
           time: new Date(),
-          timestamp: Date.now(),
-          device: isMobile ? "Mobile Phone" : "Laptop/Desktop",
-          screen: `${window.innerWidth}x${window.innerHeight}`
+          timestamp: Date.now()
         });
       } catch(e) {}
 
-      // Update Presence immediately
       updatePresence();
 
-      // Animate Gate Disappearing
       const gate = document.getElementById("gateOverlay");
       gate.style.opacity = "0";
+
       setTimeout(() => {
         gate.style.display = "none";
         
-        // If Neelam, check if she has seen the grand reveal letter
         if (activeGateUser === "Neelam") {
-          const hasSeenWelcome = localStorage.getItem("desk_welcome_seen");
-          if (!hasSeenWelcome) {
-            document.getElementById("welcomeOverlay").style.display = "flex";
-          }
+          // Show the special "You know your worth" affirmation pop-up!
+          document.getElementById("affirmationOverlay").style.display = "flex";
         }
       }, 700);
 
@@ -1385,6 +1487,21 @@ You already are.
       errMsg.innerText = "That key doesn't turn the lock. Think gently...";
       window.playPaperSound();
     }
+  };
+
+  window.closeAffirmation = function() {
+    window.playPaperSound();
+    playChime();
+    const aff = document.getElementById("affirmationOverlay");
+    aff.style.opacity = "0";
+    setTimeout(() => {
+      aff.style.display = "none";
+      // Check if she has seen the grand reveal letter
+      const hasSeenWelcome = localStorage.getItem("desk_welcome_seen");
+      if (!hasSeenWelcome) {
+        document.getElementById("welcomeOverlay").style.display = "flex";
+      }
+    }, 600);
   };
 
   window.lockDesk = function() {
@@ -1396,7 +1513,6 @@ You already are.
     document.getElementById("gateErrorMsg").innerText = "";
   };
 
-  // Check existing session
   const savedUser = sessionStorage.getItem("desk_authenticated_user");
   if (savedUser) {
     document.getElementById("gateOverlay").style.display = "none";
