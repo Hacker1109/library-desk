@@ -249,6 +249,7 @@
     }
     .affirmation-btn:hover { transform: translateY(-2px); }
 
+    /* Keepsake Background Memory Tapestry */
     .keepsake-background-layer {
       position: fixed;
       top: 0;
@@ -287,7 +288,7 @@
       z-index: 2;
     }
 
-    /* Grand Reveal Modal for Neelam */
+    /* First Visit Grand Reveal Modal */
     .welcome-overlay {
       position: fixed;
       top: 0; left: 0;
@@ -394,7 +395,224 @@
       box-shadow: 0 8px 24px rgba(0,0,0,0.35);
     }
 
-    /* Postal Overlay */
+    /* Open When Drawer Styles */
+    .drawer-widget {
+      background: #462c1b;
+      border: 3px solid #2d1b10;
+      border-radius: 12px;
+      margin-top: 20px;
+      padding: 16px 14px 14px;
+      text-align: center;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.4), 0 8px 18px rgba(0,0,0,0.18);
+      cursor: pointer;
+      position: relative;
+      transition: all 0.25s ease;
+    }
+    .drawer-widget:hover {
+      transform: translateY(-2px);
+      background: #503320;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+    }
+    .drawer-handle {
+      width: 44px; height: 16px;
+      border: 3px solid #c5a059;
+      border-top: none;
+      border-radius: 0 0 14px 14px;
+      margin: 0 auto 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.35);
+    }
+    .drawer-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #f0e1c2;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .drawer-sublabel {
+      font-family: 'Caveat', cursive;
+      font-size: 1.05rem;
+      color: #d1b48b;
+      margin-top: 3px;
+    }
+
+    /* Drawer Modal & Envelopes Grid */
+    .drawer-modal-overlay {
+      position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(18, 14, 11, 0.86);
+      backdrop-filter: blur(10px);
+      z-index: 25000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .drawer-chest {
+      width: 100%;
+      max-width: 680px;
+      max-height: 92vh;
+      background: #fcf9f2;
+      border: 3px solid #dfcca9;
+      border-radius: 20px;
+      padding: 30px 24px;
+      box-shadow: 0 28px 60px rgba(0,0,0,0.5), inset 0 0 40px rgba(220, 195, 155, 0.2);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    .drawer-header {
+      text-align: center;
+      border-bottom: 2px dashed #ded0bd;
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+      position: relative;
+    }
+    .drawer-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.1rem;
+      color: #3b2818;
+      font-weight: 700;
+    }
+    .drawer-caution-banner {
+      background: #fff5e6;
+      border: 1px solid #ebd3a2;
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-bottom: 18px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: #795516;
+      line-height: 1.4;
+      text-align: center;
+    }
+    .envelopes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 14px;
+      overflow-y: auto;
+      padding: 6px 4px 14px;
+    }
+    .drawer-envelope-card {
+      background: #fffdf9;
+      border: 2px solid #e7dac9;
+      border-radius: 12px;
+      padding: 18px 14px 14px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 140px;
+    }
+    .drawer-envelope-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-neelam);
+      box-shadow: 0 10px 22px rgba(131, 39, 62, 0.15);
+    }
+    .drawer-env-stamp {
+      font-size: 1.8rem;
+      margin-bottom: 6px;
+    }
+    .drawer-env-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: #352618;
+      line-height: 1.35;
+    }
+    .drawer-env-prompt {
+      font-family: 'Caveat', cursive;
+      font-size: 1.05rem;
+      color: var(--accent-neelam);
+      margin-top: 6px;
+    }
+
+    /* Single Letter Reader Modal */
+    .letter-modal-overlay {
+      position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(16, 12, 9, 0.92);
+      backdrop-filter: blur(12px);
+      z-index: 26000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .open-letter-paper {
+      width: 100%;
+      max-width: 540px;
+      max-height: 88vh;
+      background: #fffefb;
+      border: 2px solid #dfcca9;
+      border-radius: 16px;
+      padding: 34px 28px 28px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      animation: popIn 0.4s ease;
+    }
+    .letter-header-tag {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--gold-dark);
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .letter-header-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: #352618;
+      text-align: center;
+      margin-bottom: 16px;
+      border-bottom: 1px dashed #e2d3be;
+      padding-bottom: 10px;
+    }
+    .letter-content-scroll {
+      overflow-y: auto;
+      padding: 8px 8px 16px;
+    }
+    .letter-body-text {
+      font-family: 'Caveat', cursive;
+      font-size: 1.65rem;
+      line-height: 1.5;
+      color: #241c15;
+      white-space: pre-wrap;
+    }
+    .letter-call-action {
+      display: inline-block;
+      margin: 10px 0;
+      background: #244e3d;
+      color: #fff !important;
+      padding: 6px 18px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 4px 10px rgba(36, 78, 61, 0.3);
+    }
+    .letter-sig-row {
+      margin-top: 14px;
+      text-align: right;
+      font-family: 'Marck Script', cursive;
+      font-size: 1.9rem;
+      color: #1f3b2f;
+      border-top: 1px dashed #e2d3be;
+      padding-top: 8px;
+    }
+
+    /* Postal Animation & Envelope Overlay */
     #postalOverlay {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       pointer-events: none !important; z-index: 9999; display: none; perspective: 1400px;
@@ -423,14 +641,8 @@
       border-radius: 0 0 10px 10px;
       filter: drop-shadow(0 -2px 4px rgba(0,0,0,0.06));
     }
-    .animated-envelope.Neelam::before {
-      border-left-color: #f1d4dc;
-      border-right-color: #f1d4dc;
-    }
-    .animated-envelope.Saksham::before {
-      border-left-color: #d1e5dd;
-      border-right-color: #d1e5dd;
-    }
+    .animated-envelope.Neelam::before { border-left-color: #f1d4dc; border-right-color: #f1d4dc; }
+    .animated-envelope.Saksham::before { border-left-color: #d1e5dd; border-right-color: #d1e5dd; }
     .envelope-flap {
       position: absolute; top: 0; left: 0; width: 0; height: 0;
       border-left: 160px solid transparent; border-right: 160px solid transparent;
@@ -464,22 +676,14 @@
     .envelope-wax.Saksham { background: radial-gradient(circle at 35% 35%, #2a6a53, var(--wax-saksham)); }
 
     .sparkle-burst {
-      position: absolute;
-      top: -10px; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 1px; height: 1px;
-      pointer-events: none;
-      z-index: 6;
+      position: absolute; top: -10px; left: 50%;
+      transform: translate(-50%, -50%); width: 1px; height: 1px;
+      pointer-events: none; z-index: 6;
     }
     .sparkle-dot {
-      position: absolute;
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: #ffdf88;
-      box-shadow: 0 0 8px #ffc107;
-      opacity: 0;
+      position: absolute; width: 6px; height: 6px; border-radius: 50%;
+      background: #ffdf88; box-shadow: 0 0 8px #ffc107; opacity: 0;
     }
-
     .flying-letter {
       position: absolute; width: 290px; height: 165px; background: #fffcf8; border: 1px solid #dfd2c0;
       border-radius: 8px; padding: 18px; left: 15px; top: 15px; z-index: 2;
@@ -716,37 +920,18 @@
       border-bottom: 14px solid transparent;
     }
     .pinned-ribbon.saksham-ribbon { background: var(--accent-saksham); }
-    .pinned-ribbon.saksham-ribbon::after {
-      border-left-color: var(--accent-saksham); border-right-color: var(--accent-saksham);
-    }
+    .pinned-ribbon.saksham-ribbon::after { border-left-color: var(--accent-saksham); border-right-color: var(--accent-saksham); }
     .tack-pin {
-      position: absolute;
-      top: 5px; left: calc(50% - 5px);
-      width: 10px; height: 10px;
+      position: absolute; top: 5px; left: calc(50% - 5px); width: 10px; height: 10px;
       background: radial-gradient(circle at 35% 35%, #fff2be, #cda756);
-      border-radius: 50%;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
     .unpin-ribbon-btn {
-      position: absolute;
-      top: 2px; right: 2px;
-      background: rgba(0,0,0,0.45);
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 16px; height: 16px;
-      font-size: 10px;
-      line-height: 16px;
-      cursor: pointer;
-      opacity: 0;
-      transition: opacity 0.2s;
+      position: absolute; top: 2px; right: 2px; background: rgba(0,0,0,0.45);
+      color: #fff; border: none; border-radius: 50%; width: 16px; height: 16px;
+      font-size: 10px; line-height: 16px; cursor: pointer; opacity: 0; transition: opacity 0.2s;
     }
     .pinned-ribbon:hover .unpin-ribbon-btn { opacity: 1; }
-
-    @keyframes ribbonSway {
-      from { transform: rotate(-2deg); }
-      to { transform: rotate(2deg); }
-    }
 
     /* Composer Blotter */
     .composer-blotter {
@@ -758,10 +943,7 @@
       margin-bottom: 40px;
       position: relative;
     }
-    body.night-mode .composer-blotter {
-      background: #25201b;
-      border-color: #3e3328;
-    }
+    body.night-mode .composer-blotter { background: #25201b; border-color: #3e3328; }
     .composer {
       background: var(--paper-linen);
       border: 1px solid var(--border-soft);
@@ -779,44 +961,24 @@
       background-image: linear-gradient(#e9dfcc 1px, transparent 1px), linear-gradient(90deg, #e9dfcc 1px, transparent 1px);
       background-size: 22px 22px;
     }
-
     .quill-rest {
-      position: absolute;
-      top: -18px; right: 28px;
-      font-size: 1.6rem;
-      transform: rotate(45deg);
-      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-      cursor: pointer;
-      user-select: none;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+      position: absolute; top: -18px; right: 28px; font-size: 1.6rem;
+      transform: rotate(45deg); transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      cursor: pointer; user-select: none; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
     }
     .quill-rest.writing { transform: rotate(15deg) translateY(6px); }
 
     .stationery-tray {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 14px;
-      font-size: 0.8rem;
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 700;
+      display: flex; align-items: center; gap: 8px; margin-bottom: 14px;
+      font-size: 0.8rem; font-family: 'Cormorant Garamond', serif; font-weight: 700;
     }
     .stationery-chip {
-      padding: 5px 14px;
-      border-radius: 14px;
-      border: 1px solid #d8c7b0;
-      background: #f7efe4;
-      cursor: pointer;
-      color: #2d241c;
-      user-select: none;
-      transition: all 0.2s ease;
+      padding: 5px 14px; border-radius: 14px; border: 1px solid #d8c7b0;
+      background: #f7efe4; cursor: pointer; color: #2d241c; user-select: none; transition: all 0.2s ease;
     }
     .stationery-chip:hover { transform: translateY(-1px); }
     .stationery-chip.active {
-      background: #4a382a;
-      border-color: #4a382a;
-      color: #fff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      background: #4a382a; border-color: #4a382a; color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
     .author-toggle { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; font-size: 0.9rem; font-weight: 600; color: #2d241c; }
@@ -832,28 +994,19 @@
       width: 100%; height: 115px; border: 1px solid #e7dac9; border-radius: 12px;
       padding: 14px 18px; font-family: 'Caveat', cursive; font-size: 1.7rem;
       background: rgba(255,255,255,0.85); color: #1c1611 !important; resize: vertical; line-height: 1.45;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.03);
-      transition: border-color 0.2s;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.03); transition: border-color 0.2s;
     }
     .composer.midnight textarea { background: rgba(255,255,255,0.08); color: #f5eedf !important; border-color: #3b4256; }
     textarea:focus { outline: none; border-color: var(--gold); }
 
     .drawing-preview-box {
-      margin-top: 12px;
-      display: none;
-      position: relative;
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1px solid #dfcfb7;
-      max-height: 190px;
+      margin-top: 12px; display: none; position: relative; border-radius: 10px;
+      overflow: hidden; border: 1px solid #dfcfb7; max-height: 190px;
     }
     .drawing-preview-box img { width: 100%; height: auto; display: block; }
     .clear-drawing-btn {
-      position: absolute;
-      top: 8px; right: 8px;
-      background: rgba(0,0,0,0.65);
-      color: #fff; border: none; border-radius: 50%;
-      width: 26px; height: 26px; cursor: pointer;
+      position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.65);
+      color: #fff; border: none; border-radius: 50%; width: 26px; height: 26px; cursor: pointer;
     }
 
     .song-input-row { margin-top: 12px; display: none; }
@@ -869,8 +1022,7 @@
     .btn-action {
       background: #f7f1e6; border: 1px solid var(--border-soft); padding: 8px 14px;
       border-radius: 10px; cursor: pointer; font-size: 0.85rem; font-weight: 600;
-      color: #2e261e; display: flex; align-items: center; gap: 6px;
-      user-select: none; transition: all 0.2s ease;
+      color: #2e261e; display: flex; align-items: center; gap: 6px; user-select: none; transition: all 0.2s ease;
     }
     .btn-action:hover { background: #ece0ce; transform: translateY(-1px); }
     .btn-action.active-tool { background: #e3d2bc; border-color: var(--gold-dark); }
@@ -902,26 +1054,17 @@
     .note-card.Saksham { border-left: 6px solid var(--accent-saksham); }
 
     .washi-tape {
-      position: absolute;
-      top: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 110px;
-      height: 22px;
-      background: rgba(235, 218, 192, 0.65);
-      backdrop-filter: blur(4px);
-      border-left: 2px dashed rgba(160, 140, 110, 0.4);
-      border-right: 2px dashed rgba(160, 140, 110, 0.4);
+      position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+      width: 110px; height: 22px; background: rgba(235, 218, 192, 0.65); backdrop-filter: blur(4px);
+      border-left: 2px dashed rgba(160, 140, 110, 0.4); border-right: 2px dashed rgba(160, 140, 110, 0.4);
       box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     }
-
     .bookmark-ribbon {
       position: absolute; top: -3px; right: 30px; width: 15px; height: 32px; border-radius: 0 0 2px 2px;
       box-shadow: 0 3px 6px rgba(0,0,0,0.18);
     }
     .note-card.Neelam .bookmark-ribbon { background: var(--accent-neelam); }
     .note-card.Saksham .bookmark-ribbon { background: var(--accent-saksham); }
-
     .note-header {
       display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;
       padding-bottom: 10px; border-bottom: 1px dashed #ded0bd;
@@ -930,26 +1073,17 @@
     .author-name.Neelam { color: var(--accent-neelam); }
     .author-name.Saksham { color: var(--accent-saksham); }
     .note-time { font-size: 0.78rem; color: #7a6b5c !important; font-weight: 500; }
-
     .note-body {
-      font-family: 'Caveat', cursive;
-      font-size: 1.8rem;
-      line-height: 1.48;
-      white-space: pre-wrap;
-      color: #1a1510 !important;
-      font-weight: 600;
+      font-family: 'Caveat', cursive; font-size: 1.8rem; line-height: 1.48;
+      white-space: pre-wrap; color: #1a1510 !important; font-weight: 600;
     }
-    .note-card.paper-midnight .note-body {
-      color: #f7eedd !important;
-    }
-
+    .note-card.paper-midnight .note-body { color: #f7eedd !important; }
     .invisible-text {
       filter: blur(9px); cursor: pointer; background: linear-gradient(90deg, #c7a361, #b28c46);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; transition: filter 0.6s ease;
     }
     .invisible-text:hover { filter: blur(0); -webkit-text-fill-color: inherit; }
     .invisible-hint { font-size: 0.8rem; color: var(--gold-dark); display: block; margin-bottom: 8px; font-weight: 600; }
-
     .note-photo img, .note-drawing img { width: 100%; border-radius: 10px; margin-top: 16px; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 14px rgba(0,0,0,0.06); }
     .song-box { margin-top: 16px; background: rgba(255,255,255,0.5); border: 1px solid #ebdcc9; border-radius: 12px; padding: 12px 14px; }
     .song-label { font-size: 0.76rem; font-weight: 700; color: var(--gold-dark); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
@@ -957,22 +1091,11 @@
     audio { width: 100%; height: 40px; margin-top: 16px; border-radius: 20px; }
 
     .wax-seal {
-      position: absolute;
-      bottom: -16px;
-      right: 24px;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 700;
-      font-size: 1.25rem;
-      color: rgba(255, 255, 255, 0.95);
+      position: absolute; bottom: -16px; right: 24px; width: 42px; height: 42px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif;
+      font-weight: 700; font-size: 1.25rem; color: rgba(255, 255, 255, 0.95);
       box-shadow: 0 6px 16px rgba(0,0,0,0.25), inset 0 2px 4px rgba(255,255,255,0.4);
-      border: 2px solid rgba(255,255,255,0.22);
-      user-select: none;
+      border: 2px solid rgba(255,255,255,0.22); user-select: none;
     }
     .note-card.Neelam .wax-seal { background: radial-gradient(circle at 35% 35%, #a62e49, var(--wax-neelam)); }
     .note-card.Saksham .wax-seal { background: radial-gradient(circle at 35% 35%, #23604b, var(--wax-saksham)); }
@@ -985,8 +1108,7 @@
     }
     .studio-box {
       width: 100%; max-width: 680px; background: #fdfbf7; border: 2px solid #ded3c1;
-      border-radius: 20px; padding: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-      position: relative;
+      border-radius: 20px; padding: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.4); position: relative;
     }
     .studio-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
     .studio-header h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; color: #3b2818; }
@@ -994,9 +1116,7 @@
       width: 100%; height: 340px; background: #fffdfa; border: 1px solid #dfd3bf;
       border-radius: 12px; cursor: crosshair; touch-action: none; box-shadow: inset 0 2px 6px rgba(0,0,0,0.04);
     }
-    .palette-toolbar {
-      display: flex; justify-content: space-between; align-items: center; margin-top: 16px; flex-wrap: wrap; gap: 10px;
-    }
+    .palette-toolbar { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; flex-wrap: wrap; gap: 10px; }
     .color-dots { display: flex; gap: 8px; align-items: center; }
     .color-dot {
       width: 26px; height: 26px; border-radius: 50%; cursor: pointer;
@@ -1155,7 +1275,6 @@ You already are.
 </div>
 
 <div class="keepsake-background-layer" id="keepsakeBg"></div>
-
 <canvas id="ambientCanvas"></canvas>
 <div class="night-candle-spot" id="nightSpotlight"></div>
 
@@ -1281,6 +1400,49 @@ You already are.
       </div>
       <div class="wood-plank"></div>
     </div>
+
+    <!-- Antique Wooden "Open When..." Drawer -->
+    <div class="drawer-widget" onclick="window.openDrawerChest()" title="Open When... Envelopes Drawer">
+      <div class="drawer-handle"></div>
+      <div class="drawer-label">“Open When...” Drawer 🗝️</div>
+      <div class="drawer-sublabel">A sanctuary for heavy moments</div>
+    </div>
+  </div>
+</div>
+
+<!-- "OPEN WHEN..." DRAWER CHEST MODAL -->
+<div class="drawer-modal-overlay" id="drawerModalOverlay">
+  <div class="drawer-chest">
+    <button type="button" class="book-close-btn" onclick="window.closeDrawerChest()">✕</button>
+    
+    <div class="drawer-header">
+      <div class="header-tag">A Secret Compartment</div>
+      <h2>The “Open When...” Drawer</h2>
+    </div>
+
+    <div class="drawer-caution-banner">
+      ⚠️ <strong>A Gentle Caution:</strong> These envelopes hold quiet pieces of my heart meant for moments when your world feels heavy. Open only when you truly need to hear them.
+    </div>
+
+    <div class="envelopes-grid" id="envelopesGrid">
+      <!-- Envelope Cards Generated Dynamically -->
+    </div>
+  </div>
+</div>
+
+<!-- SINGLE LETTER READER MODAL -->
+<div class="letter-modal-overlay" id="letterModalOverlay">
+  <div class="open-letter-paper">
+    <button type="button" class="book-close-btn" onclick="window.closeLetterModal()">✕</button>
+    <div class="letter-header-tag">Unfolded From The Drawer</div>
+    <div class="letter-header-title" id="letterModalTitle">Open When...</div>
+    
+    <div class="letter-content-scroll">
+      <div class="letter-body-text" id="letterModalBody"></div>
+      <div class="letter-sig-row">
+        Yours faithfully, Saksham ❤️
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1384,6 +1546,198 @@ You already are.
 
   let activeGateUser = "Neelam";
 
+  // --- The 6 "Open When" Personal Letters ---
+  const OPEN_WHEN_LETTERS = [
+    {
+      id: 1,
+      title: "Open when you feel like you are not worthy",
+      shortPrompt: "When you feel not worthy...",
+      stamp: "🕊️",
+      text: `Hey, you.
+
+If you're reading this, I hope you remember one thing: you don't have to prove that you're worthy.
+
+You don't have to be perfect to deserve kindness. You don't have to achieve something, look a certain way, or become someone else before you're allowed to be cared for.
+
+Sometimes we are much harsher on ourselves than we would ever be on someone we love.
+
+So, for a moment, look at yourself the way you would look at someone you deeply care about.
+
+Be a little kinder to her.
+
+You are worthy. Not because of what you do. Simply because you are you.
+
+And if you don't believe it today, that's okay.
+I'll believe it for you until you can believe it yourself.`
+    },
+    {
+      id: 2,
+      title: "Open when your mind is racing with anxiety",
+      shortPrompt: "When your mind is racing...",
+      stamp: "🌿",
+      text: `Hey, breathe.
+
+You don't have to solve everything right now.
+
+Whatever is running through your head can wait for a few minutes.
+
+Put everything down. Take a slow breath. Then another.
+
+You are here. You're okay. And you don't need to have every answer tonight.
+
+One thought at a time. One breath at a time. One little step at a time.
+
+Your mind doesn't always tell you the truth when it's scared.
+So don't believe every thought that visits you.
+
+Let this moment pass.
+
+You've got this. And if you don't feel like you do, that's okay too.`
+    },
+    {
+      id: 3,
+      title: "Open when you are feeling sad & heavy",
+      shortPrompt: "When days feel sad & heavy...",
+      stamp: "☕",
+      text: `Hey, Neelam.
+
+You don't have to force yourself to be okay today.
+
+Some days are simply heavy. And that's alright.
+
+You can be tired. You can be quiet. You can have a bad day without needing to find a reason for it.
+
+So don't fight yourself today.
+
+Make yourself something warm, listen to something that makes you feel safe, sit somewhere peaceful, and let the day be what it is.
+
+This feeling is a chapter, not the whole story.
+
+And tomorrow doesn't have to be perfect.
+It just has to be a little lighter than today.`
+    },
+    {
+      id: 4,
+      title: "Open when you feel exhausted and low on energy",
+      shortPrompt: "When you feel low & exhausted...",
+      stamp: "🌙",
+      text: `Hey, slow down.
+
+You don't always have to keep going just because there is still more to do.
+
+Sometimes resting isn't falling behind.
+Sometimes resting is exactly what you need to keep moving.
+
+So drink some water. Eat something. Put your phone away for a little while. Close your eyes.
+
+The world can wait.
+
+You are allowed to rest without feeling guilty about it.
+You don't need to earn your rest.
+
+Tomorrow, you can try again.
+
+For today, just be gentle with yourself.`
+    },
+    {
+      id: 5,
+      title: "Open when you feel helpless and stuck",
+      shortPrompt: "When you feel helpless & stuck...",
+      stamp: "📞",
+      hasCallBtn: true,
+      text: `Okay. Stop thinking for a second.
+
+I know your mind is probably giving you a hundred reasons why you should figure everything out right now.
+
+Don't.
+
+You don't have to know what to do next.
+You don't have to solve everything alone.
+
+And if you genuinely feel stuck, call me:
+<a class="letter-call-action" href="tel:9084165033">📞 Call Saksham: 9084165033</a>
+
+Don't sit there wondering, “Should I call him?”
+Don't overthink whether it's too late, whether you're bothering me, or whether it's silly.
+
+Just call.
+
+Even if you don't know what to say.
+Even if you just want someone to sit through the silence with you.
+
+You don't have to explain everything.
+Just call. I'll listen.`
+    },
+    {
+      id: 6,
+      title: "Open when you need a gentle reminder to smile",
+      shortPrompt: "When you need to smile... :)",
+      stamp: "✨",
+      text: `Hey, you. :)
+
+This is your official reminder to stop taking life so seriously for five minutes.
+
+Go find something ridiculously small that makes you happy.
+
+Play that one song.
+Eat something you like.
+Look at the sky.
+Laugh at something stupid.
+
+And if none of that works, just remember:
+
+Somewhere, someone is genuinely grateful that you exist.
+
+So give me a little smile.
+Yes, I'm talking to you.
+
+There. That's better. :)`
+    }
+  ];
+
+  // Render Envelopes into Drawer Chest
+  function renderDrawerEnvelopes() {
+    const grid = document.getElementById("envelopesGrid");
+    grid.innerHTML = "";
+    OPEN_WHEN_LETTERS.forEach(env => {
+      const card = document.createElement("div");
+      card.className = "drawer-envelope-card";
+      card.innerHTML = `
+        <div class="drawer-env-stamp">${env.stamp}</div>
+        <div class="drawer-env-title">${env.title}</div>
+        <div class="drawer-env-prompt">Tap to break seal & open 💌</div>
+      `;
+      card.onclick = () => window.openLetterModal(env.id);
+      grid.appendChild(card);
+    });
+  }
+  renderDrawerEnvelopes();
+
+  window.openDrawerChest = function() {
+    window.playPaperSound();
+    document.getElementById("drawerModalOverlay").style.display = "flex";
+  };
+  window.closeDrawerChest = function() {
+    window.playPaperSound();
+    document.getElementById("drawerModalOverlay").style.display = "none";
+  };
+
+  window.openLetterModal = function(letterId) {
+    window.playPaperSound();
+    playChime();
+    const letter = OPEN_WHEN_LETTERS.find(l => l.id === letterId);
+    if (!letter) return;
+
+    document.getElementById("letterModalTitle").innerText = letter.title;
+    document.getElementById("letterModalBody").innerHTML = letter.text;
+    document.getElementById("letterModalOverlay").style.display = "flex";
+  };
+
+  window.closeLetterModal = function() {
+    window.playPaperSound();
+    document.getElementById("letterModalOverlay").style.display = "none";
+  };
+
   // Detailed Device & Browser Sniffer
   function getDetailedDeviceInfo() {
     const ua = navigator.userAgent;
@@ -1438,10 +1792,8 @@ You already are.
     let isMatch = false;
 
     if (activeGateUser === "Neelam") {
-      // Neelam password is "1" or "one"
       if (input === "1" || input === "one") isMatch = true;
     } else {
-      // Saksham password
       if (input === "1109" || input === "saksham") isMatch = true;
     }
 
@@ -1456,7 +1808,6 @@ You already are.
       }
       syncSignature();
 
-      // Log exact device details into Firebase collection "logins"
       try {
         const info = getDetailedDeviceInfo();
         await addDoc(collection(db, "logins"), {
@@ -1476,9 +1827,7 @@ You already are.
 
       setTimeout(() => {
         gate.style.display = "none";
-        
         if (activeGateUser === "Neelam") {
-          // Show the special "You know your worth" affirmation pop-up!
           document.getElementById("affirmationOverlay").style.display = "flex";
         }
       }, 700);
@@ -1496,7 +1845,6 @@ You already are.
     aff.style.opacity = "0";
     setTimeout(() => {
       aff.style.display = "none";
-      // Check if she has seen the grand reveal letter
       const hasSeenWelcome = localStorage.getItem("desk_welcome_seen");
       if (!hasSeenWelcome) {
         document.getElementById("welcomeOverlay").style.display = "flex";
